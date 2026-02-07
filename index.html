@@ -1,0 +1,2888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yousef Moussa | Embedded Systems & Hardware Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e14;
+            --bg-card: #1a1f2e;
+            --bg-code: #151a23;
+            --accent-primary: #00d9ff;
+            --accent-secondary: #00ff9d;
+            --accent-warning: #ff9500;
+            --text-primary: #e6e8eb;
+            --text-secondary: #9199a8;
+            --text-code: #c5cdd9;
+            --border: #2a3142;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(135deg, rgba(10, 14, 20, 0.92) 0%, rgba(0, 40, 80, 0.88) 50%, rgba(10, 14, 20, 0.92) 100%),
+                url('images/Abstract_digital_background_2_generated-modified.png');
+            background-size: cover, 500px auto;
+            background-position: center, center;
+            background-attachment: fixed, fixed;
+            background-repeat: no-repeat, repeat;
+            z-index: 0;
+        }
+
+        .bg-grid::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 14, 20, 0.6) 70%);
+            pointer-events: none;
+        }
+
+        /* Profile Picture */
+        .profile-picture {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: center top;
+            border: 4px solid var(--accent-primary);
+            box-shadow: 
+                0 0 30px rgba(0, 217, 255, 0.4),
+                0 0 60px rgba(0, 217, 255, 0.2),
+                inset 0 0 30px rgba(0, 217, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .profile-picture:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-secondary);
+            box-shadow: 
+                0 0 40px rgba(0, 255, 157, 0.5),
+                0 0 80px rgba(0, 255, 157, 0.3);
+        }
+
+        .profile-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: -2rem;
+        }
+
+        .profile-container::before {
+            content: '';
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            border-radius: 50%;
+            border: 2px dashed var(--accent-primary);
+            opacity: 0.3;
+            animation: rotateBorder 20s linear infinite;
+        }
+
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            padding-top: 80px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            background: rgba(10, 14, 20, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
+        }
+
+
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            letter-spacing: -0.05em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-secondary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 6rem 0 4rem;
+            
+        }
+
+
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .tagline {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        .hero-text .focus {
+            font-size: 1.1rem;
+            color: var(--accent-secondary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-text p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--accent-primary);
+            color: var(--bg-dark);
+            border: 2px solid var(--accent-primary);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-secondary);
+            color: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .project-link:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .project-link svg {
+            stroke: currentColor;
+        }
+
+
+
+        /* Section Headers */
+        .section {
+            padding: 5rem 0;
+            
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-number {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border), transparent);
+        }
+
+        /* Deep Dive Project Cards */
+        .deep-dive-project {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .deep-dive-project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 2rem;
+        }
+
+        .project-title-section h3 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-secondary);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-company {
+            color: var(--text-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .project-role {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        .project-metrics {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric {
+            text-align: center;
+        }
+
+        .metric-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        /* Technical Deep Dive */
+        .technical-section {
+            margin: 2rem 0;
+        }
+
+        .technical-section h4 {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            overflow-x: auto;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .code-title {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-secondary);
+            font-size: 0.9rem;
+        }
+
+        .code-lang {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        pre {
+            margin: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--text-code);
+            line-height: 1.6;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Problem-Solution-Impact Cards */
+        .psi-card {
+            background: var(--bg-code);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .psi-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .psi-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+
+        .problem-icon {
+            background-image: url('images/challenge.jpg');
+        }
+
+        .solution-icon {
+            background-image: url('images/solution.jpg');
+        }
+
+        .impact-icon {
+            background-image: url('images/impact.jpg');
+        }
+
+        .psi-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .psi-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-tag {
+            background: rgba(0, 217, 255, 0.1);
+            color: var(--accent-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            border: 1px solid rgba(0, 217, 255, 0.3);
+        }
+
+        /* Image Gallery */
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: contain;
+            object-position: center;
+            display: block;
+            background: var(--bg-code);
+        }
+
+        .gallery-caption {
+            background: var(--bg-card);
+            padding: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+            margin: 2rem 0;
+            margin-left: 1rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: calc(1rem + 5px);
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-secondary);
+            box-shadow: 0 0 0 4px var(--bg-dark), 0 0 0 5px var(--accent-secondary);
+        }
+
+        .timeline-title {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent-primary);
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .image-placeholder {
+                margin: 0 auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .project-header {
+                flex-direction: column;
+            }
+
+            .project-metrics {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+                /* Certification Badge */
+        .cert-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0, 255, 157, 0.1);
+            border: 2px solid var(--accent-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            color: var(--accent-secondary);
+            font-weight: 700;
+            margin: 1rem 0;
+        }
+
+        .cert-badge svg {
+            width: 20px;
+            height: 20px;
+        }
+    
+        /* Ensure all sections are visible */
+        .section {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+        
+        .deep-dive-project {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+
+        /* Collapsible Sections */
+        .collapse-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .collapse-content.expanded {
+            max-height: 15000px;
+            opacity: 1;
+        }
+
+        .expand-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%;
+            padding: 1rem;
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 255, 157, 0.1));
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--accent-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 255, 157, 0.2));
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .expand-btn .chevron {
+            transition: transform 0.3s ease;
+            width: 20px;
+            height: 20px;
+        }
+
+        .expand-btn.expanded .chevron {
+            transform: rotate(180deg);
+        }
+
+        .project-preview {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 3px solid var(--accent-primary);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .project-preview strong {
+            color: var(--accent-secondary);
+        }
+        
+</style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+</head>
+<body>
+    <div class="bg-grid"></div>
+    
+    <div class="container">
+        <!-- Navigation -->
+        <nav>
+            <a href="#home" class="logo" style="text-decoration: none;">&lt;YM /&gt;</a>
+            <ul class="nav-links">
+                <li><a href="#digital-design">RISC-V</a></li>
+                <li><a href="#prng">PRNG</a></li>
+                <li><a href="#secure-fsm">FSM</a></li>
+                <li><a href="#vlsi-comparator">VLSI</a></li>
+                <li><a href="#arvp">ARVP</a></li>
+                <li><a href="#uvad">UVAD</a></li>
+                <li><a href="#rrl">Medical</a></li>
+                <li><a href="#shell">Shell</a></li>
+                <li><a href="#filesystem">Systems</a></li>
+                <li><a href="#mapreduce">Distributed</a></li>
+                <li><a href="#quacker">Quacker</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Yousef Moussa</h1>
+                    <p class="tagline">Computer Engineering Co-op Student</p>
+                    <p class="focus">Embedded Systems • ASIC Design • Autonomous Robotics</p>
+                    <p>Fourth-year Computer Engineering student at the University of Alberta (3.9 GPA) specializing in real-time embedded systems, digital design, and robotics. Proven track record of delivering measurable results: completed RISC-V CPU, realtime ROS2 robotic software presented on a world stage, 25x network performance improvement, Health Canada-approved medical devices, and mission-critical UAV firmware.</p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                        <a href="https://github.com/YousefMoussa" target="_blank" class="btn btn-secondary">View GitHub</a>
+                    </div>
+                </div>
+                <div class="profile-container">
+                    <img src="images/Yousef%20Moussa.jpg" alt="Yousef Moussa" class="profile-picture" >
+                </div>
+            </div>
+        </section>
+
+        <!-- ARVP Deep Dive -->
+        <section id="digital-design" class="section">
+            <div class="section-header">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">Digital Design & Computer Architecture</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- RISC-V CPU Projects -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>32-bit RISC-V CPU: Multi-Cycle FSM Architecture</h3>
+                        <p class="project-company">CPU Architect & Digital Designer | Fall and Winter 2025</p>
+                    </div>
+                    <div class="project-links" style="display: flex; gap: 1rem;">
+                        <a href="https://github.com/YousefMoussa/multi_cycle_riscv_cpu_vhdl" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            VHDL
+                        </a>
+                        <a href="https://github.com/oamkotb/riscv-cpu" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            Verilog
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">2</div>
+                        <div class="metric-label">CPU Implementations</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">25+</div>
+                        <div class="metric-label">RISC-V Instructions</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">~5</div>
+                        <div class="metric-label">Cycles per Instruction</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Designed and implemented two complete 32-bit RISC-V multi-cycle CPUs: a VHDL implementation focusing on core instruction set and a Verilog implementation extending to full RV32I support. Both use FSM-based control with hardware reuse through component sharing across execution cycles. Includes comprehensive testbenches, waveform verification, and validated JALR subroutine execution.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">VHDL</span>
+                    <span class="tech-tag">Verilog</span>
+                    <span class="tech-tag">Vivado</span>
+                    <span class="tech-tag">RISC-V ISA</span>
+                    <span class="tech-tag">FSM Design</span>
+                    <span class="tech-tag">Datapath Architecture</span>
+                    <span class="tech-tag">FPGA</span>
+                    <span class="tech-tag">Xilinx Zybo Z7</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Two multi-cycle FSM CPU implementations in VHDL and Verilog, full RV32I instruction set (25+ instructions), JALR subroutine validation with bit-counter test program. Debugged FSM timing hazards through systematic datapath analysis.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Architecture Overview: VHDL vs Verilog Implementations</h4>
+                    <div class="tech-content">
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <p style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">VHDL Implementation (Core Instruction Set)</p>
+                            <ul style="margin-left: 2rem;">
+                                <li><strong>Instruction Set:</strong> ADD, ANDI, LSR, LW, SW, BEQ, BNE, JALR, NOP, HLT (10 instructions)</li>
+                                <li><strong>FSM States:</strong> FETCH, DECODE, MEM_ADR, MEM_READ/WB, MEM_W, ALU_WB, BRANCH, JUMP</li>
+                                <li>Combined instruction/data memory (von Neumann)</li>
+                                <li>32×32-bit register file with modular VHDL components</li>
+                                <li>Strong typing enforces careful signal management</li>
+                                <li>Pre-loaded test program validates bit-counter subroutine using JALR</li>
+                                <li>Xilinx Vivado project structure with behavioral simulation</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <p style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">Verilog Implementation (Full RV32I)</p>
+                            <ul style="margin-left: 2rem;">
+                                <li><strong>Instruction Set:</strong> Complete RV32I base integer ISA (25+ instructions)</li>
+                                <li><strong>R-Type:</strong> ADD, SUB, AND, OR, XOR, SLL, SRL, SRA, SLT, SLTU</li>
+                                <li><strong>I-Type:</strong> ADDI, ANDI, ORI, XORI, SLTI, SLTIU, SLLI, SRLI, SRAI, LB, LH, LW, LBU, LHU</li>
+                                <li><strong>S-Type:</strong> SB, SH, SW</li>
+                                <li><strong>B-Type:</strong> BEQ, BNE, BLT, BGE, BLTU, BGEU</li>
+                                <li><strong>U/J-Type:</strong> LUI, AUIPC, JAL, JALR</li>
+                                <li><strong>FSM States:</strong> RESET, FETCH, DECODE, MEM_ADR, MEM_READ, JUMP, WRITE_BACK, HALT</li>
+                                <li>Same datapath architecture and project structure as VHDL, demonstrating ISA scalability</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 1rem;"><strong>Shared Architecture:</strong> Both implementations use identical multi-cycle design patterns, FSM controller, intermediate registers (IR, A, B, ALU_Reg, Data_Reg), hardware reuse with single ALU for data operations and address calculation, and extend units for immediate sign extension. The Verilog version demonstrates how the architecture scales from core instruction set to comprehensive RV32I support.</p>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon problem-icon"></div>
+                        <div class="psi-title">CHALLENGE: FSM Timing and Data Hazards</div>
+                    </div>
+                    <div class="psi-content">
+                        <p><strong>Register Value Timing Issues:</strong> Initial JALR implementation failed due to incorrect PC value capture - newer PC values were being used instead of the current instruction value needed for return address calculation (PC+4).</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Symptom: JALR return addresses calculated incorrectly, causing control flow bugs</li>
+                            <li>Root cause: Tapping PC value after flip-flop update instead of before</li>
+                            <li>Similar issues at ALU output requiring careful selection between direct ALU output vs ALU register</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon solution-icon"></div>
+                        <div class="psi-title">SOLUTION: Datapath Signal Analysis</div>
+                    </div>
+                    <div class="psi-content">
+                        <p><strong>Systematic Debugging Methodology:</strong> Carefully analyzed which register values (before vs after flip-flops) should be used at each multiplexer and datapath junction.</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Traced PC value through datapath to identify correct tap point for PC+4 calculation</li>
+                            <li>Used timing diagrams to verify register update sequences</li>
+                            <li>Applied same analysis to ALU output path - determined when to use direct ALU result vs latched ALU_Reg</li>
+                            <li>Validated fixes with comprehensive waveform simulation showing correct JALR behavior</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">IMPACT: Complete RV32I Multi-Cycle CPU</div>
+                    </div>
+                    <div class="psi-content">
+                        Successfully designed and verified two multi-cycle CPUs demonstrating ISA scalability, from core 10-instruction VHDL implementation to full 25+ instruction RV32I in Verilog. Architecture demonstrates industry-relevant skills: FSM-based control, hardware resource sharing, register staging, and comprehensive testbench verification. Bit-counter subroutine validates JALR function call/return.
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Datapath & Controller Design</h4>
+                    <div class="tech-content">
+                        <p><strong>Controller FSM States:</strong> The multi-cycle controller implements a 10-state FSM orchestrating instruction execution. Every instruction begins with FETCH (load instruction from memory, increment PC) and DECODE (read source registers, calculate branch target). Execution then diverges based on instruction type:</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Memory Instructions (LW/SW):</strong> MEM_ADR (calculate effective address) → MEM_READ or MEM_WRITE → MEM_WB (write back for loads)</li>
+                            <li><strong>Arithmetic/Logic (ADD/ANDI/LSR):</strong> ALU_WB (execute operation and write back result)</li>
+                            <li><strong>Branches (BEQ/BNE):</strong> BRANCH (update PC if condition met)</li>
+                            <li><strong>Jump and Link (JALR):</strong> JUMP (calculate target from register + offset, store return address)</li>
+                            <li><strong>Halt (HLT):</strong> STUCKED (freeze FSM, prevent further instruction execution)</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>Control Signals:</strong> Controller generates 9 control signals directing datapath operation: pc_write, reg_write, ir_write, mem_write, adr_src, alu_src_a[1:0], alu_src_b[1:0], alu_ctrl[2:0], result_src[1:0]. These signals configure multiplexers, enable registers, and select ALU operations, with default values minimizing state-specific definitions.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Datapath Components:</strong> Register file (32×32-bit), ALU (arithmetic/logic/shift), extend unit (immediate sign extension), combined instruction/data memory, intermediate registers (IR, A, B, ALU_Reg, Data_Reg), and multiplexers for operand selection. Components are reused across cycles - same ALU computes both data operations and memory addresses, same memory serves instructions and data in different cycles.</p>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Verification & Testing</h4>
+                    <div class="tech-content">
+                        <p><strong>Bit Counter Subroutine :</strong> Implemented comprehensive test program counting set bits in a register using JALR for function call/return. Program flow:</p>
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><code>JALR x12, 44(x0)</code> - Jump to bit counter at address 44, store return address in x12</li>
+                            <li><code>ANDI x3, x3, 0x00</code> - Zero accumulator</li>
+                            <li><code>ANDI x9, x2, 0x01</code> - Set shift amount to 1</li>
+                            <li>Loop: <code>ANDI x2, x8, 0x01</code> - Extract LSB</li>
+                            <li><code>ADD x3, x3, x2</code> - Accumulate if bit set</li>
+                            <li><code>LSR x8, x8, x9</code> - Logical shift right by 1</li>
+                            <li><code>BNE x8, x0, -12</code> - Loop while data remains</li>
+                            <li><code>JALR x2, 0(x12)</code> - Return to caller using saved address</li>
+                        </ol>
+
+                        <p style="margin-top: 1rem;"><strong>Waveform Verification:</strong> All instructions validated through Vivado simulation with detailed timing analysis. Verified register updates, memory operations, control signal transitions, and FSM state progressions. Confirmed correct PC management, particularly critical for JALR return address calculation and branch target computation.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="images/Screenshot_from_2026-02-06_10-27-20.png" alt="Multi-Cycle CPU Architecture">
+                        <div class="gallery-caption">Multi-Cycle CPU Architecture - Controller and Datapath block diagram</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/Screenshot_from_2026-02-06_10-23-10.png" alt="FSM State Diagram">
+                        <div class="gallery-caption">FSM Controller State Diagram - 10-state machine orchestrating instruction fetch, decode, execution, memory access, and writeback</div>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/Screenshot_from_2026-02-06_10-26-05.png" alt="Simulation Waveform 1">
+                        <div class="gallery-caption">Bit-Count Testing Simulation - Waveform validating JALR subroutine execution: register updates track bit-counting algorithm (extract LSB, accumulate, shift), FSM state progression through function call/return sequence, and control signal timing for PC+4 return address storage</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/Screenshot_from_2026-02-06_10-26-15.png" alt="Simulation Waveform 2">
+                        <div class="gallery-caption">Bit-Count Subroutine Verification - JALR execution detail showing bit-counter algorithm validation: PC+4 stored to x12 (return address register), jump back from subroutine at rs1+offset, confirming proper function call/return mechanism</div>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="prng" class="section">
+            <div class="section-header">
+                <span class="section-number">02.</span>
+                <h2 class="section-title">Hardware Random Number Generation</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Tausworthe Pseudo-Random Number Generator</h3>
+                        <p class="project-company">Digital Designer | Fall 2025</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/YousefMoussa/tausworthe-pseudo-random-number-generator" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">32-bit</div>
+                        <div class="metric-label">Taus88 Algorithm</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3 LFSRs</div>
+                        <div class="metric-label">Parallel Generation</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">125 MHz</div>
+                        <div class="metric-label">Generation Rate</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Implemented Tausworthe 88-bit PRNG using three parallel Linear Feedback Shift Registers (LFSRs) with XOR combination for high-quality 32-bit random output. Deployed on Xilinx Zybo Z7 FPGA, achieving full-speed operation at 125 MHz system clock with deterministic, verifiable sequences.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">VHDL</span>
+                    <span class="tech-tag">FPGA</span>
+                    <span class="tech-tag">Xilinx Vivado</span>
+                    <span class="tech-tag">Zybo Z7-10</span>
+                    <span class="tech-tag">LFSR</span>
+                    <span class="tech-tag">RTL Design</span>
+                    <span class="tech-tag">Cryptography</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> 3 parallel LFSRs with XOR combination, 125 MHz single-cycle generation, seedable deterministic sequences, FPGA deployment with hardware validation.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Design Architecture</h4>
+                    <div class="tech-content">
+                        <ul style="margin-left: 2rem;">
+                            <li>Modular VHDL component with parameterizable shifts and masks</li>
+                            <li>Three independent LFSR generators with unique configurations (U1, U2, U3)</li>
+                            <li>Final output produced by XOR combination of all three streams</li>
+                            <li>Seedable design for deterministic sequence generation</li>
+                            <li>Parallel architecture enables single-cycle random number generation</li>
+                            <li>Verified against software implementation for correctness</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/1770400779626_image.png" alt="Tausworthe Architecture">
+                        <div class="gallery-caption">Tausworthe PRNG Architecture - Three parallel LFSR generators (U1, U2, U3) with unique shift parameters, combined through XOR tree to produce final 32-bit random output</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1770400813109_image.png" alt="RTL Schematic">
+                        <div class="gallery-caption">RTL Schematic - Top-level integration showing three parameterized Taus88 components with seed loading, synchronous generation, and XOR output combination</div>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/1770401118112_image.png" alt="Simulation Waveform">
+                        <div class="gallery-caption">Vivado Simulation - Waveform showing deterministic random sequence generation with seed values (seed1=0x12345678, seed2=0x9ABCDE0, seed3=0xfedcba98) producing repeatable 32-bit output stream</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1770401002458_image.png" alt="FPGA Setup">
+                        <div class="gallery-caption">Zybo Z7-10 FPGA Implementation - Physical hardware validation with load/start/reset buttons, 7-segment display showing output bytes, and 4-bit switch input for seed configuration</div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon solution-icon"></div>
+                        <div class="psi-title">Hardware Validation</div>
+                    </div>
+                    <div class="psi-content">
+                        <p>Deployed on Zybo Z7-10 FPGA with 7-segment display and LED indicators. Used 1Hz clock divider to observe sequential bytes of 32-bit output. Verified deterministic behavior by comparing hardware-generated sequences against simulation logs - confirmed exact match across multiple runs with same seed values.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="secure-fsm" class="section">
+            <div class="section-header">
+                <span class="section-number">03.</span>
+                <h2 class="section-title">Hardware Security & FSM Design</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Secure Element Finite State Machine</h3>
+                        <p class="project-company">Security Digital Designer | Fall 2025</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/YousefMoussa/secure-element-fsm" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">6-State</div>
+                        <div class="metric-label">Moore FSM</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Instant</div>
+                        <div class="metric-label">Attack Detection</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">RGB</div>
+                        <div class="metric-label">Status Feedback</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Implemented a hardware security controller FSM for cryptographic secure element management. Coordinates system startup, self-test verification, secure channel operations, power management, and high-priority attack response. Moore FSM architecture ensures glitch-free status outputs synchronized to clock edges.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">VHDL</span>
+                    <span class="tech-tag">Hardware Security</span>
+                    <span class="tech-tag">FPGA</span>
+                    <span class="tech-tag">FSM Design</span>
+                    <span class="tech-tag">Xilinx Vivado</span>
+                    <span class="tech-tag">Zybo Z7-20</span>
+                    <span class="tech-tag">Attack Detection</span>
+                    <span class="tech-tag">Cryptographic Control</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> 6-state Moore FSM, single-cycle attack response (8ns @ 125MHz), RGB status indication, 15-second auto-wake timer, hardware-validated security properties.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>FSM States & Security Features</h4>
+                    <div class="tech-content">
+                        <p><strong>System States:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>OFF (000):</strong> Power-down state, entry point after reset</li>
+                            <li><strong>STARTUP (Blue/001):</strong> Initialization with self-test execution</li>
+                            <li><strong>IDLE (Yellow/110):</strong> Ready state awaiting secure operations</li>
+                            <li><strong>SECURE_CHANNEL (Green/010):</strong> Active cryptographic operations</li>
+                            <li><strong>SLEEP (White/111):</strong> Low-power mode with 15-second auto-wake timer</li>
+                            <li><strong>ALARM (Red/100):</strong> Security breach detected - highest priority state</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>Critical Security Mechanisms:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Instantaneous Attack Response:</strong> Attack_detected signal triggers immediate single-cycle transition to ALARM state</li>
+                            <li><strong>Fail-Safe Design:</strong> Self-test failure during STARTUP forces ALARM rather than IDLE</li>
+                            <li><strong>Visual Status Indicator:</strong> RGB LED shows color-coded system state for external monitoring</li>
+                            <li><strong>Integrated Timer:</strong> 15-second countdown in SLEEP state triggers automatic wake and key refresh</li>
+                            <li><strong>LED Flasher Module:</strong> Dedicated Mealy FSM flashes ALARM status at 1Hz for high-visibility alert</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/1770401054199_image.png" alt="FSM Architecture">
+                        <div class="gallery-caption">Complete System Architecture - Main secure element FSM (bottom left) with 6 operational states, LED flasher FSM (top left) for alarm visualization, and integrated countdown timer (right) for automatic wake from sleep mode</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1770401096470_image.png" alt="Attack Response Waveform">
+                        <div class="gallery-caption">Vivado Simulation - Waveform demonstrating critical attack response: attack_detected assertion (180ns) triggers instantaneous STATE_ALARM transition with rgb_led=100 (Red) on next clock edge, validating single-cycle security response</div>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/1770401018685_image.png" alt="Hardware Test Setup">
+                        <div class="gallery-caption">FPGA Test Configuration - Zybo Z7-20 board with Analog Discovery 2 providing test vectors through GPIO pins via JC Pmod adapter. LED indicators show real-time FSM state, 7-segment display outputs status codes</div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">Verified Security Properties</div>
+                    </div>
+                    <div class="psi-content">
+                        <ul style="margin-left: 1rem;">
+                            <li>Attack detection latency: Single clock cycle (8ns @ 125MHz)</li>
+                            <li>Priority override: Attack signal successfully preempts all concurrent inputs</li>
+                            <li>State integrity: No transient glitches observed in Moore FSM outputs</li>
+                            <li>Timer accuracy: 15-second sleep period</li>
+                            <li>Visual feedback: LED flasher operates at consistent 1Hz without affecting controller timing</li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="vlsi-comparator" class="section">
+            <div class="section-header">
+                <span class="section-number">04.</span>
+                <h2 class="section-title">VLSI Design: Full Custom IC Flow</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>2-Bit Digital Comparator IC</h3>
+                        <p class="project-company">VLSI Design | Cadence Virtuoso</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">45nm</div>
+                        <div class="metric-label">GSCLIB Process</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">LVS</div>
+                        <div class="metric-label">Clean Match</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">DRC</div>
+                        <div class="metric-label">0 Violations</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Full Flow</div>
+                        <div class="metric-label">Schematic → Layout</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Designed and implemented a 2-bit digital comparator through the complete VLSI design flow using Cadence Virtuoso. Project demonstrates proficiency in schematic capture, transistor-level design using standard cells, physical layout with metal routing, design rule checking (DRC), layout vs schematic (LVS) verification, and pre/post-layout simulation analysis using Spectre.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">Cadence Virtuoso</span>
+                    <span class="tech-tag">Spectre Simulation</span>
+                    <span class="tech-tag">GSCLIB 45nm</span>
+                    <span class="tech-tag">LVS Verification</span>
+                    <span class="tech-tag">DRC Checking</span>
+                    <span class="tech-tag">Layout Design</span>
+                    <span class="tech-tag">Parasitic Extraction</span>
+                    <span class="tech-tag">Standard Cell Library</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Complete schematic-to-layout flow, clean LVS verification with exact netlist match, zero DRC violations, successful post-layout simulation validating timing against pre-layout results.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Design Architecture</h4>
+                    <div class="tech-content">
+                        <p><strong>Circuit Overview:</strong></p>
+                        <p>The 2-bit comparator compares two 2-bit inputs A[1:0] and B[1:0], outputting a match signal when A equals B. The design uses a registered architecture with D flip-flops for input synchronization, followed by XOR gates for bit-wise comparison and an OR gate to combine results.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Standard Cell Components (GSCLIB 45nm):</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>DFFQX1:</strong> D Flip-Flops (6 total) - Register inputs A[1:0], B[1:0] and output on clock edges</li>
+                            <li><strong>XOR2XL:</strong> 2-Input XOR Gates (2 total) - Compare corresponding bits (A[1]⊕B[1], A[0]⊕B[0])</li>
+                            <li><strong>OR2X1:</strong> 2-Input OR Gate - Combine XOR outputs (mismatch if either bit differs)</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>Signal Flow:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Inputs A[1:0] and B[1:0] captured by DFFs on rising clock edge</li>
+                            <li>XOR gates produce '1' when corresponding bits differ</li>
+                            <li>OR gate outputs '0' only when both XOR outputs are '0' (exact match)</li>
+                            <li>Final output registered through another DFF for clean timing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/comparetor%20schematic.png" alt="Comparator Schemat0.8i brightness(0.8)c">
+                        <div class="gallery-caption">Schematic Design - 2-bit comparator using GSCLIB 45nm standard cells: 6 DFFQX1 flip-flops for input/output registration, 2 XOR2XL gates for bit comparison, 1 OR2X1 gate combining match results. All cells instantiated from gsclib045 library.</div>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Physical Design & Verification</h4>
+                    <div class="tech-content">
+                        <p><strong>Layout Implementation:</strong></p>
+                        <p>Created physical layout in Cadence Virtuoso Layout Suite XL, placing standard cells and routing metal interconnects across multiple layers. Layout follows design rules for the 45nm process node with proper metal spacing, via placement, and power/ground distribution.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Verification Results:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>LVS (Layout vs Schematic):</strong> Clean match - schematic netlist exactly matches extracted layout netlist with no shorts, opens, or device mismatches</li>
+                            <li><strong>DRC (Design Rule Check):</strong> 0 violations across 552 design rule checks - validates manufacturability for 45nm process</li>
+                            <li><strong>Parasitic Extraction:</strong> RC parasitics extracted for accurate post-layout timing analysis</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/tutorial_DRC_pass.png" alt="Layout with LVS Clean">
+                        <div class="gallery-caption">Physical Layout with LVS Verification - Layout view showing standard cell placement and metal routing. Pegasus LVS results confirm clean match: ISL Clean, SCD No conflicts, ERC Empty, Extraction Clean, Comparison Match.</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/tutorial_drc_pass.png" alt="DRC Clean">
+                        <div class="gallery-caption">DRC Verification - Pegasus Design Rule Checker showing 0 results in 0 of 552 checks, confirming zero violations and manufacturability compliance for the 45nm GSCLIB process.</div>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Simulation & Timing Analysis</h4>
+                    <div class="tech-content">
+                        <p><strong>Pre-Layout vs Post-Layout Comparison:</strong></p>
+                        <p>Performed transient simulations using Spectre to validate functionality and compare timing characteristics before and after layout. Post-layout simulation includes extracted parasitic capacitances and resistances, revealing realistic signal propagation delays.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Simulation Observations:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Functional Verification:</strong> Both simulations show correct comparator behavior - Match output transitions based on A=B equality</li>
+                            <li><strong>Clock Synchronization:</strong> All flip-flops trigger cleanly on rising clock edges</li>
+                            <li><strong>Post-Layout Effects:</strong> Minor propagation delay increase due to RC parasitics, but within timing margins</li>
+                            <li><strong>Signal Integrity:</strong> Clean digital transitions with no ringing or signal degradation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/layout_simulation.png" alt="Post-Layout Simulation">
+                        <div class="gallery-caption">Post-Layout Simulation - Transient response using extracted layout parasitics. Waveforms show Match output (red), Clock (green), and input signals A[1:0], B[1:0]. Includes realistic RC delays from physical routing.</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/non_layout_simulation.png" alt="Pre-Layout Simulation">
+                        <div class="gallery-caption">Pre-Layout Simulation - Ideal schematic simulation without parasitic effects. Comparison with post-layout results validates that extracted parasitics don't violate timing requirements.</div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">VLSI Skills Demonstrated</div>
+                    </div>
+                    <div class="psi-content">
+                        <ul style="margin-left: 1rem;">
+                            <li><strong>Schematic Capture:</strong> Standard cell instantiation and hierarchical design in Virtuoso Schematic Editor</li>
+                            <li><strong>Layout Design:</strong> Cell placement, metal routing, and power distribution in Layout Suite XL</li>
+                            <li><strong>Physical Verification:</strong> LVS and DRC using Pegasus verification tools</li>
+                            <li><strong>Simulation:</strong> Pre/post-layout transient analysis using Spectre simulator</li>
+                            <li><strong>Design Flow:</strong> Complete RTL-to-GDSII methodology for digital IC design</li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="arvp" class="section">
+            <div class="section-header">
+                <span class="section-number">05.</span>
+                <h2 class="section-title">ARVP: Autonomous Underwater Vehicle Systems</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Main Project -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Embedded Engineer → Software Co-Lead</h3>
+                        <p class="project-company">University of Alberta ARVP Team</p>
+                        <p class="project-role">Sept 2023 – Present</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">RoboSub</div>
+                        <div class="metric-label">International Competition</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">cm-level</div>
+                        <div class="metric-label">Localization Accuracy</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">~60</div>
+                        <div class="metric-label">Team Members</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">2 AUVs</div>
+                        <div class="metric-label">Kenai & Koda</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Progressed from embedded systems developer to Software Co-Lead for the Autonomous Robotic Vehicle Project, a student team developing autonomous underwater vehicles competing annually at the U.S. Navy-sponsored RoboSub competition. Work spans hardware design and validation (Teensy 4.0 control boards, sensor integration), ROS2 software architecture (localization, motion planning, control), and technical leadership (sensor evaluation, pool test coordination, cross-functional collaboration).
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">ROS2</span>
+                    <span class="tech-tag">C++/Python</span>
+                    <span class="tech-tag">Teensy 4.0</span>
+                    <span class="tech-tag">Device Drivers</span>
+                    <span class="tech-tag">FREERTOS</span>
+                    <span class="tech-tag">DVL Navigation</span>
+                    <span class="tech-tag">IMU/AHRS</span>
+                    <span class="tech-tag">CAN Bus</span>
+                    <span class="tech-tag">Gazebo Simulation</span>
+                    <span class="tech-tag">GitLab CI/CD</span>
+                    <span class="tech-tag">Leadership and Technical Management</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Designed custom Teensy 4.0 control boards (Rev A → Rev B), implemented DVL-based localization achieving cm-level accuracy, developed ROS2 motion planning with visual servoing, and leading ~60-member software team to RoboSub 2026 success.
+                </div>
+
+                <div class="collapse-content">
+                <!-- PART 1: EMBEDDED SYSTEMS ENGINEER -->
+                <div class="technical-section">
+                    <h4>Part 1: Embedded Systems Engineer (2023-2025 August)</h4>
+                    <div class="tech-content">
+                        <p><strong>Role:</strong> Designed and validated embedded control systems for servo actuation, internal environment management, sensor and system integration on autonomous underwater vehicles.</p>
+
+                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); margin: 1.5rem 0;">
+                            <h5 style="margin-top: 0; color: var(--accent);">Control Board Development: Design → Test → Iterate</h5>
+                            
+                            <p><strong>Challenge:</strong></p>
+                            <p>Needed reliable, real-time servo control for actuatiors and auxiliary systems with CAN bus communication to Hitec smart servos, while maintaining system health monitoring and fault detection capabilities.</p>
+
+                            <p style="margin-top: 1rem;"><strong>Design Process:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li><strong>Requirements Analysis:</strong> Collaborated with electrical and mechanical teams to define interface requirements (6 auxiliary servos, CAN bus for smart servos, current monitoring and claw grab detection, environmental monitoring)</li>
+                                <li><strong>Component Selection (REV B) :</strong> Selected Teensy 4.0 (600 MHz ARM Cortex-M7) for high-speed real-time control, MCP2515 CAN controller with TJA1050 transceiver for robust CAN communication, INA219 for current monitoring, MS561101BA03-50 for pressure and temperature sensing</li>
+                                <li><strong>PCB Design:</strong> Initial layout with focus on getting all required functionality working while minimoizing route length and ensuring signal integrity using a 4 layer board with power and ground planes</li>
+                                <li><strong>Firmware Development:</strong> Implemented drivers for all peripherals like the INA219, and FreeRTOS tasks to schedule all required operations; managed communication between tasks and peripherals</li>
+                            </ul>
+
+                            <div style="margin-top: 1.5rem;">
+                                <p><strong>PCB Design Evolution:</strong></p>
+                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem;">
+                                    <div>
+                                        <img src="images/ControlBoard_revA_front.png" alt="Control Board Rev A Front" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev A - Front</p>
+                                    </div>
+                                    <div>
+                                        <img src="images/ControlBoard_revA_back.png" alt="Control Board Rev A Back" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev A - Back</p>
+                                    </div>
+                                    <div>
+                                        <img src="images/ControlBoard_revB_front.png" alt="Control Board Rev B Front" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev B - Front</p>
+                                    </div>
+                                    <div>
+                                        <img src="images/ControlBoard_revB_back.png" alt="Control Board Rev B Back" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev B - Back</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p style="margin-top: 1.5rem;"><strong>Testing & Validation:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li><strong>Bench Testing:</strong> Validated CAN bus communication with servos, verified PWM signal quality on oscilloscope, tested current sensing and power draw with simulated load</li>
+                                <li><strong>Pool Testing:</strong> Integrated Rev A boards into vehicles for underwater testing, identified signal integrity issues under high-current thruster operation, discovered thermal management concerns during extended missions</li>
+                                <li><strong>Failure Analysis:</strong> Used oscilloscope to diagnose ground bounce affecting CAN communication during simultaneous thruster activation, thermal imaging revealed hotspots near voltage regulators</li>
+                            </ul>
+
+                            <p style="margin-top: 1rem;"><strong>Rev B Improvements:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li><strong>Signal Integrity:</strong> Redesigned ground plane to eliminate ground bounce, added additional decoupling capacitors near high-current switching components</li>
+                                <li><strong>Thermal Management:</strong> Optimized component placement to separate high-power and low-power sections, improved copper pour for heat dissipation, added larger thermal vias under voltage regulators</li>
+                                <li><strong>Reliability:</strong> Added redundant power filtering stages, added current sensing for fault detection on all actuators, improved PCB routing to reduce EMI susceptibility, used keyed connectors to prevent mis-mating, added on board termination resistors for CAN bus, added configurable actuator voltage supply, better USB power protection</li>
+                            </ul>
+
+                            <p style="margin-top: 1rem;"><strong>Results:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li>Rev B boards successfully deployed in Kenai</li>
+                                <li>Achieved reliable operation during 2+ hour pool test sessions with no communication failures</li>
+                                <li>50Hz servo control loop maintained consistent timing under full system load (all thrusters + sensors active)</li>
+                                <li>System passed RoboSub 2025 competition validation with zero hardware faults during mission attempts</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PART 2: SOFTWARE DEVELOPER / SOFTWARE CO-LEAD -->
+                <div class="technical-section">
+                    <h4>Part 2: Software Developer / Software Co-Lead (2025 August - Present)</h4>
+                    <div class="tech-content">
+                        <p><strong>Role:</strong> Transitioned to ROS2 software development focused on autonomous navigation in GPS-denied underwater environments. Promoted to Software Co-Lead role, coordinating development across ~60 team members and driving technical decisions on software architecture and sensor selection.</p>
+
+                        <div style="margin-top: 1.5rem; text-align: center;">
+                            <img src="images/1770406458708_image.png" alt="ROS2 Software Architecture" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border);">
+                            <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">ROS2 Software Architecture used on Kenai, Koda, and Arctos AUVs</p>
+                        </div>
+
+                        <!-- Motion Planning & Autonomy -->
+                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); margin: 1.5rem 0;">
+                            <h5 style="margin-top: 0; color: var(--accent);">Motion Planning & Autonomous Behaviors</h5>
+                            
+                            <p><strong>Development Approach:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li><strong>Action Server Architecture:</strong> Implemented ROS2 action servers for object-relative navigation allowing higher-level mission planner to command complex maneuvers (approach object, orbit target, visual servoing)</li>
+                                <li><strong>3-Phase Navigation:</strong> Designed object approach behavior as rotate → search → approach sequence, enabling robust operation even when objects initially outside camera field of view</li>
+                                <li><strong>Visual Servoing Control:</strong> Developed control law using object centroid error and derivative terms to smoothly approach targets while maintaining them in camera frame</li>
+                                <li><strong>Path Planning:</strong> Implemented cubic spline interpolation for smooth path following with multiple orientation control modes (tangent-aligned, constant heading, SLERP interpolation)</li>
+                            </ul>
+
+                            <p style="margin-top: 1rem;"><strong>Testing & Validation:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li>Simulation: Used Gazebo with underwater physics to test various motion profiles (straight line, circular paths, barrel roll, object detection based movement).</li>
+                                <li>Coordinated weekly pool tests to validate perception, planning, and control integration</li>
+                                <li>Developed systematic testing procedures: individual behavior validation → multi-behavior sequences → full autonomous missions</li>
+                                <li>Analyzed ROS2 bag files post-test to identify timing issues, control instabilities, and behavior transitions</li>
+                            </ul>
+
+                            <p style="margin-top: 1rem;"><strong>Results:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li>Successfully demonstrated autonomous object detection and approach during pool testing</li>
+                                <li>Completed gate navigation, path following, and object detection interaction tasks autonomously at RoboSub 2025</li>
+                                <li>Motion planning system enabled complex maneuvers including barrel roll execution for bonus points</li>
+                            </ul>
+
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; justify-items: center;">
+                                <div style="width: 100%; max-width: 400px;">
+                                    <img src="images/1770406160222_image.png" alt="Team Testing Kenai" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                                    <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">Pool Testing: Kenai AUV</p>
+                                </div>
+                                <div style="width: 100%; max-width: 400px;">
+                                    <img src="images/1770406198124_image.png" alt="Team Testing Arctos" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                                    <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">Pool Testing: Arctos AUV</p>
+                                </div>
+                                <div style="width: 100%; max-width: 400px;">
+                                    <img src="images/1770406191678_image.png" alt="RoboSub 2024 Competition" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                                    <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">RoboSub 2024 Competition</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Software Co-Lead Responsibilities -->
+                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); margin: 1.5rem 0;">
+                            <h5 style="margin-top: 0; color: var(--accent);">Software Co-Lead: Technical Leadership</h5>
+                            
+                            <p><strong>Key Responsibilities:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li><strong>Technical Decision-Making:</strong> Drive architecture decisions on software stack (ROS2), sensor selection (DVL model, IMU/AHRS evaluation), development tools (GitLab, Docker, Gazebo)</li>
+                                <li><strong>Sensor Evaluation & Research:</strong> Lead IMU/AHRS evaluation research comparing tactical-grade options (SBG Ellipse micro and Advanced Navigation Motus) vs DVL internal IMU to improve localization accuracy</li>
+                                <li><strong>Pool Test Coordination:</strong> Organize weekly pool testing sessions coordinating software, electrical, and mechanical teams. Develop test plans, allocate pool time across subsystems, conduct post-test analysis meetings</li>
+                                <li><strong>Cross-Functional Collaboration:</strong> 
+                                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                        <li>Electrical team: Define sensor interface requirements, debug power/communication issues</li>
+                                        <li>Mechanical team: Coordinate sensor mounting locations, actuators performance and function (ex: Claw)</li>
+                                        <li>Software team: Mentor new members through onboarding materials, code reviews, debugging sessions</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Development Workflow Management:</strong> Maintain GitLab repository organization, implement code review processes, establish testing standards before pool deployment</li>
+                                <li><strong>Team Growth:</strong> Created comprehensive onboarding materials covering ROS2 fundamentals, Git/SSH basics, project structure. Coordinate ~15 software members across multiple software development tracks</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resources & Competition Context -->
+                <div class="technical-section">
+                    <h4>RoboSub Competition & Resources</h4>
+                    <div class="tech-content">
+                        <p>The international RoboSub competition challenges teams to develop autonomous underwater vehicles capable of navigating obstacle courses and completing tasks without human intervention. Tasks include gate navigation, path following, object detection/classification, buoy interaction, and torpedo/dropper delivery - all executed autonomously in a GPS-denied underwater environment.</p>
+
+                        <div style="margin-top: 1.5rem;">
+                            <p><strong>Competition Performance:</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li>RoboSub 2025 and 2024 (San Diego, CA): Top Canadian team completing many tasks autonomously, including gate navigation, torpedo, etc.</li>
+                                <li>Demonstrated barrel roll maneuver for bonus points using motion planning system</li>
+                                <li>Rebuilt 2 full AUVs from the ground up, integrating new sensors and control systems in 2025</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 1.5rem;">
+                            <p><strong>Kenai AUV Introduction Video:</strong></p>
+                            <div style="margin-top: 1rem; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid var(--border);">
+                                <iframe src="https://drive.google.com/file/d/1mJXHMRmj5gdmaCDj9WGhtaa07T7xuj34/preview" 
+                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                        frameborder="0" 
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                        allowfullscreen>
+                                </iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="uvad" class="section">
+            <div class="section-header">
+                <span class="section-number">06.</span>
+                <h2 class="section-title">UVAD: Autonomous UAV Systems</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Servo Support Board Project -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Servo Support Board: Safety-Critical Real-Time Control</h3>
+                        <p class="project-company">Unmanned Vehicle Applied Dynamics</p>
+                        <p class="project-role">Software Engineer | Jan 2025 – Aug 2025</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">~4ms</div>
+                        <div class="metric-label">Complete Control Cycle</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">4</div>
+                        <div class="metric-label">CAN Servos (Concurrent)</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">921600</div>
+                        <div class="metric-label">UART Baud Rate (bps)</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Designed and implemented multi-threaded FreeRTOS firmware for a safety-critical UAV control surface actuation board. The system receives flight commands via UART at 921600 bps, processes them with CRC validation, and orchestrates four Hitec CAN servos (ruddervators and ailerons) through a shared SPI bus architecture. The complete control loop, from UART reception through servo actuation to metadata return, executes in approximately 4ms with a 5ms safety timeout.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">STM32</span>
+                    <span class="tech-tag">FreeRTOS</span>
+                    <span class="tech-tag">CAN Bus</span>
+                    <span class="tech-tag">SPI</span>
+                    <span class="tech-tag">UART DMA</span>
+                    <span class="tech-tag">Hardware Timers</span>
+                    <span class="tech-tag">Real-Time Systems</span>
+                    <span class="tech-tag">C/C++</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Multi-threaded FreeRTOS firmware with ~4ms control cycle, hardware timer debugging to eliminate false timeouts, shared SPI mutex arbitration for 4 concurrent CAN servos. Deployed on FALCON and Alpine Swift UAV platforms.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>System Architecture</h4>
+                    <div class="tech-content">
+                        <p><strong>Hardware Architecture:</strong></p>
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <p style="color: var(--accent-secondary); margin-bottom: 0.5rem;">→ Flight Computer (UART TX @ 921600 bps)</p>
+                            <p style="color: var(--accent-secondary); margin-bottom: 0.5rem;">→ STM32 UART DMA Receiver</p>
+                            <p style="color: var(--accent-secondary); margin-bottom: 0.5rem;">→ Shared SPI Bus (connecting 4 CAN transceivers)</p>
+                            <p style="color: var(--accent-secondary); margin-bottom: 0.5rem;">→ 4x MCP2515 CAN Controllers</p>
+                            <p style="color: var(--accent-secondary); margin-bottom: 0.5rem;">→ 4x Hitec CAN Servos (2x Ruddervators, 2x Ailerons)</p>
+                            <p style="color: var(--accent-secondary);">→ STM32 UART DMA Transmitter (metadata back to flight computer)</p>
+                        </div>
+
+                        <p><strong>Data Flow:</strong></p>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-title">UART Reception (921600 bps)</div>
+                                <div class="timeline-content">Flight computer sends message containing 4 servo angles (multiplied by large integer to create uint32_t values), message type, and CRC checksum</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">DMA-Triggered Processing</div>
+                                <div class="timeline-content">STM32 DMA receives complete message → triggers callback → message placed on received queue → signals decoding thread</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">CRC Validation</div>
+                                <div class="timeline-content">Thread separates payload and CRC, calculates expected CRC, compares with received. Invalid messages discarded</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Angle Decoding</div>
+                                <div class="timeline-content">Divide uint32_t values to recover original angles for all 4 servos</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Servo Object Interface</div>
+                                <div class="timeline-content">Each servo has dedicated object. Interface generates 4 CAN messages per servo: angle command, angle request, voltage/torque request (alternating), current torque request</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Shared SPI Bus Arbitration</div>
+                                <div class="timeline-content">4 threads (one per CAN transceiver) compete for shared mutex. Messages placed on separate queues, threads acquire mutex and transmit via SPI to respective transceiver</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Metadata Collection</div>
+                                <div class="timeline-content">CAN transceivers receive responses → set line high → triggers metadata thread → acquires mutex → reads data → decodes using HITEC protocol → builds return UART message</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Safety Timeout</div>
+                                <div class="timeline-content">Hardware timer (5ms) triggers if complete cycle exceeds deadline. Remaining servos marked Loss of Link (LOL), message sent immediately to flight computer (required 7-8.3ms response window)</div>
+                            </div>
+                        </div>
+
+                        <p style="margin-top: 1.5rem;"><strong>Thread Architecture (FreeRTOS):</strong></p>
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <ul style="margin-left: 2rem;">
+                                <li><strong style="color: var(--accent-primary);">Message Decode Thread:</strong> Validates CRC, decodes angles, interfaces with servo objects</li>
+                                <li><strong style="color: var(--accent-primary);">4x CAN Transceiver Threads:</strong> Manage SPI transactions with shared mutex arbitration</li>
+                                <li><strong style="color: var(--accent-primary);">Metadata Processing Thread:</strong> Collects servo responses, builds return UART message</li>
+                                <li><strong style="color: var(--accent-primary);">Hardware Timer ISR:</strong> Safety timeout monitoring, LOL detection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem-Solution-Impact -->
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon problem-icon"></div>
+                        <div class="psi-title">PROBLEM: False Timeout Events</div>
+                    </div>
+                    <div class="psi-content">
+                        While developing the safety-critical 5ms timeout mechanism, intermittent false timeout events occurred even though all servos were connected and the measured execution time was consistently ~4ms, well within budget. The FreeRTOS software timer exhibited approximately ±1ms jitter under load, causing unreliable timeout detection in a system where timing precision was paramount for flight safety.
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon solution-icon"></div>
+                        <div class="psi-title">SOLUTION: Hardware Timer Migration</div>
+                    </div>
+                    <div class="psi-content">
+                        <p><strong>Root Cause Analysis:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 1rem;">
+                            <li>Profiled entire communication pipeline using GPIO toggling and oscilloscope</li>
+                            <li>Measured UART reception, SPI transactions, servo response times, message processing</li>
+                            <li>Confirmed ~4ms execution time consistently within budget</li>
+                            <li>Isolated FreeRTOS software timer - observed ±1ms jitter under system load</li>
+                        </ul>
+                        <p style="margin-top: 1rem;"><strong>Implementation:</strong> Replaced FreeRTOS software timer with STM32 hardware timer peripheral, providing deterministic timing independent of system load.</p>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">IMPACT: Reliable Safety-Critical System</div>
+                    </div>
+                    <div class="psi-content">
+                        Eliminated all false timeouts and restored reliable communication under full operational conditions. The system now operates deterministically with predictable timing behavior essential for flight safety. This demonstrates proficiency in real-time systems debugging, oscilloscope-based timing analysis, and understanding the critical distinction between software and hardware timing in safety-critical applications.
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>UAV Platforms</h4>
+                    <div class="tech-content">
+                        <p>UVAD develops multiple autonomous UAV platforms for defense and commercial applications. The servo support board and control systems developed will be deployed across the fleet, enabling precise flight control for diverse mission profiles.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="images/1770358279047_image.png" alt="FALCON Target Drone UAV">
+                        <div class="gallery-caption">FALCON - High-speed target drone </div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1770358283859_image.png" alt="Alpine Swift Long-Endurance UAV">
+                        <div class="gallery-caption">Alpine Swift - Long-endurance platform featuring integrated payload TCP network and MQTT messaging architecture</div>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+
+            <!-- TCP Network Debugging Project -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>TCP Network Performance: 25x Latency Improvement</h3>
+                        <p class="project-company">Unmanned Vehicle Applied Dynamics</p>
+                        <p class="project-role">Software Engineer | Jan 2025 – Aug 2025</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">25x</div>
+                        <div class="metric-label">Performance Improvement</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">>5s → ~200ms</div>
+                        <div class="metric-label">Round-Trip Latency</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3</div>
+                        <div class="metric-label">Computers Time-Synced</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    The Alpine Swift UAV provides customers with payload integration capability, enabling custom sensors to communicate with the ground station via TCP. The specification required ~200ms round-trip latency for ground station ↔ UAV communication, but actual measured performance exceeded 5 seconds. Tasked with analyzing and resolving this critical performance bottleneck affecting customer operations.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">TCP/IP</span>
+                    <span class="tech-tag">MQTT</span>
+                    <span class="tech-tag">Mosquitto</span>
+                    <span class="tech-tag">Network Analysis</span>
+                    <span class="tech-tag">SSH</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Embedded Linux</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Systematic distributed debugging across 3 time-synced computers, identified message queueing bugs through instrumentation, reduced latency from >5s to ~200ms meeting customer specifications.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Systematic Debugging Methodology</h4>
+                    <div class="tech-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-title">System Architecture</div>
+                                <div class="timeline-content">Network path: Ground Station Computer → Antenna Computer → RF Antenna → UAV Modem → Flight Computer → Payload</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Time Synchronization</div>
+                                <div class="timeline-content">Executed parallel SSH commands to synchronize time across all three computers simultaneously. Achieved ~100ms synchronization accuracy - sufficient for identifying bottlenecks</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Instrumentation</div>
+                                <div class="timeline-content">Modified applications throughout the network stack to log timestamps at every handoff: message creation → transmission → antenna receipt → antenna transmission → UAV receipt → return path. Sent test messages every 30 seconds for comprehensive timing analysis</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Data Analysis</div>
+                                <div class="timeline-content">Plotted time spent in and between each application, revealing which components introduced latency</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Bug Identification</div>
+                                <div class="timeline-content">
+                                    Found critical bugs:
+                                    <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                        <li>Messages placed on "needs acknowledgement" queue BEFORE actually sending (logged as sent, but not transmitted)</li>
+                                        <li>Incorrect message priority assignment causing low-priority messages to block high-priority payload data</li>
+                                        <li>Message processing order issues in queue management</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">RESULTS</div>
+                    </div>
+                    <div class="psi-content">
+                        Reduced round-trip latency from >5 seconds to ~200ms, meeting customer specifications and enabling real-time payload operations. Demonstrated expertise in distributed systems debugging, network protocol analysis, and systematic root cause analysis across complex multi-computer architectures. The MQTT message broker architecture with Mosquitto enabled robust communication between multiple applications across the UAV and ground station systems.
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+
+            <!-- Other UVAD Projects -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Additional UVAD Projects</h3>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Angle of Attack / Sideswipe Sensor Board</h4>
+                    <div class="tech-content">
+                        <p>Developed FreeRTOS-based firmware for aerodynamic angle measurement system using potentiometer sensors (180° or 360° range) connected to STM32 ADC with ~63,000 resolution. Multi-threaded architecture: ADC reading thread with calibrated offset conversion, terminal interface thread for real-time display and calibration commands, CAN transmission thread for flight computer communication, and command processing thread for remote calibration control. Implemented zero-point calibration system enabling in-flight angle reference adjustment.</p>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Route Upload System</h4>
+                    <div class="tech-content">
+                        <p>Implemented waypoint upload system using NATO STANAG 4586 protocol over UDP with acknowledgement verification. Previous implementation sent all waypoints then immediately requested download, causing errors when long routes had incomplete transmission. Designed counter-based verification system to track message IDs based on route size, ensuring all waypoints received before download command sent to vehicle. Eliminated waypoint gap errors and improved upload reliability for complex mission profiles.</p>
+                    </div>
+                </div>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">STM32</span>
+                    <span class="tech-tag">FreeRTOS</span>
+                    <span class="tech-tag">ADC</span>
+                    <span class="tech-tag">Calibration Systems</span>
+                    <span class="tech-tag">UDP</span>
+                    <span class="tech-tag">STANAG 4586</span>
+                    <span class="tech-tag">QTCreator</span>
+                </div>
+            </div>
+        </section>
+        <section id="rrl" class="section">
+            <div class="section-header">
+                <span class="section-number">07.</span>
+                <h2 class="section-title">Medical Devices: Health Canada Pathway</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Shoulder Rehabilitation Sensor: Prototype to Health Canada -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Shoulder Rehabilitation Sensor: Prototype to Health Canada</h3>
+                        <p class="project-company">Rehabilitation Robotics Lab</p>
+                        <p class="project-role">Engineering Intern & Embedded Systems Co-op | May 2023 – Dec 2024</p>
+                    </div>
+                </div>
+
+                <div class="cert-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
+                    </svg>
+                    Health Canada Approval Pathway
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">$100k</div>
+                        <div class="metric-label">Grant Funding Secured</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">75 Hz</div>
+                        <div class="metric-label">Data Collection Rate</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">30 Hz</div>
+                        <div class="metric-label">BLE Streaming</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3</div>
+                        <div class="metric-label">Sensors Integrated</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Two-year journey developing a shoulder rehabilitation sensor from Arduino prototype to Health Canada-approved medical device. The system measures shoulder range of motion and applied force during rehabilitation exercises for patients in rural/remote areas who lack access to specialized physical therapy. Initial Arduino prototype demonstrated feasibility and secured $100,000 in grant funding. Production version features custom PCB design, ESP32-based embedded system with FreeRTOS firmware, BNO055 IMU integration, HX711 force sensing, and Bluetooth Low Energy communication.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">ESP32</span>
+                    <span class="tech-tag">ESP-IDF</span>
+                    <span class="tech-tag">FreeRTOS</span>
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">BLE GATT</span>
+                    <span class="tech-tag">BNO055 IMU</span>
+                    <span class="tech-tag">HX711</span>
+                    <span class="tech-tag">I2C</span>
+                    <span class="tech-tag">PCB Design</span>
+                    <span class="tech-tag">EasyEDA</span>
+                    <span class="tech-tag">C/C++</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Arduino prototype → $100k grant → ESP32 production PCB with FreeRTOS firmware. 75 Hz sensor fusion (BNO055 + HX711), BLE GATT streaming, custom calibration system. Device entered Health Canada approval pathway for rural telehealth deployment.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Development Timeline: Prototype to Production</h4>
+                    <div class="tech-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-title">Phase 1: Arduino Prototype (May - Aug 2023)</div>
+                                <div class="timeline-content">
+                                    Initial proof-of-concept using Arduino C++ and off-the-shelf breakout boards. Demonstrated viability of force measurement for shoulder rehabilitation assessment at University Hospital. Prototype validated clinical use case and user experience with rehabilitation patients.
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Grant Funding Success (Aug 2023)</div>
+                                <div class="timeline-content">
+                                    Prototype demonstration secured $100,000 in grant funding for development of production-ready medical device. Funding enabled transition from breadboard prototype to custom PCB design and Health Canada approval pathway.
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Phase 2: Production Redesign (May - Dec 2024)</div>
+                                <div class="timeline-content">
+                                    Complete redesign with ESP32-WROOM-32D microcontroller, custom PCB integration, FreeRTOS multi-threaded firmware, BLE communication, and battery management system. Transitioned to ESP-IDF framework.
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Calibration & Clinical Testing</div>
+                                <div class="timeline-content">
+                                    Developed calibration procedures using Newton meter in lab (January 2025). Established empirical conversion coefficients for force sensor. Implemented persistent calibration storage and runtime adjustment via BLE commands. Created Standard Operating Procedures (SOPs) for clinical deployment.
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Health Canada Approval Pathway</div>
+                                <div class="timeline-content">
+                                    Completed technical documentation detailing firmware architecture, sensor integration, calibration methodology, and safety considerations. Device entered Health Canada approval pathway for clinical deployment in rural rehabilitation settings.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Prototype Development & Lab Work</h4>
+                    <div class="tech-content">
+                        <p>Hands-on development from breadboard prototype to functional medical device. The initial force meter prototype integrated multiple Arduino-compatible boards, force sensing circuitry, and battery management into a portable enclosure. Extensive lab testing validated force measurement accuracy and established calibration procedures for clinical deployment.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="images/1770361515707_image.png" alt="Force Meter Prototype Assembly">
+                        <div class="gallery-caption">Force Meter Prototype - Internal electronics assembly (top) showing multi-board integration, and final prototype in portable enclosure (bottom)</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1770361680394_image.png" alt="Lab Work and Testing">
+                        <div class="gallery-caption">Lab Development - PCB assembly, soldering, and testing at Rehabilitation Robotics Lab workbench</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1770362665469_image.png" alt="Force Data Visualization">
+                        <div class="gallery-caption">Data Collection - Force vs time graph showing repeated shoulder exercise measurements (~20N peak force over 3500ms test duration)</div>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>System Architecture</h4>
+                    <div class="tech-content">
+                        <p><strong>Hardware Platform:</strong> ESP32-WROOM-32D with custom PCB integrating:</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>BNO055 9-axis IMU (I2C, 0x28) - orientation, acceleration, gyroscope, magnetometer</li>
+                            <li>HX711 24-bit ADC for half-bridge force sensor</li>
+                            <li>Battery monitoring system with RGB status LEDs</li>
+                            <li>BLE 4.2 radio for wireless data transmission</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>Firmware Architecture (FreeRTOS):</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Sensor collection task: Combined IMU + force data at 75 Hz</li>
+                            <li>BLE GATT server: Two service profiles for command/control and data streaming</li>
+                            <li>Calibration system: Zero-force offset and IMU orientation calibration with persistent storage</li>
+                            <li>Battery monitoring task: ADC-based voltage measurement with LED indication</li>
+                            <li>Data buffering: 40KB circular buffer for high-throughput data collection</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Firmware Architecture (FreeRTOS Multi-threaded)</h4>
+                    <div class="tech-content">
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <p style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">Main Collection Task</p>
+                            <ul style="margin-left: 2rem;">
+                                <li>Runs at ~75 Hz (13.3ms period)</li>
+                                <li>Synchronized IMU + force sensor sampling</li>
+                                <li>Microsecond-precision timestamping with ESP32 hardware timer</li>
+                                <li>40KB circular buffer management for high-throughput data</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <p style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">BLE GATT Server</p>
+                            <ul style="margin-left: 2rem;">
+                                <li>Dual service profiles: Command/Control + Data Stream</li>
+                                <li>Characteristic-based communication for device control</li>
+                                <li>Event-driven architecture with callback handlers</li>
+                                <li>MTU negotiation for optimal BLE throughput</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <p style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">Calibration System</p>
+                            <ul style="margin-left: 2rem;">
+                                <li>Zero-force offset calibration with 20-sample averaging</li>
+                                <li>Persistent storage in NVS (non-volatile storage)</li>
+                                <li>IMU orientation calibration for wearable positioning</li>
+                                <li>Runtime calibration via BLE commands</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: var(--bg-code); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; margin: 1rem 0;">
+                            <p style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; margin-bottom: 1rem;">Battery Monitoring Task</p>
+                            <ul style="margin-left: 2rem;">
+                                <li>ADC-based voltage measurement with averaging filter</li>
+                                <li>RGB LED status indication (charging/charged/low battery)</li>
+                                <li>Periodic monitoring at 1Hz to optimize power consumption</li>
+                                <li>Low-battery detection and shutdown protection</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Data Transmission Modes</h4>
+                    <div class="tech-content">
+                        <p><strong>Collect & Send Mode:</strong> Buffers 1000 data points (~18 seconds at 60 Hz) in SPIFFS filesystem, then transmits complete dataset over BLE. Enables comprehensive data collection without real-time transmission requirements.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Real-Time Streaming Mode:</strong> Transmits data continuously at 30 Hz over BLE using JSON format compatible with RRL BLE Dashboard. Initialization message sent once containing device metadata, followed by continuous stream messages with sensor values.</p>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Hardware Development Journey</h4>
+                    <div class="tech-content">
+                        <p>The device evolved from breadboard prototype to production-ready PCB through multiple iterations. Custom PCB integrates ESP32-WROOM-32D, BNO055 IMU breakout, HX711 ADC, battery management circuitry, and micro-USB charging. Design considerations included I2C pullup resistor placement for reliable sensor communication, power plane layout for stable sensor operation, and compact form factor for wearable medical device application.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="images/1770358767211_image.png" alt="Shoulder Sensor PCB Schematic">
+                        <div class="gallery-caption">Custom PCB Design - EasyEDA schematic showing ESP32, BNO055, HX711, and power management integration</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/1770358784625_image.png" alt="Assembled Shoulder Sensor PCB">
+                        <div class="gallery-caption">Production PCB Assembly - Fully assembled and tested device ready for Health Canada approval pathway</div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">IMPACT & DOCUMENTATION</div>
+                    </div>
+                    <div class="psi-content">
+                        <ul style="margin-left: 2rem;">
+                            <li>Mentored another student in PCB design</li>
+                            <li>Authored Standard Operating Procedures (SOPs) for device operation</li>
+                            <li>Created comprehensive technical documentation detailing firmware architecture, sensor integration, and calibration procedures</li>
+                            <li>Device entered Health Canada approval pathway for clinical deployment in rural rehabilitation settings</li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+
+            <!-- Smart Cushion Deep Dive -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>ML-Based Smart Cushion: Wheelchair Seating Position Analysis</h3>
+                        <p class="project-company">Rehabilitation Robotics Lab - Dean's Research Award</p>
+                        <p class="project-role">Machine Learning Engineer | Sep 2023 – Apr 2024</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">112,640</div>
+                        <div class="metric-label">Training Data Points</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">0.99 AUC</div>
+                        <div class="metric-label">Classification Performance</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">5</div>
+                        <div class="metric-label">Hidden Layers (NN)</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">4</div>
+                        <div class="metric-label">Seating Positions</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Developed ML-powered pressure sensing system for real-time wheelchair seating position classification to prevent pressure sores in long-term wheelchair users. Designed custom velostat-based pressure pad with multiplexer circuit and flexible PCB, collected 112,640 training samples across 4 seating positions, implemented 5-layer neural network in PyTorch with CUDA acceleration, and built 3D force visualization interface in Java using Processing IDE. Achieved 0.99-1.00 AUC classification performance across three position classes, demonstrating viability for clinical deployment.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">PyTorch</span>
+                    <span class="tech-tag">CUDA</span>
+                    <span class="tech-tag">Neural Networks</span>
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">Velostat Sensors</span>
+                    <span class="tech-tag">Multiplexers</span>
+                    <span class="tech-tag">Java</span>
+                    <span class="tech-tag">Processing IDE</span>
+                    <span class="tech-tag">Altium</span>
+                    <span class="tech-tag">Flexible PCB</span>
+                    <span class="tech-tag">ROC Analysis</span>
+                    <span class="tech-tag">Python</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Custom velostat pressure sensor array, 112,640 sample dataset, 5-layer PyTorch neural network achieving 0.99-1.00 AUC. 3D real-time visualization in Java Processing. Dean's Research Award recipient.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Pressure Sensing Technology: Velostat</h4>
+                    <div class="tech-content">
+                        <p>Velostat (pressure-sensitive conductive material) changes electrical resistance when compressed. With no applied pressure, carbon particles within the material maintain high electrical resistance (low current flow). When pressure is applied, carbon particles move closer together, creating more conductive pathways and dramatically reducing resistance (high current flow). This piezoresistive property enables precise pressure mapping across the cushion surface.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Custom Sensor Array Design:</strong> Constructed flexible pressure pad with velostat layer sandwiched between copper electrode arrays. Adhesive layers secure the vinyl substrate while carbon particles within the velostat respond to applied force. Multiple sensing points connected through multiplexer circuit enable spatial pressure distribution measurement without requiring individual ADC channels for each sensor.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="images/velostat_sensor.png" alt="Velostat Sensor Operating Principle">
+                        <div class="gallery-caption">Velostat Pressure Sensing Mechanism - Low current at rest, high current under pressure as carbon particles compress and create conductive pathways</div>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Hardware Development</h4>
+                    <div class="tech-content">
+                        <p><strong>Multiplexer Circuit Design:</strong> Implemented analog multiplexer array to read multiple pressure sensors through single Arduino ADC input. Multiplexer addressing controlled via digital GPIO pins, enabling sequential sensor polling. This architecture reduces pin requirements and allows scalable sensor array expansion without ADC channel limitations.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Flexible PCB Design (Altium):</strong> Designed flexible printed circuit board to interface with velostat sensor array. Flex PCB conforms to cushion curvature while maintaining reliable electrical connections. Layout considerations included trace routing for minimal crosstalk, via placement for mechanical flexibility, and connector positioning for Arduino integration. PCB manufacturing process used polyimide substrate for durability under repeated flexing cycles.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Data Acquisition System:</strong> Arduino microcontroller samples all sensors at fixed intervals, formats pressure readings into structured data packets, and transmits via serial connection to host computer for real-time visualization and dataset logging. System captures spatial pressure distribution at sufficient sampling rate for position classification while maintaining stable USB communication.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="images/cushion_testing.png" alt="Smart Cushion Testing Setup">
+                        <div class="gallery-caption">Testing Configuration - User seated on cushion with Arduino/multiplexer visible, collecting pressure distribution data for training dataset</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/3d_visualization.png" alt="3D Pressure Visualization">
+                        <div class="gallery-caption">Real-Time 3D Force Visualization - Java Processing interface displaying pressure distribution as height-mapped surface with color gradient</div>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Machine Learning Pipeline</h4>
+                    <div class="tech-content">
+                        <p><strong>Dataset Collection:</strong> Captured 112,640 labeled samples across 4 distinct seating positions (properly centered, leaning forward, leaning right, sitting on something). Each sample contains pressure readings from all sensor locations, creating high-dimensional feature vectors. Multiple subjects contributed to dataset for generalization across different body types and sitting habits. Data collection protocol ensured balanced class distribution to prevent model bias.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Neural Network Architecture:</strong> Implemented feedforward neural network with 5 hidden layers in PyTorch. Input layer dimensionality matches sensor array size, hidden layers apply ReLU activation with progressive dimensionality reduction, output layer uses softmax for 4-class probability distribution. Architecture depth chosen through experimentation to balance model capacity against overfitting risk given dataset size.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Training Methodology:</strong> Leveraged CUDA-enabled GPU acceleration for efficient batch gradient descent. Training process monitored validation loss to detect overfitting, employed early stopping when validation performance plateaued. Loss curves demonstrate successful convergence with training and validation losses tracking closely, indicating good generalization without memorization. Final model achieves low loss (~0.3) on both training and validation sets after 12 epochs.</p>
+                    </div>
+                </div>
+
+                <div class="image-gallery">
+                    <div class="gallery-item">
+                        <img src="images/training_loss.png" alt="Neural Network Training Loss">
+                        <div class="gallery-caption">Training Progress - Convergence of training and validation loss over 12 epochs, demonstrating effective learning without overfitting</div>
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/roc_curve.png" alt="ROC Curve Classification Performance">
+                        <div class="gallery-caption">Classification Performance - ROC curves showing excellent discrimination: Class 0 (AUC=0.99), Class 1 (AUC=1.00), Class 2 (AUC=1.00), Class 3 (AUC=0.67)</div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">RESULTS & CLINICAL IMPACT</div>
+                    </div>
+                    <div class="psi-content">
+                        <p><strong>Classification Performance:</strong> Achieved near-perfect classification for three seating positions (AUC 0.99-1.00), demonstrating system viability for clinical deployment. Class 3 (sitting on something) showed lower but acceptable performance (AUC 0.67), this is because Class 3 was tested on data it had not seen to see how it would preform. Showing that the model needed more training data for this class to improve generalization.</p>
+
+                        <p style="margin-top: 1rem;"><strong>3D Visualization System:</strong> Developed real-time pressure visualization in Java using Processing IDE. Interface displays pressure distribution as 3D height-mapped surface with color-coded intensity (red indicates high pressure regions). Visualization enables clinicians to quickly assess seating patterns and identify problematic pressure concentrations that could lead to tissue damage.</p>
+
+                        <p style="margin-top: 1rem;"><strong>Clinical Application:</strong> System provides immediate feedback for proper wheelchair positioning to prevent pressure sores in long-term wheelchair users. Pressure sores (decubitus ulcers) represent serious health risk for individuals with limited mobility. Early detection and position correction can prevent costly medical interventions and improve quality of life. Grant funding application supported by strong ROC performance metrics.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="shell" class="section">
+            <div class="section-header">
+                <span class="section-number">08.</span>
+                <h2 class="section-title">System Programming & Process Control</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Unix Shell Implementation</h3>
+                        <p class="project-company">Systems Programmer | Fall 2025</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/YousefMoussa/CustomShell-C" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">Process</div>
+                        <div class="metric-label">fork/exec/wait</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">I/O</div>
+                        <div class="metric-label">Redirection</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Pipelines</div>
+                        <div class="metric-label">IPC</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Built a fully-functional Unix shell from scratch, providing command parsing, process execution, I/O redirection, and pipeline support. Handles both built-in commands and external program execution with proper signal handling for job control.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">Unix System Calls</span>
+                    <span class="tech-tag">Process Control</span>
+                    <span class="tech-tag">Signal Handling</span>
+                    <span class="tech-tag">File I/O</span>
+                    <span class="tech-tag">String Parsing</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> fork/exec/wait process management, I/O redirection and pipelines, signal handling (SIGINT, SIGCHLD), built-in commands, background execution.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Shell Capabilities</h4>
+                    <div class="tech-content">
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Command parsing with argument tokenization and quote handling</li>
+                            <li>Process creation and management using fork()/exec()/wait() system calls</li>
+                            <li>I/O redirection (>, <, >>) with file descriptor manipulation</li>
+                            <li>Pipeline implementation (|) supporting multiple command chaining</li>
+                            <li>Built-in commands: cd, pwd, exit, history</li>
+                            <li>Background process execution with & operator</li>
+                            <li>Signal handling (SIGINT, SIGCHLD) for proper job control</li>
+                            <li>Environment variable expansion</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/1770402653210_image.png" alt="Custom Shell Terminal">
+                        <div class="gallery-caption">Custom Shell in Action - Terminal session demonstrating command execution (ls, ps aux, git), directory navigation, custom prompt display, and Unix command integration. Shows built-in command support alongside external program execution with proper I/O handling and process management.</div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon solution-icon"></div>
+                        <div class="psi-title">Implementation Details</div>
+                    </div>
+                    <div class="psi-content">
+                        <p>Implemented robust command parser handling quotes, escapes, and special characters. Managed file descriptor lifecycle for complex pipelines with proper cleanup. Handled zombie processes through SIGCHLD signals and proper wait() usage. Developed command history mechanism with efficient storage and retrieval.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="filesystem" class="section">
+            <div class="section-header">
+                <span class="section-number">09.</span>
+                <h2 class="section-title">Systems Programming</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Simulated Unix Filesystem</h3>
+                        <p class="project-company">Systems Programmer | Fall 2025</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/YousefMoussa/Simulated-Filesystem" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">Block I/O</div>
+                        <div class="metric-label">Disk Simulation</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">inode</div>
+                        <div class="metric-label">File Metadata</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Directory</div>
+                        <div class="metric-label">Path Resolution</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Built a complete Unix-like filesystem from scratch in C, implementing block-level storage management, inode-based file representation, and hierarchical directory structures. Simulates virtual disk I/O operations with proper handling of file creation, reading, writing, deletion, and seeking across multi-level directories.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">File Systems</span>
+                    <span class="tech-tag">Block I/O</span>
+                    <span class="tech-tag">inode Management</span>
+                    <span class="tech-tag">Memory Management</span>
+                    <span class="tech-tag">Data Structures</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Block allocation with bitmap tracking, inode-based metadata, hierarchical directories with path resolution, CRUD operations across multi-level directory structures.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>System Architecture</h4>
+                    <div class="tech-content">
+                        <p><strong>Core Features:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Block allocation and free space management with bitmap tracking</li>
+                            <li>inode table for file metadata including size, permissions, and block pointers</li>
+                            <li>Directory entry management with name-to-inode mapping</li>
+                            <li>Path parsing and traversal for both absolute and relative paths</li>
+                            <li>Support for create, read, write, delete, and seek operations</li>
+                            <li>Multi-level directory support with proper handling of "." and ".." entries</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon solution-icon"></div>
+                        <div class="psi-title">Technical Challenges</div>
+                    </div>
+                    <div class="psi-content">
+                        <p>Implemented efficient block allocation strategies to minimize fragmentation, developed robust path parsing to handle edge cases (., .., /), and designed data structures for optimal memory usage. Ensured filesystem consistency across operations with proper error handling and validation.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="mapreduce" class="section">
+            <div class="section-header">
+                <span class="section-number">10.</span>
+                <h2 class="section-title">Distributed Systems</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Distributed MapReduce Framework</h3>
+                        <p class="project-company">Distributed Systems Programmer | Fall 2025</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/YousefMoussa/MapReduce" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">Parallel</div>
+                        <div class="metric-label">Worker Coordination</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Distribution</div>
+                        <div class="metric-label">Load Balancing</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Fault Tolerant</div>
+                        <div class="metric-label">Worker Recovery</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Developed a distributed computing framework inspired by Google's MapReduce paper, enabling parallel processing of large datasets across multiple worker processes. The coordinator manages task assignment, monitors worker health, and handles failures gracefully through task reassignment.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C</span>
+                    <span class="tech-tag">Distributed Systems</span>
+                    <span class="tech-tag">IPC</span>
+                    <span class="tech-tag">Parallel Computing</span>
+                    <span class="tech-tag">Process Management</span>
+                    <span class="tech-tag">Fault Tolerance</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Coordinator/worker architecture with IPC, heartbeat-based fault detection, task reassignment on failure, exactly-once execution semantics.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>System Components</h4>
+                    <div class="tech-content">
+                        <p><strong>Architecture:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Coordinator process for centralized task management and worker orchestration</li>
+                            <li>Worker processes with configurable map/reduce function execution</li>
+                            <li>Inter-process communication using sockets and shared memory</li>
+                            <li>Task partitioning and intermediate data shuffling mechanisms</li>
+                            <li>Fault detection through heartbeat mechanism and task reassignment on worker failure</li>
+                            <li>Configurable number of map and reduce workers for scalability</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon solution-icon"></div>
+                        <div class="psi-title">Implementation Challenges</div>
+                    </div>
+                    <div class="psi-content">
+                        <p>Implemented efficient data partitioning strategy to balance workload across workers, developed heartbeat mechanism for failure detection, and designed intermediate file format for map-to-reduce data transfer. Handled race conditions in shared state access and ensured exactly-once task execution semantics.</p>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="quacker" class="section">
+            <div class="section-header">
+                <span class="section-number">11.</span>
+                <h2 class="section-title">Full-Stack Web Development</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Quacker - Social Media Platform C++/SQL</h3>
+                        <p class="project-company">Full-Stack Developer & Database Management | Winter 2024</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/YousefMoussa/Quacker" target="_blank" class="project-link">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            View on GitHub
+                        </a>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">Auth</div>
+                        <div class="metric-label">Secure Sessions</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Social</div>
+                        <div class="metric-label">Post & Comment</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Follow</div>
+                        <div class="metric-label">User Connections</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Built a Twitter-inspired social media platform using Flask backend with PostgreSQL database and responsive HTML/CSS/JavaScript frontend. Implements core social networking features including user profiles, posts (quacks), comments, likes, and follow relationships with proper authentication and database normalization.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Flask</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">SQLAlchemy</span>
+                    <span class="tech-tag">HTML/CSS</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Bootstrap</span>
+                    <span class="tech-tag">REST API</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Flask REST API with PostgreSQL, secure authentication with bcrypt, normalized database schema, social features (posts, comments, follows, likes).
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Platform Features & Architecture</h4>
+                    <div class="tech-content">
+                        <p><strong>Core Functionality:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>User authentication and session management with secure password hashing</li>
+                            <li>Profile creation with customizable bio, avatar, and user information</li>
+                            <li>Post creation, editing, and deletion with timestamp tracking</li>
+                            <li>Comment system with nested discussions on posts</li>
+                            <li>Follow/unfollow mechanics for building social connections</li>
+                            <li>Personalized feed showing posts from followed users</li>
+                            <li>Search functionality for discovering users and content</li>
+                            <li>Like/unlike system for post engagement tracking</li>
+                        </ul>
+
+                        <p style="margin-top: 1rem;"><strong>Technical Implementation:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Backend:</strong> Flask application with RESTful API design, SQLAlchemy ORM for database interactions, Flask-Login for session management</li>
+                            <li><strong>Database:</strong> PostgreSQL with normalized schema - users, posts, comments, follows, likes tables with proper foreign key relationships</li>
+                            <li><strong>Frontend:</strong> Responsive design with Bootstrap, AJAX for dynamic content updates without page refreshes</li>
+                            <li><strong>Security:</strong> Password hashing with bcrypt, CSRF protection, SQL injection prevention through parameterized queries</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="image-gallery" style="margin-top: 2rem;">
+                    <div class="gallery-item">
+                        <img src="images/1770402899967_image.png" alt="Quacker Application Login">
+                        <div class="gallery-caption">Quacker Welcome Screen - Terminal-based interface with ASCII art logo and main menu featuring authentication options: user login for existing accounts, sign-up for new user registration, and exit. Built with Python and Flask, demonstrating full-stack development with database-backed user management.</div>
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+        </section>
+        <section id="skills" class="section">
+            <div class="section-header">
+                <span class="section-number">12.</span>
+                <h2 class="section-title">Technical Skills</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <div class="deep-dive-project" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Embedded Systems & Real-Time</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">STM32</span>
+                        <span class="tech-tag">ESP32</span>
+                        <span class="tech-tag">FreeRTOS</span>
+                        <span class="tech-tag">ESP-IDF</span>
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Hardware Timers</span>
+                        <span class="tech-tag">DMA</span>
+                        <span class="tech-tag">Multi-threading</span>
+                    </div>
+                </div>
+
+                <div class="deep-dive-project" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Communication Protocols</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">CAN Bus</span>
+                        <span class="tech-tag">SPI</span>
+                        <span class="tech-tag">I2C</span>
+                        <span class="tech-tag">UART</span>
+                        <span class="tech-tag">BLE</span>
+                        <span class="tech-tag">MQTT</span>
+                        <span class="tech-tag">TCP/IP</span>
+                        <span class="tech-tag">UDP</span>
+                    </div>
+                </div>
+
+                <div class="deep-dive-project" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Programming Languages</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">C</span>
+                        <span class="tech-tag">C++</span>
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Verilog</span>
+                        <span class="tech-tag">VHDL</span>
+                        <span class="tech-tag">Assembly</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Bash</span>
+                    </div>
+                </div>
+
+                <div class="deep-dive-project" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Hardware Design & Tools</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Altium</span>
+                        <span class="tech-tag">EasyEDA</span>
+                        <span class="tech-tag">Vivado</span>
+                        <span class="tech-tag">LTspice</span>
+                        <span class="tech-tag">Oscilloscope</span>
+                        <span class="tech-tag">Logic Analyzer</span>
+                        <span class="tech-tag">Soldering</span>
+                    </div>
+                </div>
+
+                <div class="deep-dive-project" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Robotics & Autonomy</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">ROS2</span>
+                        <span class="tech-tag">IMU/AHRS</span>
+                        <span class="tech-tag">Navigation</span>
+                        <span class="tech-tag">Motion Control</span>
+                        <span class="tech-tag">Sensor Fusion</span>
+                    </div>
+                </div>
+
+                <div class="deep-dive-project" style="margin-bottom: 0;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Machine Learning & Data</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">CUDA</span>
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Matplotlib</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="contact" class="section">
+            <div class="section-header">
+                <span class="section-number">13.</span>
+                <h2 class="section-title">Contact</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                    Let's Build Something Together
+                </h2>
+                <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
+                    Currently seeking co-op and internship opportunities for May 2026 to December 2026 in embedded systems, ASIC design, hardware verification, and autonomous systems. Open to full-time positions starting May 2027.<br><br>
+                    <span style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace;">ymoussa@ualberta.ca</span>
+                </p>
+
+                <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap;">
+                    <a href="https://linkedin.com/in/yousefmoussa" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; padding: 0.8rem 1.5rem; border: 2px solid var(--border); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-primary)'; this.style.transform='translateY(0)'">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                            <rect x="2" y="9" width="4" height="12"/>
+                            <circle cx="4" cy="4" r="2"/>
+                        </svg>
+                        LinkedIn
+                    </a>
+                    <a href="https://github.com/YousefMoussa" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; padding: 0.8rem 1.5rem; border: 2px solid var(--border); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-primary)'; this.style.transform='translateY(0)'">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">
+            <p>Designed & Built by Yousef Moussa | © 2025</p>
+            <p style="margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">ASIC & Digital Design • Embedded Systems • Real-Time Control • Autonomous Robotics</p>
+        </footer>
+    </div>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Collapsible sections
+        function toggleCollapse(btn) {
+            const content = btn.previousElementSibling;
+            const isExpanded = content.classList.contains('expanded');
+            
+            if (isExpanded) {
+                content.classList.remove('expanded');
+                btn.classList.remove('expanded');
+                btn.innerHTML = `<span>View Full Details</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+            } else {
+                content.classList.add('expanded');
+                btn.classList.add('expanded');
+                btn.innerHTML = `<span>Show Less</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+            }
+        }
+
+        // Expand All / Collapse All
+        function toggleAllSections(expand) {
+            document.querySelectorAll('.collapse-content').forEach(content => {
+                if (expand) {
+                    content.classList.add('expanded');
+                } else {
+                    content.classList.remove('expanded');
+                }
+            });
+            document.querySelectorAll('.expand-btn').forEach(btn => {
+                if (expand) {
+                    btn.classList.add('expanded');
+                    btn.innerHTML = `<span>Show Less</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+                } else {
+                    btn.classList.remove('expanded');
+                    btn.innerHTML = `<span>View Full Details</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+                }
+            });
+        }
+
+        // Hide nav on scroll down, show on scroll up
+        (function() {
+            const nav = document.querySelector('nav');
+            let lastScrollY = window.scrollY;
+            let ticking = false;
+
+            function updateNav() {
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY < 100) {
+                    // Always show nav near top of page
+                    nav.classList.remove('nav-hidden');
+                } else if (currentScrollY > lastScrollY) {
+                    // Scrolling down - hide nav
+                    nav.classList.add('nav-hidden');
+                } else {
+                    // Scrolling up - show nav
+                    nav.classList.remove('nav-hidden');
+                }
+                
+                lastScrollY = currentScrollY;
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNav);
+                    ticking = true;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
