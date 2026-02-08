@@ -294,6 +294,195 @@
             stroke: currentColor;
         }
 
+        /* Overview Grid */
+        .projects-grid-wrapper {
+            margin: 4rem 0 2rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.25rem 3.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 12px 30px rgba(0, 217, 255, 0.18);
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .card-meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+
+        .card-tag {
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 0.28rem 0.65rem;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            background: rgba(0, 217, 255, 0.08);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 170px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg-code);
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            color: var(--accent-primary);
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 0;
+            position: absolute;
+            left: 1.25rem;
+            bottom: 1rem;
+        }
+
+        .card-link svg {
+            width: 18px;
+            height: 18px;
+            stroke: currentColor;
+        }
+
+        .card-badges {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 0;
+            justify-content: flex-end;
+            position: absolute;
+            right: 1.25rem;
+            bottom: 1rem;
+        }
+
+        .card-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.28rem 0.65rem;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.08);
+            text-decoration: none;
+            transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+        }
+
+        .card-badge:hover {
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.14);
+            color: #fff;
+        }
+
+        .card-badge svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+        }
+
+        /* Tag color coding */
+        .card-tag.lang { background: rgba(0, 144, 255, 0.18); border-color: rgba(0, 144, 255, 0.4); }
+        .card-tag.tool { background: rgba(173, 86, 255, 0.18); border-color: rgba(173, 86, 255, 0.4); }
+        .card-tag.hardware { background: rgba(0, 200, 150, 0.18); border-color: rgba(0, 200, 150, 0.45); }
+        .card-tag.proto { background: rgba(255, 170, 0, 0.2); border-color: rgba(255, 170, 0, 0.45); color: #ffffff; }
+        .card-tag.concept { background: rgba(0, 217, 255, 0.15); border-color: rgba(0, 217, 255, 0.4); }
+        .card-tag.web { background: rgba(255, 99, 146, 0.18); border-color: rgba(255, 99, 146, 0.4); }
+        .card-tag.ml { background: rgba(120, 200, 255, 0.18); border-color: rgba(120, 200, 255, 0.4); }
+        .card-tag.security { background: rgba(255, 99, 71, 0.2); border-color: rgba(255, 99, 71, 0.45); }
+
+        .detail-banner {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.9rem 1.25rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgba(0, 217, 255, 0.08), rgba(0, 255, 157, 0.05));
+            margin: 1rem 0 2rem;
+        }
+
+        .detail-banner.show {
+            display: flex;
+        }
+
+        .detail-banner .left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--accent-secondary);
+        }
+
+        .detail-banner .actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-banner a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .project-section .section-header {
+            display: none;
+        }
+
+        .project-section.hidden {
+            display: none !important;
+        }
+
+        /* Detail mode layout tweaks */
+        .detail-mode .hero {
+            display: none;
+        }
+
 
 
         /* Section Headers */
@@ -683,53 +872,15 @@
             display: block !important;
         }
 
-        /* Collapsible Sections */
+        /* Collapsible Sections (forced open) */
         .collapse-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-            opacity: 0;
-        }
-
-        .collapse-content.expanded {
-            max-height: 15000px;
+            max-height: none;
+            overflow: visible;
             opacity: 1;
         }
 
         .expand-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            width: 100%;
-            padding: 1rem;
-            margin-top: 1.5rem;
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(0, 255, 157, 0.1));
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--accent-primary);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .expand-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 217, 255, 0.2), rgba(0, 255, 157, 0.2));
-            border-color: var(--accent-primary);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(0, 217, 255, 0.2);
-        }
-
-        .expand-btn .chevron {
-            transition: transform 0.3s ease;
-            width: 20px;
-            height: 20px;
-        }
-
-        .expand-btn.expanded .chevron {
-            transform: rotate(180deg);
+            display: none;
         }
 
         .project-preview {
@@ -759,21 +910,30 @@
         <nav>
             <a href="#home" class="logo" style="text-decoration: none;">&lt;YM /&gt;</a>
             <ul class="nav-links">
-                <li><a href="#digital-design">RISC-V</a></li>
-                <li><a href="#prng">PRNG</a></li>
-                <li><a href="#secure-fsm">FSM</a></li>
-                <li><a href="#vlsi-comparator">VLSI</a></li>
-                <li><a href="#arvp">ARVP</a></li>
-                <li><a href="#uvad">UVAD</a></li>
-                <li><a href="#rrl">Medical</a></li>
-                <li><a href="#shell">Shell</a></li>
-                <li><a href="#filesystem">Systems</a></li>
-                <li><a href="#mapreduce">Distributed</a></li>
-                <li><a href="#quacker">Quacker</a></li>
+                <li><a href="?project=digital-design">RISC-V</a></li>
+                <li><a href="?project=prng">PRNG</a></li>
+                <li><a href="?project=secure-fsm">FSM</a></li>
+                <li><a href="?project=vlsi-comparator">VLSI</a></li>
+                <li><a href="?project=arvp">ARVP</a></li>
+                <li><a href="?project=uvad">UVAD</a></li>
+                <li><a href="?project=rrl">Medical</a></li>
+                <li><a href="?project=smart-cushion">Smart Cushion</a></li>
+                <li><a href="?project=shell">Shell</a></li>
+                <li><a href="?project=filesystem">Filesystem</a></li>
+                <li><a href="?project=mapreduce">Distributed</a></li>
+                <li><a href="?project=quacker">Quacker</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
+
+        <div id="detail-banner" class="detail-banner">
+            <div class="left">Viewing: <span id="detail-title">Project</span></div>
+            <div class="actions">
+                <a id="back-to-projects" href="./#projects-grid">← All Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
 
         <!-- Hero Section -->
         <section id="home" class="hero">
@@ -794,8 +954,383 @@
             </div>
         </section>
 
+        <!-- Projects Grid -->
+        <section id="projects-grid" class="projects-grid-wrapper">
+            <div class="projects-grid">
+                <article class="project-card">
+                    <h3 class="card-title">32-bit RISC-V CPU</h3>
+                    <p class="card-meta">CPU Architect & Digital Designer | Fall and Winter 2025</p>
+                    <p class="card-summary">Designed and implemented two complete 32-bit RISC-V multi-cycle CPUs with FSM control and full RV32I coverage.</p>
+                    <div class="card-image">
+                        <img src="images/Screenshot_from_2026-02-06_10-27-20.png" alt="RISC-V CPU datapath and controller diagram">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">VHDL</span>
+                        <span class="card-tag lang">Verilog</span>
+                        <span class="card-tag concept">RISC-V ISA</span>
+                        <span class="card-tag concept">FSM Design</span>
+                        <span class="card-tag concept">Datapath Architecture</span>
+                        <span class="card-tag tool">Vivado</span>
+                        <span class="card-tag hardware">FPGA</span>
+                        <span class="card-tag hardware">Xilinx Zybo Z7</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/YousefMoussa/multi_cycle_riscv_cpu_vhdl" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=digital-design">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">Tausworthe PRNG</h3>
+                    <p class="card-meta">Digital Designer | Fall 2025</p>
+                    <p class="card-summary">32-bit Taus88 PRNG with three parallel LFSRs, XOR combination, and 125 MHz FPGA validation.</p>
+                    <div class="card-image">
+                        <img src="images/1770401118112_image.png" alt="Tausworthe PRNG architecture diagram">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">VHDL</span>
+                        <span class="card-tag hardware">FPGA</span>
+                        <span class="card-tag tool">Xilinx Vivado</span>
+                        <span class="card-tag hardware">Zybo Z7-10</span>
+                        <span class="card-tag concept">LFSR</span>
+                        <span class="card-tag concept">RTL Design</span>
+                        <span class="card-tag security">Cryptography</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/YousefMoussa/tausworthe-pseudo-random-number-generator" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=prng">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">Secure Element FSM</h3>
+                    <p class="card-meta">Security Digital Designer | Fall 2025</p>
+                    <p class="card-summary">Hardware security controller with instant attack override and Moore FSM for synchronized status outputs.</p>
+                    <div class="card-image">
+                        <img src="images/1770401054199_image.png" alt="Secure element FSM architecture diagram">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">VHDL</span>
+                        <span class="card-tag security">Hardware Security</span>
+                        <span class="card-tag hardware">FPGA</span>
+                        <span class="card-tag concept">FSM Design</span>
+                        <span class="card-tag tool">Xilinx Vivado</span>
+                        <span class="card-tag hardware">Zybo Z7-20</span>
+                        <span class="card-tag security">Attack Detection</span>
+                        <span class="card-tag security">Cryptographic Control</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/YousefMoussa/secure-element-fsm" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=secure-fsm">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">2-Bit Comparator IC</h3>
+                    <p class="card-meta">VLSI Design | Cadence Virtuoso</p>
+                    <p class="card-summary">Full custom 2-bit comparator through schematic-to-layout flow with clean DRC/LVS and post-layout validation.</p>
+                    <div class="card-image">
+                        <img src="images/image.png" alt="2-bit comparator schematic in GSCLIB 45nm">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag tool">Cadence Virtuoso</span>
+                        <span class="card-tag tool">Spectre Simulation</span>
+                        <span class="card-tag hardware">GSCLIB 45nm</span>
+                        <span class="card-tag concept">LVS Verification</span>
+                        <span class="card-tag concept">DRC Checking</span>
+                        <span class="card-tag concept">Layout Design</span>
+                        <span class="card-tag concept">Parasitic Extraction</span>
+                        <span class="card-tag hardware">Standard Cell Library</span>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
+                                <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                                <path d="M12 16v2"></path>
+                            </svg>
+                            Closed Source
+                        </span>
+                    </div>
+                    <a class="card-link" href="?project=vlsi-comparator">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">ARVP AUV Systems</h3>
+                    <p class="card-meta">Software Co-Lead | RoboSub</p>
+                    <p class="card-summary">ROS2 autonomy, localization, and embedded control across three AUV platforms with Teensy hardware.</p>
+                    <div class="card-image">
+                        <img src="images/1770406198124_image.png" alt="ARVP AUV pool testing">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag tool">ROS2</span>
+                        <span class="card-tag lang">C++</span>
+                        <span class="card-tag lang">Python</span>
+                        <span class="card-tag hardware">Teensy 4.0</span>
+                        <span class="card-tag concept">Device Drivers</span>
+                        <span class="card-tag concept">FreeRTOS</span>
+                        <span class="card-tag concept">DVL Navigation</span>
+                        <span class="card-tag hardware">IMU/AHRS</span>
+                        <span class="card-tag proto">CAN Bus</span>
+                        <span class="card-tag tool">Gazebo Simulation</span>
+                        <span class="card-tag tool">GitLab CI/CD</span>
+                        <span class="card-tag concept">Leadership</span>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
+                                <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                                <path d="M12 16v2"></path>
+                            </svg>
+                            Closed Source
+                        </span>
+                    </div>
+                    <a class="card-link" href="?project=arvp">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">UVAD Control Surface Firmware and More</h3>
+                    <p class="card-meta">Software Engineer | Jan–Aug 2025</p>
+                    <p class="card-summary">Safety-critical 4ms control loop for CAN servos with UART DMA ingest and hardware timer safeguards. TCP ground station to UAV quality improvement. Angle of attack and sideswipe firmware. Route upload improvements.</p>
+                    <div class="card-image">
+                        <img src="images/1770358283859_image.png" alt="UVAD servo control board Rev B front view">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">C/C++</span>
+                        <span class="card-tag hardware">STM32</span>
+                        <span class="card-tag concept">FreeRTOS</span>
+                        <span class="card-tag proto">CAN Bus</span>
+                        <span class="card-tag proto">SPI</span>
+                        <span class="card-tag proto">UART DMA</span>
+                        <span class="card-tag hardware">Hardware Timers</span>
+                        <span class="card-tag concept">Real-Time Systems</span>
+                        <span class="card-tag proto">TCP/IP</span>
+                        <span class="card-tag proto">MQTT</span>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
+                                <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                                <path d="M12 16v2"></path>
+                            </svg>
+                            Closed Source
+                        </span>
+                    </div>
+                    <a class="card-link" href="?project=uvad">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">Shoulder Rehab Sensor</h3>
+                    <p class="card-meta">Engineering Intern & Co-op | 2023–2024</p>
+                    <p class="card-summary">ESP32-based tele-rehab sensor streaming IMU and force data, moving from prototype to Health Canada pathway.</p>
+                    <div class="card-image">
+                        <img src="images/image(1).png" alt="Assembled shoulder rehab sensor PCB">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag hardware">ESP32</span>
+                        <span class="card-tag tool">ESP-IDF</span>
+                        <span class="card-tag concept">FreeRTOS</span>
+                        <span class="card-tag tool">Arduino</span>
+                        <span class="card-tag proto">BLE GATT</span>
+                        <span class="card-tag hardware">BNO055</span>
+                        <span class="card-tag hardware">HX711</span>
+                        <span class="card-tag proto">I2C</span>
+                        <span class="card-tag hardware">PCB Design</span>
+                        <span class="card-tag tool">EasyEDA</span>
+                        <span class="card-tag lang">C/C++</span>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
+                                <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                                <path d="M12 16v2"></path>
+                            </svg>
+                            Closed Source
+                        </span>
+                    </div>
+                    <a class="card-link" href="?project=rrl">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">ML-Based Smart Cushion</h3>
+                    <p class="card-meta">Machine Learning Engineer | 2023–2024</p>
+                    <p class="card-summary">Pressure-sensing wheelchair cushion with 5-layer neural net achieving 0.99 AUC for seating position classification.</p>
+                    <div class="card-image">
+                        <img src="images/3d_visualization.png" alt="3D pressure visualization for smart cushion">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">Python</span>
+                        <span class="card-tag ml">PyTorch</span>
+                        <span class="card-tag ml">CUDA</span>
+                        <span class="card-tag hardware">Arduino</span>
+                        <span class="card-tag proto">Multiplexers</span>
+                        <span class="card-tag hardware">Velostat Sensors</span>
+                        <span class="card-tag ml">Neural Networks</span>
+                        <span class="card-tag web">Visualization</span>
+                    </div>
+                    <div class="card-badges">
+                        <span class="card-badge">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
+                                <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                                <path d="M12 16v2"></path>
+                            </svg>
+                            Closed Source
+                        </span>
+                    </div>
+                    <a class="card-link" href="?project=smart-cushion">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">Unix Shell</h3>
+                    <p class="card-meta">Systems Programmer | Fall 2025</p>
+                    <p class="card-summary">Custom Unix shell with pipelines, redirection, job control, and robust parsing.</p>
+                    <div class="card-image">
+                        <img src="images/shell.png" alt="Custom Unix shell terminal view">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">C</span>
+                        <span class="card-tag concept">Unix System Calls</span>
+                        <span class="card-tag concept">Process Control</span>
+                        <span class="card-tag concept">Signal Handling</span>
+                        <span class="card-tag concept">File I/O</span>
+                        <span class="card-tag concept">String Parsing</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/YousefMoussa/CustomShell-C" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=shell">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">Simulated Filesystem</h3>
+                    <p class="card-meta">Systems Programmer | Fall 2025</p>
+                    <p class="card-summary">Unix-like filesystem simulator with block allocation, inode metadata, and multi-level directories.</p>
+                    <div class="card-image">
+                        <img src="images/filesystem.png" alt="Filesystem architecture visualization">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">C</span>
+                        <span class="card-tag concept">File Systems</span>
+                        <span class="card-tag concept">Block I/O</span>
+                        <span class="card-tag concept">inode Management</span>
+                        <span class="card-tag concept">Memory Management</span>
+                        <span class="card-tag concept">Data Structures</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/YousefMoussa/Simulated-Filesystem" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=filesystem">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">MapReduce Framework</h3>
+                    <p class="card-meta">Distributed Systems Programmer | Fall 2025</p>
+                    <p class="card-summary">Coordinator/worker MapReduce implementation with IPC, multithreading and more.</p>
+                    <div class="card-image">
+                        <img src="images/mapreduce.png" alt="MapReduce workflow diagram">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">C</span>
+                        <span class="card-tag concept">Distributed Systems</span>
+                        <span class="card-tag proto">IPC</span>
+                        <span class="card-tag concept">Parallel Computing</span>
+                        <span class="card-tag concept">Process Management</span>
+                        <span class="card-tag concept">Fault Tolerance</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/YousefMoussa/MapReduce" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=mapreduce">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
+                    <h3 class="card-title">Quacker Platform</h3>
+                    <p class="card-meta">Full-Stack Developer | Winter 2024</p>
+                    <p class="card-summary">Twitter-style platform with secure auth, feeds, follows, posts, comments, and SQL schema.</p>
+                    <div class="card-image">
+                        <img src="images/1770402899967_image.png" alt="Quacker app login screen">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">Python</span>
+                        <span class="card-tag tool">Flask</span>
+                        <span class="card-tag tool">PostgreSQL</span>
+                        <span class="card-tag tool">SQL</span>
+                        <span class="card-tag web">HTML/CSS</span>
+                        <span class="card-tag lang">JavaScript</span>
+                        <span class="card-tag web">Bootstrap</span>
+                        <span class="card-tag proto">REST API</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/YousefMoussa/Quacker" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            GitHub
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=quacker">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+            </div>
+        </section>
+
         <!-- ARVP Deep Dive -->
-        <section id="digital-design" class="section">
+        <section id="digital-design" class="section project-section">
             <div class="section-header">
                 <span class="section-number">01.</span>
                 <h2 class="section-title">Digital Design & Computer Architecture</h2>
@@ -1000,7 +1535,7 @@
                 </button>
             </div>
         </section>
-        <section id="prng" class="section">
+        <section id="prng" class="section project-section">
             <div class="section-header">
                 <span class="section-number">02.</span>
                 <h2 class="section-title">Hardware Random Number Generation</h2>
@@ -1109,7 +1644,7 @@
                 </button>
             </div>
         </section>
-        <section id="secure-fsm" class="section">
+        <section id="secure-fsm" class="section project-section">
             <div class="section-header">
                 <span class="section-number">03.</span>
                 <h2 class="section-title">Hardware Security & FSM Design</h2>
@@ -1135,7 +1670,7 @@
                 <div class="project-metrics">
                     <div class="metric">
                         <div class="metric-value">Multiple</div>
-                        <div class="metric-label">Moore FSMs</div>
+                        <div class="metric-label">Moore FSM</div>
                     </div>
                     <div class="metric">
                         <div class="metric-value">Instant</div>
@@ -1227,7 +1762,7 @@
                 </button>
             </div>
         </section>
-        <section id="vlsi-comparator" class="section">
+        <section id="vlsi-comparator" class="section project-section">
             <div class="section-header">
                 <span class="section-number">04.</span>
                 <h2 class="section-title">VLSI Design: Full Custom IC Flow</h2>
@@ -1386,7 +1921,7 @@
                 </button>
             </div>
         </section>
-        <section id="arvp" class="section">
+        <section id="arvp" class="section project-section">
             <div class="section-header">
                 <span class="section-number">05.</span>
                 <h2 class="section-title">ARVP: Autonomous Underwater Vehicle Systems</h2>
@@ -1625,7 +2160,7 @@
                 </button>
             </div>
         </section>
-        <section id="uvad" class="section">
+        <section id="uvad" class="section project-section">
             <div class="section-header">
                 <span class="section-number">06.</span>
                 <h2 class="section-title">UVAD: Autonomous UAV Systems</h2>
@@ -1669,7 +2204,6 @@
                     <span class="tech-tag">UART DMA</span>
                     <span class="tech-tag">Hardware Timers</span>
                     <span class="tech-tag">Real-Time Systems</span>
-                    <span class="tech-tag">C/C++</span>
                 </div>
 
                 <div class="project-preview">
@@ -1928,7 +2462,7 @@
                 </div>
             </div>
         </section>
-        <section id="rrl" class="section">
+        <section id="rrl" class="section project-section">
             <div class="section-header">
                 <span class="section-number">07.</span>
                 <h2 class="section-title">Medical Devices: Health Canada Pathway</h2>
@@ -2170,7 +2704,14 @@
                 </button>
             </div>
 
-            <!-- Smart Cushion Deep Dive -->
+        </section>
+        <section id="smart-cushion" class="section project-section">
+            <div class="section-header">
+                <span class="section-number">08.</span>
+                <h2 class="section-title">Smart Cushion: Seating Analytics</h2>
+                <div class="section-line"></div>
+            </div>
+
             <div class="deep-dive-project">
                 <div class="project-header">
                     <div class="project-title-section">
@@ -2303,9 +2844,9 @@
                 </button>
             </div>
         </section>
-        <section id="shell" class="section">
+        <section id="shell" class="section project-section">
             <div class="section-header">
-                <span class="section-number">08.</span>
+                <span class="section-number">09.</span>
                 <h2 class="section-title">System Programming & Process Control</h2>
                 <div class="section-line"></div>
             </div>
@@ -2399,9 +2940,9 @@
                 </button>
             </div>
         </section>
-        <section id="filesystem" class="section">
+        <section id="filesystem" class="section project-section">
             <div class="section-header">
-                <span class="section-number">09.</span>
+                <span class="section-number">10.</span>
                 <h2 class="section-title">Systems Programming</h2>
                 <div class="section-line"></div>
             </div>
@@ -2455,6 +2996,13 @@
                 </div>
 
                 <div class="collapse-content">
+                <div class="image-gallery" style="margin-top: 1.5rem;">
+                    <div class="gallery-item">
+                        <img src="images/filesystem.png" alt="Simulated filesystem visualization">
+                        <div class="gallery-caption">Filesystem Architecture - visualization of block allocation, inodes, and directory hierarchy.</div>
+                    </div>
+                </div>
+
                 <div class="technical-section">
                     <h4>System Architecture</h4>
                     <div class="tech-content">
@@ -2486,9 +3034,9 @@
                 </button>
             </div>
         </section>
-        <section id="mapreduce" class="section">
+        <section id="mapreduce" class="section project-section">
             <div class="section-header">
-                <span class="section-number">10.</span>
+                <span class="section-number">11.</span>
                 <h2 class="section-title">Distributed Systems</h2>
                 <div class="section-line"></div>
             </div>
@@ -2542,6 +3090,13 @@
                 </div>
 
                 <div class="collapse-content">
+                <div class="image-gallery" style="margin-top: 1.5rem;">
+                    <div class="gallery-item">
+                        <img src="images/mapreduce.png" alt="MapReduce framework diagram">
+                        <div class="gallery-caption">MapReduce Workflow - coordinator, workers, and shuffle phases for distributed jobs.</div>
+                    </div>
+                </div>
+
                 <div class="technical-section">
                     <h4>System Components</h4>
                     <div class="tech-content">
@@ -2573,9 +3128,9 @@
                 </button>
             </div>
         </section>
-        <section id="quacker" class="section">
+        <section id="quacker" class="section project-section">
             <div class="section-header">
-                <span class="section-number">11.</span>
+                <span class="section-number">12.</span>
                 <h2 class="section-title">Full-Stack Web Development</h2>
                 <div class="section-line"></div>
             </div>
@@ -2619,7 +3174,7 @@
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">Flask</span>
                     <span class="tech-tag">PostgreSQL</span>
-                    <span class="tech-tag">SQLAlchemy</span>
+                    <span class="tech-tag">SQL</span>
                     <span class="tech-tag">HTML/CSS</span>
                     <span class="tech-tag">JavaScript</span>
                     <span class="tech-tag">Bootstrap</span>
@@ -2648,7 +3203,7 @@
 
                         <p style="margin-top: 1rem;"><strong>Technical Implementation:</strong></p>
                         <ul style="margin-left: 2rem;">
-                            <li><strong>Backend:</strong> Flask application with RESTful API design, SQLAlchemy ORM for database interactions, Flask-Login for session management</li>
+                            <li><strong>Backend:</strong> Flask application with RESTful API design, SQL ORM for database interactions, Flask-Login for session management</li>
                             <li><strong>Database:</strong> PostgreSQL with normalized schema - users, posts, comments, follows, likes tables with proper foreign key relationships</li>
                             <li><strong>Frontend:</strong> Responsive design with Bootstrap, AJAX for dynamic content updates without page refreshes</li>
                             <li><strong>Security:</strong> Password hashing with bcrypt, CSRF protection, SQL injection prevention through parameterized queries</li>
@@ -2671,7 +3226,6 @@
         </section>
         <section id="skills" class="section">
             <div class="section-header">
-                <span class="section-number">12.</span>
                 <h2 class="section-title">Technical Skills</h2>
                 <div class="section-line"></div>
             </div>
@@ -2757,7 +3311,6 @@
         </section>
         <section id="contact" class="section">
             <div class="section-header">
-                <span class="section-number">13.</span>
                 <h2 class="section-title">Contact</h2>
                 <div class="section-line"></div>
             </div>
@@ -2798,6 +3351,65 @@
     </div>
 
     <script>
+        // Overview vs detail routing
+        (function() {
+            const params = new URLSearchParams(window.location.search);
+            const projectId = params.get('project');
+            const overview = document.getElementById('projects-grid');
+            const detailSections = document.querySelectorAll('.project-section');
+            const banner = document.getElementById('detail-banner');
+            const bannerTitle = document.getElementById('detail-title');
+            let found = false;
+
+            if (projectId) {
+                document.body.classList.add('detail-mode');
+                if (overview) overview.style.display = 'none';
+                detailSections.forEach(section => {
+                    const match = section.id === projectId;
+                    section.classList.toggle('hidden', !match);
+                    if (match) found = true;
+                });
+                if (found) {
+                    if (banner) banner.classList.add('show');
+                    const active = document.getElementById(projectId);
+                    if (active) {
+                        const title = active.querySelector('.project-title-section h3')?.textContent?.trim();
+                        if (bannerTitle && title) bannerTitle.textContent = title;
+                        toggleAllSections(true);
+                        setTimeout(() => active.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+                    }
+                } else {
+                    document.body.classList.remove('detail-mode');
+                    if (overview) overview.style.display = 'block';
+                    detailSections.forEach(section => section.classList.add('hidden'));
+                    if (banner) banner.classList.remove('show');
+                }
+            } else {
+                document.body.classList.remove('detail-mode');
+                if (overview) overview.style.display = 'block';
+                detailSections.forEach(section => section.classList.add('hidden'));
+                if (banner) banner.classList.remove('show');
+            }
+
+            const backLink = document.getElementById('back-to-projects');
+            if (backLink) {
+                backLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const dest = window.location.pathname + '#projects-grid';
+                    window.location.href = dest;
+                });
+            }
+
+            const logoLink = document.querySelector('.logo');
+            if (logoLink) {
+                logoLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const dest = window.location.pathname + '#home';
+                    window.location.href = dest;
+                });
+            }
+        })();
+
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
