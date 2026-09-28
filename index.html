@@ -146,17 +146,21 @@
             font-weight: 700;
             color: var(--accent-primary);
             letter-spacing: -0.05em;
+            white-space: nowrap;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 0.5rem 1.5rem;
             list-style: none;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
+            white-space: nowrap;
             font-size: 0.95rem;
             transition: color 0.3s ease;
             position: relative;
@@ -270,12 +274,17 @@
             transform: translateY(-2px);
         }
 
+        .project-links {
+            flex-shrink: 0;
+        }
+
         .project-link {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             color: #ffffff;
             text-decoration: none;
+            white-space: nowrap;
             padding: 0.8rem 1.5rem;
             border: 2px solid var(--border);
             border-radius: 8px;
@@ -910,6 +919,7 @@
         <nav>
             <a href="#home" class="logo" style="text-decoration: none;">&lt;YM /&gt;</a>
             <ul class="nav-links">
+                <li><a href="?project=tenstorrent">Tenstorrent</a></li>
                 <li><a href="?project=digital-design">RISC-V</a></li>
                 <li><a href="?project=prng">PRNG</a></li>
                 <li><a href="?project=secure-fsm">FSM</a></li>
@@ -940,9 +950,9 @@
             <div class="hero-content">
                 <div class="hero-text">
                     <h1>Yousef Moussa</h1>
-                    <p class="tagline">Computer Engineering Co-op Student</p>
-                    <p class="focus">Embedded Systems • ASIC Design • Autonomous Robotics</p>
-                    <p>Fourth-year Computer Engineering student at the University of Alberta (3.9 GPA) specializing in real-time embedded systems, digital design, and robotics. Proven track record of delivering measurable results: completed RISC-V CPU, realtime ROS2 robotic software presented on a world stage, 25x network performance improvement, Health Canada-approved medical devices, and mission-critical UAV firmware.</p>
+                    <p class="tagline">Computer Engineering Student · Graduating May 2027</p>
+                    <p class="focus">Embedded Systems • AI Accelerators • ASIC Design • Autonomous Robotics</p>
+                    <p>I am a final-year Computer Engineering student at the University of Alberta (3.9 GPA), currently I am on co-op on Tenstorrent's Metal Runtime team building bare-metal C++ runtime software for RISC-V-based AI accelerators. I Specialize in real-time embedded systems, digital design, and robotics, and have a proven track record of results: 20x faster atomic semaphores in an AI accelerator runtime, a 25x network latency improvement for UAV payloads, single-cycle and multi-cycle RISC-V CPUs, real-time ROS2 software competing at the international RoboSub competition, a medical sensor built for Health Canada approval, and mission-critical UAV firmware.</p>
                     <div class="cta-buttons">
                         <a href="#contact" class="btn btn-primary">Get in Touch</a>
                         <a href="https://github.com/YousefMoussa" target="_blank" class="btn btn-secondary">View GitHub</a>
@@ -958,8 +968,39 @@
         <section id="projects-grid" class="projects-grid-wrapper">
             <div class="projects-grid">
                 <article class="project-card">
+                    <h3 class="card-title">Tenstorrent AI Accelerator Runtime</h3>
+                    <p class="card-meta">Bare Metal Runtime | May 2026 – Present</p>
+                    <p class="card-summary">Low-level C++ runtime work for AI accelerators: block-based buffer transfers, topology-aware atomic semaphores (20x faster), and address-translation support for fast kernal dispatch.</p>
+                    <div class="card-image">
+                        <img src="images/tenstorrent_noc.svg" alt="Diagram of a block of buffer entries moving across a network-on-chip from a producer core to a consumer core">
+                    </div>
+                    <div class="card-tags">
+                        <span class="card-tag lang">C++</span>
+                        <span class="card-tag hardware">RISC-V</span>
+                        <span class="card-tag hardware">AI Accelerators</span>
+                        <span class="card-tag proto">Network-on-Chip</span>
+                        <span class="card-tag concept">Dataflow Buffers</span>
+                        <span class="card-tag concept">Atomics & Synchronization</span>
+                        <span class="card-tag concept">Address Translation</span>
+                        <span class="card-tag concept">Kernal Dispatch</span>
+                        <span class="card-tag tool">Emulation</span>
+                        <span class="card-tag tool">RTL Simulation</span>
+                    </div>
+                    <div class="card-badges">
+                        <a class="card-badge" href="https://github.com/tenstorrent/tt-metal" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            TT-Metal
+                        </a>
+                    </div>
+                    <a class="card-link" href="?project=tenstorrent">
+                        <span>See project</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
+                </article>
+
+                <article class="project-card">
                     <h3 class="card-title">32-bit RISC-V CPU</h3>
-                    <p class="card-meta">CPU Architect & Digital Designer | Fall and Winter 2025</p>
+                    <p class="card-meta">CPU Architecture & Digital Design | Fall 2025 and Winter 2026</p>
                     <p class="card-summary">Designed and implemented two complete 32-bit RISC-V multi-cycle CPUs with FSM control and full RV32I coverage.</p>
                     <div class="card-image">
                         <img src="images/Screenshot_from_2026-02-06_10-27-20.png" alt="RISC-V CPU datapath and controller diagram">
@@ -988,7 +1029,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">Tausworthe PRNG</h3>
-                    <p class="card-meta">Digital Designer | Fall 2025</p>
+                    <p class="card-meta">Digital Design | Fall 2025</p>
                     <p class="card-summary">32-bit Taus88 PRNG with three parallel LFSRs, XOR combination, and 125 MHz FPGA validation.</p>
                     <div class="card-image">
                         <img src="images/1770401118112_image.png" alt="Tausworthe PRNG architecture diagram">
@@ -1016,7 +1057,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">Secure Element FSM</h3>
-                    <p class="card-meta">Security Digital Designer | Fall 2025</p>
+                    <p class="card-meta">Hardware Security & Digital Design | Fall 2025</p>
                     <p class="card-summary">Hardware security controller with instant attack override and Moore FSM for synchronized status outputs.</p>
                     <div class="card-image">
                         <img src="images/1770401054199_image.png" alt="Secure element FSM architecture diagram">
@@ -1045,7 +1086,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">2-Bit Comparator IC</h3>
-                    <p class="card-meta">VLSI Design | Cadence Virtuoso</p>
+                    <p class="card-meta">Full-Custom VLSI Design | Winter 2026</p>
                     <p class="card-summary">Full custom 2-bit comparator through schematic-to-layout flow with clean DRC/LVS and post-layout validation.</p>
                     <div class="card-image">
                         <img src="images/image.png" alt="2-bit comparator schematic in GSCLIB 45nm">
@@ -1078,7 +1119,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">ARVP AUV Systems</h3>
-                    <p class="card-meta">Software Co-Lead | RoboSub</p>
+                    <p class="card-meta">Autonomous Robotics & Embedded Systems | Sept 2023 – Present</p>
                     <p class="card-summary">ROS2 autonomy, localization, and embedded control across three AUV platforms with Teensy hardware.</p>
                     <div class="card-image">
                         <img src="images/1770406198124_image.png" alt="ARVP AUV pool testing">
@@ -1115,7 +1156,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">UVAD Control Surface Firmware and More</h3>
-                    <p class="card-meta">Software Engineer | Jan–Aug 2025</p>
+                    <p class="card-meta">UAV Firmware & Networking | Jan–Aug 2025</p>
                     <p class="card-summary">Safety-critical 4ms control loop for CAN servos with UART DMA ingest and hardware timer safeguards. TCP ground station to UAV quality improvement. Angle of attack and sideswipe firmware. Route upload improvements.</p>
                     <div class="card-image">
                         <img src="images/1770358283859_image.png" alt="UVAD servo control board Rev B front view">
@@ -1150,7 +1191,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">Shoulder Rehab Sensor</h3>
-                    <p class="card-meta">Engineering Intern & Co-op | 2023–2024</p>
+                    <p class="card-meta">Medical Device Embedded Systems | May 2023 – Dec 2024</p>
                     <p class="card-summary">ESP32-based tele-rehab sensor streaming IMU and force data, moving from prototype to Health Canada pathway.</p>
                     <div class="card-image">
                         <img src="images/image(1).png" alt="Assembled shoulder rehab sensor PCB">
@@ -1186,7 +1227,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">ML-Based Smart Cushion</h3>
-                    <p class="card-meta">Machine Learning Engineer | 2023–2024</p>
+                    <p class="card-meta">Machine Learning & Sensing | Sept 2023 – April 2024</p>
                     <p class="card-summary">Pressure-sensing wheelchair cushion with 5-layer neural net achieving 0.99 AUC for seating position classification.</p>
                     <div class="card-image">
                         <img src="images/3d_visualization.png" alt="3D pressure visualization for smart cushion">
@@ -1219,7 +1260,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">Unix Shell</h3>
-                    <p class="card-meta">Systems Programmer | Fall 2025</p>
+                    <p class="card-meta">Systems Programming | Fall 2025</p>
                     <p class="card-summary">Custom Unix shell with pipelines, redirection, job control, and robust parsing.</p>
                     <div class="card-image">
                         <img src="images/shell.png" alt="Custom Unix shell terminal view">
@@ -1246,7 +1287,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">Simulated Filesystem</h3>
-                    <p class="card-meta">Systems Programmer | Fall 2025</p>
+                    <p class="card-meta">File Systems & Storage | Fall 2025</p>
                     <p class="card-summary">Unix-like filesystem simulator with block allocation, inode metadata, and multi-level directories.</p>
                     <div class="card-image">
                         <img src="images/filesystem.png" alt="Filesystem architecture visualization">
@@ -1273,7 +1314,7 @@
 
                 <article class="project-card">
                     <h3 class="card-title">MapReduce Framework</h3>
-                    <p class="card-meta">Distributed Systems Programmer | Fall 2025</p>
+                    <p class="card-meta">Distributed Systems | Fall 2025</p>
                     <p class="card-summary">Coordinator/worker MapReduce implementation with IPC, multithreading and more.</p>
                     <div class="card-image">
                         <img src="images/mapreduce.png" alt="MapReduce workflow diagram">
@@ -1300,20 +1341,17 @@
 
                 <article class="project-card">
                     <h3 class="card-title">Quacker Platform</h3>
-                    <p class="card-meta">Full-Stack Developer | Winter 2024</p>
-                    <p class="card-summary">Twitter-style platform with secure auth, feeds, follows, posts, comments, and SQL schema.</p>
+                    <p class="card-meta">Database & User Management | Fall 2024</p>
+                    <p class="card-summary">Command-line, Twitter-style social platform in C++ on SQLite: sign-up and login, paginated feeds, tweet and user search, hashtags, replies, retweets, and follows.</p>
                     <div class="card-image">
-                        <img src="images/1770402899967_image.png" alt="Quacker app login screen">
+                        <img src="images/1770402899967_image.png" alt="Quacker terminal welcome screen">
                     </div>
                     <div class="card-tags">
-                        <span class="card-tag lang">Python</span>
-                        <span class="card-tag tool">Flask</span>
-                        <span class="card-tag tool">PostgreSQL</span>
+                        <span class="card-tag lang">C++</span>
+                        <span class="card-tag tool">SQLite</span>
                         <span class="card-tag tool">SQL</span>
-                        <span class="card-tag web">HTML/CSS</span>
-                        <span class="card-tag lang">JavaScript</span>
-                        <span class="card-tag web">Bootstrap</span>
-                        <span class="card-tag proto">REST API</span>
+                        <span class="card-tag lang">Python</span>
+                        <span class="card-tag concept">Terminal UI</span>
                     </div>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/Quacker" target="_blank" rel="noopener">
@@ -1329,10 +1367,343 @@
             </div>
         </section>
 
+        <section id="tenstorrent" class="section project-section">
+            <div class="section-header">
+                <span class="section-number">01.</span>
+                <h2 class="section-title">Tenstorrent: AI Accelerator Runtime</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <!-- Block-Based Data Movement Project -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Block-Based Data Movement for AI Accelerator Kernels</h3>
+                        <p class="project-company">Tenstorrent</p>
+                        <p class="project-role">Computer Engineer Co-op, Metal Runtime | May 2026 – Present</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">100+</div>
+                        <div class="metric-label">End-to-End Tests</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">1</div>
+                        <div class="metric-label">NoC Transactions per Contiguous Block</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3</div>
+                        <div class="metric-label">Layers: Runtime, Firmware, Kernel</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    TT-Metal is Tenstorrent's bare-metal C++ runtime for its RISC-V-based AI accelerators. Kernels pass data through on-chip Dataflow Buffers (DFBs), hardware-managed queues between producer and consumer cores. Developed a block-based access pattern for DFBs, enabling contiguous groups of buffer entries to transfer in a single network-on-chip (NoC) transaction when the data layout permits, amortizing transfer cost and keeping compute workloads supplied with data.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">TT-Metal</span>
+                    <span class="tech-tag">RISC-V</span>
+                    <span class="tech-tag">Network-on-Chip</span>
+                    <span class="tech-tag">Dataflow Buffers</span>
+                    <span class="tech-tag">Host/Device APIs</span>
+                    <span class="tech-tag">Emulation</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Added runtime configuration, block-aware data-movement and compute kernels, synchronization handling, and configuration validation, with more than 100 end-to-end tests across producer/consumer layouts.
+                </div>
+
+                <div class="collapse-content">
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon problem-icon"></div>
+                        <div class="psi-title">PROBLEM: Per-Entry Transfer Overhead</div>
+                    </div>
+                    <div class="psi-content">
+                        The existing data-movement path was designed mainly for per-entry transfers. Workloads that naturally consume contiguous groups of data paid transaction overhead on every entry, even when the whole group could have moved at once.
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem; text-align: center;">
+                    <img src="images/tenstorrent_noc.svg" alt="Diagram of a block of buffer entries moving across a network-on-chip from a producer core to a consumer core" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border);">
+                    <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Block-based transfer: a contiguous group of Dataflow Buffer entries moves from a producer core to a consumer core in a single NoC transaction</p>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Implementation</h4>
+                    <div class="tech-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-title">API Surface</div>
+                                <div class="timeline-content">Added a block-based access mode and a configurable <code>block_size</code> to the host and device APIs</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Configuration Plumbing</div>
+                                <div class="timeline-content">Connected block configuration across the runtime, firmware, and kernel interfaces</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Block-Aware Kernels</div>
+                                <div class="timeline-content">Implemented block-aware producer and consumer paths for both data-movement and compute workloads</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Synchronization</div>
+                                <div class="timeline-content">Supported explicit and implicit synchronization across multiple producer and consumer layouts</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Validation</div>
+                                <div class="timeline-content">Rejected invalid configurations, unsupported combinations, capacity-limit violations, and deadlock-prone configurations before they reach the device</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">End-to-End Testing</div>
+                                <div class="timeline-content">Built tests covering different placements of data-movement and compute cores</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">IMPACT: Fewer NoC Transactions</div>
+                    </div>
+                    <div class="psi-content">
+                        Reduces the number of network transactions required for contiguous data regions. Validated in emulation with more than 100 end-to-end tests covering producer/consumer layouts and synchronization behavior.
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+
+            <!-- Atomic Semaphores Project -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Topology-Aware Atomic Semaphores</h3>
+                        <p class="project-company">Tenstorrent</p>
+                        <p class="project-role">Computer Engineer Co-op, Metal Runtime | May 2026 – Present</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">20x</div>
+                        <div class="metric-label">Faster Semaphore Updates</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3</div>
+                        <div class="metric-label">Access Paths, Auto-Selected</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">44</div>
+                        <div class="metric-label">Emulator Tests</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Designed topology-aware semaphore handling for the accelerator runtime. The runtime automatically selects a safe access path based on whether a semaphore's users are local, cached, or remote, choosing between cached and NoC-based update paths. This prevents cache overwrites and increased semaphore update speed by a factor of 20, all behind the existing user-facing semaphore API.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Atomics</span>
+                    <span class="tech-tag">Cache Coherence</span>
+                    <span class="tech-tag">Network-on-Chip</span>
+                    <span class="tech-tag">Concurrency</span>
+                    <span class="tech-tag">Build-Time Analysis</span>
+                    <span class="tech-tag">Emulation</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Automatic selection among local, cached-atomic, and network-atomic paths based on kernel access topology, with no change to the user-facing API. Validated concurrency, cache coherence, and remote-access behavior with 44 emulator tests.
+                </div>
+
+                <div class="collapse-content">
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon problem-icon"></div>
+                        <div class="psi-title">PROBLEM: Atomicity Depends on Who Is Accessing</div>
+                    </div>
+                    <div class="psi-content">
+                        A shared semaphore may be accessed by multiple threads on the same accelerator or by remote devices over the network. A mechanism that is safe and efficient for local access may not remain atomic once remote access is possible, and leaving that choice to the user invites subtle synchronization bugs.
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Implementation</h4>
+                    <div class="tech-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-title">Topology Classification</div>
+                                <div class="timeline-content">Classified each semaphore's access topology at build time from the kernels that use it</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Mechanism Selection</div>
+                                <div class="timeline-content">Automatically selected among local, cached-atomic, and network-atomic access paths</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Kernel Propagation</div>
+                                <div class="timeline-content">Propagated the selected mechanism into device kernels without changing the user-facing semaphore API</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Runtime & Device Support</div>
+                                <div class="timeline-content">Implemented the runtime and device-side support required for local and remote atomic access</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Verification</div>
+                                <div class="timeline-content">Added tests for mechanism selection, concurrency, cache coherence, and local and remote access, plus emulator coverage for atomic behavior and synchronization correctness</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">IMPACT: Correct by Default, 20x Faster</div>
+                    </div>
+                    <div class="psi-content">
+                        Semaphore users no longer choose an implementation manually. The runtime selects an appropriate mechanism for each semaphore's access topology while preserving atomicity across the supported access patterns, and selecting between cached and NoC-based updates increased speed by a factor of 20. The change was validated with 44 emulator tests.
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+
+            <!-- Fast Dispatch Project -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Fast Dispatch with Address Translation</h3>
+                        <p class="project-company">Tenstorrent</p>
+                        <p class="project-role">Computer Engineer Co-op, Metal Runtime | May 2026 – Present</p>
+                    </div>
+                </div>
+
+                <div class="project-metrics">
+                    <div class="metric">
+                        <div class="metric-value">55</div>
+                        <div class="metric-label">Emulation Test Cases</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">3</div>
+                        <div class="metric-label">Command-Queue Kernels Migrated</div>
+                    </div>
+                    <div class="metric">
+                        <div class="metric-value">Pre-Silicon</div>
+                        <div class="metric-label">Bring-Up in Emulation</div>
+                    </div>
+                </div>
+
+                <p class="project-description">
+                    Fast dispatch relies on device-side command-queue kernels to issue work to the accelerator. Those kernels used an older address-programming model that was not compatible with translated destinations, so they could not start correctly when hardware address translation was enabled. Enabled fast command dispatch with address translation by migrating the command-queue kernels to a translated-address API and adapting stateful network-transfer helpers to use translated addresses correctly.
+                </p>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Address Translation</span>
+                    <span class="tech-tag">Command Dispatch</span>
+                    <span class="tech-tag">Network-on-Chip</span>
+                    <span class="tech-tag">Multicast</span>
+                    <span class="tech-tag">Emulation</span>
+                </div>
+
+                <div class="project-preview">
+                    <strong>Key Achievements:</strong> Migrated prefetcher, dispatcher, and dispatch-helper kernels to a translated-address API. Added stateful network-transfer handling, multicast address resolution, dispatch-map updates, and address-range validation, all tested in emulation.
+                </div>
+
+                <div class="collapse-content">
+                <div class="technical-section">
+                    <h4>Implementation</h4>
+                    <div class="tech-content">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-title">Translated-Address API</div>
+                                <div class="timeline-content">Migrated the prefetcher, dispatcher, and dispatch-helper kernels to a translated-address API</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Stateful NoC Transfers</div>
+                                <div class="timeline-content">Added stateful network-transfer support for retaining and recombining address components as transfers are issued</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Multicast Resolution</div>
+                                <div class="timeline-content">Resolved multicast destinations through the address-translation map</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Dispatch Mapping</div>
+                                <div class="timeline-content">Updated dispatch mapping and address-range validation needed for emulation</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-title">Testing</div>
+                                <div class="timeline-content">Added address-encoding and command-dispatch tests covering worker, memory, dispatch, and invalid-address cases</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="psi-card">
+                    <div class="psi-header">
+                        <div class="psi-icon impact-icon"></div>
+                        <div class="psi-title">RESULTS</div>
+                    </div>
+                    <div class="psi-content">
+                        Fast dispatch was validated with address translation enabled in emulation. Testing covered 55 cases across basic programs, events, buffers, prefetching, and dispatch behavior, while the existing slow-dispatch and non-translated paths remained covered.
+                    </div>
+                </div>
+                </div>
+                <button class="expand-btn" onclick="toggleCollapse(this)">
+                    <span>View Full Details</span>
+                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
+            </div>
+
+            <!-- Other Tenstorrent Work -->
+            <div class="deep-dive-project">
+                <div class="project-header">
+                    <div class="project-title-section">
+                        <h3>Additional Tenstorrent Work</h3>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>Dataflow Buffer Stress Testing</h4>
+                    <div class="tech-content">
+                        <p>Built stress tests for on-chip Dataflow Buffers (DFBs), the hardware-managed data queues that connect producer and consumer kernels on the accelerator.</p>
+                    </div>
+                </div>
+
+                <div class="technical-section">
+                    <h4>AI Accelerator Bring-Up in Emulation</h4>
+                    <div class="tech-content">
+                        <p>Supported bring-up of an AI accelerator in emulation, enabling memory access through address translation tables, kernel dispatch, and RTL simulation boot-up.</p>
+                    </div>
+                </div>
+
+                <div class="tech-stack">
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">Stress Testing</span>
+                    <span class="tech-tag">Address Translation Tables</span>
+                    <span class="tech-tag">Kernel Dispatch</span>
+                    <span class="tech-tag">RTL Simulation</span>
+                    <span class="tech-tag">Emulation</span>
+                    <span class="tech-tag">Runtime CI</span>
+                </div>
+            </div>
+        </section>
+
         <!-- ARVP Deep Dive -->
         <section id="digital-design" class="section project-section">
             <div class="section-header">
-                <span class="section-number">01.</span>
+                <span class="section-number">02.</span>
                 <h2 class="section-title">Digital Design & Computer Architecture</h2>
                 <div class="section-line"></div>
             </div>
@@ -1342,7 +1713,7 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>32-bit RISC-V CPU: Multi-Cycle FSM Architecture</h3>
-                        <p class="project-company">CPU Architect & Digital Designer | Fall and Winter 2025</p>
+                        <p class="project-company">CPU Architecture & Digital Design | Fall and Winter 2025</p>
                     </div>
                     <div class="project-links" style="display: flex; gap: 1rem;">
                         <a href="https://github.com/YousefMoussa/multi_cycle_riscv_cpu_vhdl" target="_blank" class="project-link">
@@ -1537,7 +1908,7 @@
         </section>
         <section id="prng" class="section project-section">
             <div class="section-header">
-                <span class="section-number">02.</span>
+                <span class="section-number">03.</span>
                 <h2 class="section-title">Hardware Random Number Generation</h2>
                 <div class="section-line"></div>
             </div>
@@ -1546,7 +1917,7 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>Tausworthe Pseudo-Random Number Generator</h3>
-                        <p class="project-company">Digital Designer | Fall 2025</p>
+                        <p class="project-company">Digital Design | Fall 2025</p>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/YousefMoussa/tausworthe-pseudo-random-number-generator" target="_blank" class="project-link">
@@ -1646,7 +2017,7 @@
         </section>
         <section id="secure-fsm" class="section project-section">
             <div class="section-header">
-                <span class="section-number">03.</span>
+                <span class="section-number">04.</span>
                 <h2 class="section-title">Hardware Security & FSM Design</h2>
                 <div class="section-line"></div>
             </div>
@@ -1655,7 +2026,7 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>Secure Element Finite State Machine</h3>
-                        <p class="project-company">Security Digital Designer | Fall 2025</p>
+                        <p class="project-company">Hardware Security & Digital Design | Fall 2025</p>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/YousefMoussa/secure-element-fsm" target="_blank" class="project-link">
@@ -1764,7 +2135,7 @@
         </section>
         <section id="vlsi-comparator" class="section project-section">
             <div class="section-header">
-                <span class="section-number">04.</span>
+                <span class="section-number">05.</span>
                 <h2 class="section-title">VLSI Design: Full Custom IC Flow</h2>
                 <div class="section-line"></div>
             </div>
@@ -1773,7 +2144,7 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>2-Bit Digital Comparator IC</h3>
-                        <p class="project-company">VLSI Design | Cadence Virtuoso</p>
+                        <p class="project-company">Full-Custom VLSI Design | Winter 2026</p>
                     </div>
                 </div>
 
@@ -1923,7 +2294,7 @@
         </section>
         <section id="arvp" class="section project-section">
             <div class="section-header">
-                <span class="section-number">05.</span>
+                <span class="section-number">06.</span>
                 <h2 class="section-title">ARVP: Autonomous Underwater Vehicle Systems</h2>
                 <div class="section-line"></div>
             </div>
@@ -1934,7 +2305,7 @@
                     <div class="project-title-section">
                         <h3>Embedded Engineer → Software Co-Lead</h3>
                         <p class="project-company">University of Alberta ARVP Team</p>
-                        <p class="project-role">Sept 2023 – Present</p>
+                        <p class="project-role">Sept 2023 – Aug 2026</p>
                     </div>
                 </div>
 
@@ -1976,7 +2347,7 @@
                 </div>
 
                 <div class="project-preview">
-                    <strong>Key Achievements:</strong> Designed custom Teensy 4.0 control boards (Rev A → Rev B), implemented DVL-based localization achieving cm-level accuracy, developed ROS2 motion planning with visual servoing, and leading ~60-member software team to RoboSub 2026 success.
+                    <strong>Key Achievements:</strong> Designed custom Teensy 4.0 control boards (Rev A → Rev B), implemented DVL-based localization achieving cm-level accuracy, developed ROS2 motion planning with visual servoing, and leading ~15-member software team to RoboSub 2026 success.
                 </div>
 
                 <div class="collapse-content">
@@ -2051,7 +2422,7 @@
                 <div class="technical-section">
                     <h4>Part 2: Software Developer / Software Co-Lead</h4>
                     <div class="tech-content">
-                        <p><strong>Role:</strong> Transitioned to ROS2 software development focused on autonomous navigation in GPS-denied underwater environments. Promoted to Software Co-Lead role, coordinating development across ~60 team members and driving technical decisions on software architecture and sensor selection.</p>
+                        <p><strong>Role:</strong> Transitioned to ROS2 software development focused on autonomous navigation in GPS-denied underwater environments. Promoted to Software Co-Lead role, coordinating development across ~15 team members and driving technical decisions on software architecture and sensor selection.</p>
 
                         <div style="margin-top: 1.5rem; text-align: center;">
                             <img src="images/1770406458708_image.png" alt="ROS2 Software Architecture" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border);">
@@ -2162,7 +2533,7 @@
         </section>
         <section id="uvad" class="section project-section">
             <div class="section-header">
-                <span class="section-number">06.</span>
+                <span class="section-number">07.</span>
                 <h2 class="section-title">UVAD: Autonomous UAV Systems</h2>
                 <div class="section-line"></div>
             </div>
@@ -2464,7 +2835,7 @@
         </section>
         <section id="rrl" class="section project-section">
             <div class="section-header">
-                <span class="section-number">07.</span>
+                <span class="section-number">08.</span>
                 <h2 class="section-title">Medical Devices: Health Canada Pathway</h2>
                 <div class="section-line"></div>
             </div>
@@ -2707,7 +3078,7 @@
         </section>
         <section id="smart-cushion" class="section project-section">
             <div class="section-header">
-                <span class="section-number">08.</span>
+                <span class="section-number">09.</span>
                 <h2 class="section-title">Smart Cushion: Seating Analytics</h2>
                 <div class="section-line"></div>
             </div>
@@ -2846,7 +3217,7 @@
         </section>
         <section id="shell" class="section project-section">
             <div class="section-header">
-                <span class="section-number">09.</span>
+                <span class="section-number">10.</span>
                 <h2 class="section-title">System Programming & Process Control</h2>
                 <div class="section-line"></div>
             </div>
@@ -2855,7 +3226,7 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>Unix Shell Implementation</h3>
-                        <p class="project-company">Systems Programmer | Fall 2025</p>
+                        <p class="project-company">Systems Programming | Fall 2025</p>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/YousefMoussa/CustomShell-C" target="_blank" class="project-link">
@@ -2942,7 +3313,7 @@
         </section>
         <section id="filesystem" class="section project-section">
             <div class="section-header">
-                <span class="section-number">10.</span>
+                <span class="section-number">11.</span>
                 <h2 class="section-title">Systems Programming</h2>
                 <div class="section-line"></div>
             </div>
@@ -2951,7 +3322,7 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>Simulated Unix Filesystem</h3>
-                        <p class="project-company">Systems Programmer | Fall 2025</p>
+                        <p class="project-company">File Systems & Storage | Fall 2025</p>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/YousefMoussa/Simulated-Filesystem" target="_blank" class="project-link">
@@ -3036,7 +3407,7 @@
         </section>
         <section id="mapreduce" class="section project-section">
             <div class="section-header">
-                <span class="section-number">11.</span>
+                <span class="section-number">12.</span>
                 <h2 class="section-title">Distributed Systems</h2>
                 <div class="section-line"></div>
             </div>
@@ -3045,7 +3416,7 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>Distributed MapReduce Framework</h3>
-                        <p class="project-company">Distributed Systems Programmer | Fall 2025</p>
+                        <p class="project-company">Distributed Systems | Fall 2025</p>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/YousefMoussa/MapReduce" target="_blank" class="project-link">
@@ -3130,16 +3501,16 @@
         </section>
         <section id="quacker" class="section project-section">
             <div class="section-header">
-                <span class="section-number">12.</span>
-                <h2 class="section-title">Full-Stack Web Development</h2>
+                <span class="section-number">13.</span>
+                <h2 class="section-title">Database & User Management</h2>
                 <div class="section-line"></div>
             </div>
 
             <div class="deep-dive-project">
                 <div class="project-header">
                     <div class="project-title-section">
-                        <h3>Quacker - Social Media Platform C++/SQL</h3>
-                        <p class="project-company">Full-Stack Developer & Database Management | Winter 2024</p>
+                        <h3>Quacker: Command-Line Social Media Platform (C++/SQLite)</h3>
+                        <p class="project-company">Database & User Management | Fall 2024</p>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/YousefMoussa/Quacker" target="_blank" class="project-link">
@@ -3153,36 +3524,29 @@
 
                 <div class="project-metrics">
                     <div class="metric">
-                        <div class="metric-value">Auth</div>
-                        <div class="metric-label">Secure Sessions</div>
+                        <div class="metric-value">7</div>
+                        <div class="metric-label">Relational Tables</div>
                     </div>
                     <div class="metric">
-                        <div class="metric-value">Social</div>
-                        <div class="metric-label">Post & Comment</div>
-                    </div>
-                    <div class="metric">
-                        <div class="metric-value">Follow</div>
-                        <div class="metric-label">User Connections</div>
+                        <div class="metric-value">3</div>
+                        <div class="metric-label">Person Team</div>
                     </div>
                 </div>
 
                 <p class="project-description">
-                    Built a Twitter-inspired social media platform using Flask backend with PostgreSQL database and responsive HTML/CSS/JavaScript frontend. Implements core social networking features including user profiles, posts (quacks), comments, likes, and follow relationships with proper authentication and database normalization.
+                    Built a command-line, Twitter-style social media platform in C++17 on the SQLite3 C API. Users sign up or log in, read a feed of tweets and retweets from the people they follow, search tweets by keyword or hashtag, search for users, compose tweets with hashtags, reply, retweet, and follow other users. Built as a three-person team; focused on the terminal user interface, including the login and sign-up flows, the feed, the search pages, and replies and retweets.
                 </p>
 
                 <div class="tech-stack">
-                    <span class="tech-tag">Python</span>
-                    <span class="tech-tag">Flask</span>
-                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">C++</span>
+                    <span class="tech-tag">SQLite</span>
                     <span class="tech-tag">SQL</span>
-                    <span class="tech-tag">HTML/CSS</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Bootstrap</span>
-                    <span class="tech-tag">REST API</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Terminal UI</span>
                 </div>
 
                 <div class="project-preview">
-                    <strong>Key Achievements:</strong> Flask REST API with PostgreSQL, secure authentication with bcrypt, normalized database schema, social features (posts, comments, follows, likes).
+                    <strong>Key Achievements:</strong> Separated the terminal UI from a data layer that holds all SQL, used prepared statements with bound parameters for every query to block SQL injection, masked password entry, and paginated the feed and search results five at a time.
                 </div>
 
                 <div class="collapse-content">
@@ -3191,30 +3555,32 @@
                     <div class="tech-content">
                         <p><strong>Core Functionality:</strong></p>
                         <ul style="margin-left: 2rem;">
-                            <li>User authentication and session management with secure password hashing</li>
-                            <li>Profile creation with customizable bio, avatar, and user information</li>
-                            <li>Post creation, editing, and deletion with timestamp tracking</li>
-                            <li>Comment system with nested discussions on posts</li>
-                            <li>Follow/unfollow mechanics for building social connections</li>
-                            <li>Personalized feed showing posts from followed users</li>
-                            <li>Search functionality for discovering users and content</li>
-                            <li>Like/unlike system for post engagement tracking</li>
+                            <li>Login and sign-up with system-generated unique user IDs, email and phone-number validation, and masked password entry</li>
+                            <li>Personalized feed combining tweets and retweets from followed users, newest first, shown five at a time with options to see more or fewer</li>
+                            <li>Tweet search across multiple keywords: <code>#hashtag</code> terms match the hashtag table, other keywords match words in the tweet text, all case-insensitive</li>
+                            <li>Tweet view with retweet and reply counts, plus options to reply or retweet</li>
+                            <li>User search by partial name match, ranked by name length, with a profile showing follower, following, and tweet counts and the user's tweets three at a time</li>
+                            <li>Tweet composer that records each hashtag and rejects duplicate hashtags within the same tweet</li>
+                            <li>Follower list with profile drill-down and follow-back</li>
+                            <li>Logout that returns to the start screen without exiting the program</li>
                         </ul>
 
                         <p style="margin-top: 1rem;"><strong>Technical Implementation:</strong></p>
                         <ul style="margin-left: 2rem;">
-                            <li><strong>Backend:</strong> Flask application with RESTful API design, SQL ORM for database interactions, Flask-Login for session management</li>
-                            <li><strong>Database:</strong> PostgreSQL with normalized schema - users, posts, comments, follows, likes tables with proper foreign key relationships</li>
-                            <li><strong>Frontend:</strong> Responsive design with Bootstrap, AJAX for dynamic content updates without page refreshes</li>
-                            <li><strong>Security:</strong> Password hashing with bcrypt, CSRF protection, SQL injection prevention through parameterized queries</li>
+                            <li><strong>Architecture:</strong> The <code>Quacker</code> class runs the pages and user input, while the <code>Pond</code> class owns the SQLite connection and every SQL query</li>
+                            <li><strong>Database:</strong> Course-specified 7-table relational schema (users, follows, tweets, retweets, hashtag mentions, lists, list entries) with composite primary keys and cascading foreign keys</li>
+                            <li><strong>Queries:</strong> Feed built from a <code>UNION</code> of followed users' tweets and non-spam retweets, <code>COUNT</code> aggregates for tweet and profile statistics, and case-insensitive <code>LIKE</code> matching for search</li>
+                            <li><strong>Security:</strong> All 26 queries are prepared with <code>sqlite3_prepare_v2</code> and bound parameters, so no SQL is built from user input; passwords are masked with asterisks by disabling terminal echo and canonical mode through <code>termios</code></li>
+                            <li><strong>Terminal UI:</strong> ANSI escape sequences redraw pages in place, tweet text is word-wrapped to the terminal width, and menu input is validated with regular expressions</li>
+                            <li><strong>Build & Testing:</strong> Makefile build with <code>-Wall -Wextra -Werror</code>; a Python script fills test databases with randomized users, tweets, lists, and follows for manual edge-case testing</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/1770402899967_image.png" alt="Quacker Application Login">
-                        <div class="gallery-caption">Quacker Welcome Screen - Terminal-based interface with ASCII art logo and main menu featuring authentication options: user login for existing accounts, sign-up for new user registration, and exit. Built with Python and Flask, demonstrating full-stack development with database-backed user management.</div>
+                        <img src="images/1770402899967_image.png" alt="Quacker terminal welcome screen">
+                        <div class="gallery-caption">Quacker Welcome Screen - Terminal-based interface with ASCII art logo and main menu featuring authentication options: user login for existing accounts, sign-up for new user registration, and exit. Built in C++ on the SQLite3 C API with database-backed user management.</div>
                     </div>
                 </div>
                 </div>
@@ -3231,6 +3597,24 @@
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <div class="deep-dive-project" style="margin-bottom: 0; grid-column: 1 / -1;">
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Low Level Systems Programming</h4>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Bare-Metal C++</span>
+                        <span class="tech-tag">RISC-V</span>
+                        <span class="tech-tag">Network-on-Chip (NoC)</span>
+                        <span class="tech-tag">Dataflow Buffers</span>
+                        <span class="tech-tag">Host/Device APIs</span>
+                        <span class="tech-tag">Atomics & Synchronization</span>
+                        <span class="tech-tag">Cache Coherence</span>
+                        <span class="tech-tag">Address Translation Tables</span>
+                        <span class="tech-tag">Kernel Dispatch</span>
+                        <span class="tech-tag">Pre-Silicon Emulation</span>
+                        <span class="tech-tag">RTL Simulation</span>
+                        <span class="tech-tag">Stress & Concurrency Testing</span>
+                    </div>
+                </div>
+
                 <div class="deep-dive-project" style="margin-bottom: 0;">
                     <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Embedded Systems & Real-Time</h4>
                     <div class="tech-stack">
@@ -3320,7 +3704,7 @@
                     Let's Build Something Together
                 </h2>
                 <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
-                    Currently seeking co-op and internship opportunities for May 2026 to December 2026 in embedded systems, ASIC design, hardware verification, and autonomous systems. Open to full-time positions starting May 2027.<br><br>
+                    Graduating in May 2027 and seeking full-time roles starting Spring/Summer 2027 in embedded systems, low level systems programming, ASIC design and verification, autonomous systems and robotics.<br><br>
                     <span style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace;">ymoussa@ualberta.ca</span>
                 </p>
 
@@ -3346,7 +3730,7 @@
         <!-- Footer -->
         <footer style="padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">
             <p>Designed & Built by Yousef Moussa | © 2026</p>
-            <p style="margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">ASIC & Digital Design • Embedded Systems • Real-Time Control • Autonomous Robotics</p>
+            <p style="margin-top: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;">Low Level Systems Programming • ASIC & Digital Design • Embedded Systems • Real-Time Control • Autonomous Robotics</p>
         </footer>
     </div>
 

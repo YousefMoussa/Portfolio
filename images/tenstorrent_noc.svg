@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 200" width="480" height="200" role="img" aria-label="A block of buffer entries moving across a network-on-chip from a producer core to a consumer core">
+  <style>
+    .ch { stroke: #2a3142; stroke-width: 2; }
+    .tile { fill: #1a1f2e; stroke: #2a3142; stroke-width: 1.5; }
+    .dot { fill: #3a4458; }
+    .lbl { font-family: 'JetBrains Mono', ui-monospace, Menlo, Consolas, monospace; font-size: 8px; font-weight: 700; letter-spacing: 0.06em; }
+    .route { fill: none; stroke: #00d9ff; stroke-width: 2; stroke-opacity: 0.45; stroke-dasharray: 4 3; }
+    .pkt rect { fill: #00d9ff; }
+    .pkt { animation: move 3.2s ease-in-out infinite; }
+    @keyframes move {
+      0% { transform: translateX(0); opacity: 0; }
+      10% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { transform: translateX(256px); opacity: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .pkt { animation: none; transform: translateX(128px); }
+    }
+  </style>
+
+  <rect width="480" height="200" fill="#151a23"/>
+
+  <!-- NoC channels -->
+  <g class="ch">
+    <line x1="16" y1="72" x2="464" y2="72"/>
+    <line x1="16" y1="128" x2="464" y2="128"/>
+    <line x1="80" y1="16" x2="80" y2="184"/>
+    <line x1="144" y1="16" x2="144" y2="184"/>
+    <line x1="208" y1="16" x2="208" y2="184"/>
+    <line x1="272" y1="16" x2="272" y2="184"/>
+    <line x1="336" y1="16" x2="336" y2="184"/>
+    <line x1="400" y1="16" x2="400" y2="184"/>
+  </g>
+
+  <!-- Core tiles: 7 x 3 grid, each with five small RISC-V cores -->
+  <defs>
+    <g id="core">
+      <rect class="tile" width="48" height="40" rx="4"/>
+      <circle class="dot" cx="8" cy="32" r="1.8"/>
+      <circle class="dot" cx="16" cy="32" r="1.8"/>
+      <circle class="dot" cx="24" cy="32" r="1.8"/>
+      <circle class="dot" cx="32" cy="32" r="1.8"/>
+      <circle class="dot" cx="40" cy="32" r="1.8"/>
+    </g>
+  </defs>
+  <use href="#core" x="24" y="24"/><use href="#core" x="88" y="24"/><use href="#core" x="152" y="24"/><use href="#core" x="216" y="24"/><use href="#core" x="280" y="24"/><use href="#core" x="344" y="24"/><use href="#core" x="408" y="24"/>
+  <use href="#core" x="24" y="80"/><use href="#core" x="152" y="80"/><use href="#core" x="216" y="80"/><use href="#core" x="280" y="80"/><use href="#core" x="408" y="80"/>
+  <use href="#core" x="24" y="136"/><use href="#core" x="88" y="136"/><use href="#core" x="152" y="136"/><use href="#core" x="216" y="136"/><use href="#core" x="280" y="136"/><use href="#core" x="344" y="136"/><use href="#core" x="408" y="136"/>
+
+  <!-- Producer and consumer cores -->
+  <rect x="88" y="80" width="48" height="40" rx="4" fill="#0f2a33" stroke="#00d9ff" stroke-width="1.5"/>
+  <text class="lbl" x="112" y="97" text-anchor="middle" fill="#00d9ff">PROD</text>
+  <g fill="#00d9ff"><rect x="95" y="104" width="6" height="6"/><rect x="103" y="104" width="6" height="6"/><rect x="111" y="104" width="6" height="6"/><rect x="119" y="104" width="6" height="6"/></g>
+
+  <rect x="344" y="80" width="48" height="40" rx="4" fill="#0f2d25" stroke="#00ff9d" stroke-width="1.5"/>
+  <text class="lbl" x="368" y="97" text-anchor="middle" fill="#00ff9d">CONS</text>
+  <g fill="none" stroke="#00ff9d" stroke-width="1"><rect x="351.5" y="104.5" width="5" height="5"/><rect x="359.5" y="104.5" width="5" height="5"/><rect x="367.5" y="104.5" width="5" height="5"/><rect x="375.5" y="104.5" width="5" height="5"/></g>
+
+  <!-- Block transfer route and packet -->
+  <path class="route" d="M112 80 V72 H368 V80"/>
+  <g class="pkt">
+    <rect x="97" y="69" width="6" height="6"/><rect x="105" y="69" width="6" height="6"/><rect x="113" y="69" width="6" height="6"/><rect x="121" y="69" width="6" height="6"/>
+  </g>
+</svg>
