@@ -4,6 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yousef Moussa | Embedded Systems & Hardware Engineer</title>
+    <script>
+        /* [DN-04] Hide the sections that do not belong to this route before the first paint.
+           Must stay above the Google Fonts stylesheet: a script after a pending stylesheet is blocked by it. */
+        (function () {
+            var id = (new URLSearchParams(location.search).get('project') || '').trim().toLowerCase();
+            var style = document.createElement('style');
+            style.id = 'route-style';
+            style.textContent = /^[a-z][a-z0-9-]*$/.test(id)
+                ? '#home, #projects-grid, section.project-section:not(#' + id + ') { display: none !important; } #detail-banner { display: flex; } section.project-section { padding-top: 0; } #detail-title { visibility: hidden; }'
+                : 'section.project-section { display: none !important; }';
+            document.head.appendChild(style);
+        })();
+    </script>
+    <meta name="description" content="Computer Engineering Student at the University of Alberta · Graduating May 2027. Embedded Systems • AI Accelerators • ASIC Design • Autonomous Robotics.">
+    <meta name="author" content="Yousef Moussa">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#0a0e14">
+    <link rel="icon" href="favicon.ico" sizes="32x32">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Yousef Moussa">
+    <meta property="og:locale" content="en_CA">
+    <meta property="og:title" content="Yousef Moussa | Embedded Systems &amp; Hardware Engineer">
+    <meta property="og:description" content="Computer Engineering Student at the University of Alberta · Graduating May 2027. Embedded Systems • AI Accelerators • ASIC Design • Autonomous Robotics.">
+    <meta property="og:image" content="https://yousefmoussa.github.io/Portfolio/images/og-card.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Yousef Moussa: Computer Engineering Student, Graduating May 2027. Embedded Systems, AI Accelerators, ASIC Design, Autonomous Robotics.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:alt" content="Yousef Moussa: Computer Engineering Student, Graduating May 2027. Embedded Systems, AI Accelerators, ASIC Design, Autonomous Robotics.">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"ProfilePage","url":"https://yousefmoussa.github.io/Portfolio/","name":"Yousef Moussa | Embedded Systems & Hardware Engineer",
+     "mainEntity":{"@type":"Person","@id":"https://yousefmoussa.github.io/Portfolio/#person","name":"Yousef Moussa","url":"https://yousefmoussa.github.io/Portfolio/",
+      "image":"https://yousefmoussa.github.io/Portfolio/images/yousef-moussa.webp","jobTitle":"Computer Engineering Student",
+      "description":"Computer Engineering Student at the University of Alberta · Graduating May 2027. Embedded Systems • AI Accelerators • ASIC Design • Autonomous Robotics.",
+      "email":"mailto:ymoussa@ualberta.ca",
+      "affiliation":{"@type":"CollegeOrUniversity","name":"University of Alberta","url":"https://www.ualberta.ca/"},
+      "knowsAbout":["Embedded Systems","AI Accelerators","ASIC Design","Autonomous Robotics","RISC-V","ROS2"],
+      "sameAs":["https://www.linkedin.com/in/yousefmoussa","https://github.com/YousefMoussa"]}}
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,7 +58,7 @@
             --accent-secondary: #00ff9d;
             --accent-warning: #ff9500;
             --text-primary: #e6e8eb;
-            --text-secondary: #9199a8;
+            --text-secondary: #9aa2b0;
             --text-code: #c5cdd9;
             --border: #2a3142;
         }
@@ -44,7 +88,6 @@
                 url('images/Abstract_digital_background_2_generated-modified.png');
             background-size: cover, 500px auto;
             background-position: center, center;
-            background-attachment: fixed, fixed;
             background-repeat: no-repeat, repeat;
             z-index: 0;
         }
@@ -310,7 +353,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
             gap: 1.5rem;
         }
 
@@ -419,7 +462,7 @@
             transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
         }
 
-        .card-badge:hover {
+        a.card-badge:hover {
             border-color: #fff;
             background: rgba(255, 255, 255, 0.14);
             color: #fff;
@@ -479,8 +522,15 @@
             font-size: 0.95rem;
         }
 
+        .project-section .section-number { display: none; }   /* header is visually hidden; do not read "01." before the heading */
         .project-section .section-header {
-            display: none;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            margin: 0;
+            overflow: hidden;
+            clip: rect(0 0 0 0);
+            white-space: nowrap;
         }
 
         .project-section.hidden {
@@ -732,7 +782,7 @@
         /* Image Gallery */
         .image-gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
             gap: 2rem;
             margin: 2rem 0;
         }
@@ -750,7 +800,8 @@
         }
 
         .gallery-item img {
-            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
             height: 400px;
             object-fit: contain;
             object-position: center;
@@ -888,10 +939,6 @@
             opacity: 1;
         }
 
-        .expand-btn {
-            display: none;
-        }
-
         .project-preview {
             color: var(--text-secondary);
             font-size: 0.95rem;
@@ -906,19 +953,364 @@
         .project-preview strong {
             color: var(--accent-secondary);
         }
-        
+
+        /* ======================================================================
+           Design/UX audit fixes, appended at the end of the <style> block.
+           One block per do_now item, in implementation order. Keep [DN-09b] last.
+           ====================================================================== */
+
+        /* [DN-02] width/height attributes give every image its aspect ratio; CSS keeps it fluid */
+        img { height: auto; }
+
+        /* [DN-05] ARVP callout headings (the three <h5> inside .tech-content) */
+        .tech-content h5 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        /* [DN-06] Responsive layout */
+        .project-links { flex-wrap: wrap; }
+        .project-header { gap: 1rem 1.5rem; }   /* space between the title and its repo button, side by side or stacked */
+        .project-header > * { min-width: 0; }
+        .project-title-section h3, .psi-title, .timeline-title { overflow-wrap: anywhere; }
+        @media (max-width: 1400px) {
+            /* the rotating ring's rotated bounding box (up to ~509px) widens the page; at these widths the
+               container spans the whole viewport, so clipping it hides nothing that is visible today */
+            .container { overflow-x: clip; }
+        }
+        @media (min-width: 481px) and (max-width: 768px) {
+            .cta-buttons { flex-direction: row; justify-content: center; }
+        }
+        @media (max-width: 768px) {
+            .hero { padding: 2.5rem 0 2rem; }
+            .hero-content { gap: 1.75rem; }
+            .profile-container { margin-left: 0; }
+            .profile-picture { width: 180px; height: 180px; }
+            .profile-container::before { width: 208px; height: 208px; }
+            .hero-text p:not(.tagline):not(.focus) { text-align: left; }
+            .detail-banner { flex-direction: column; align-items: stretch; gap: 0.6rem; padding: 0.75rem 1rem; }
+            .detail-banner .left { display: block; font-size: 0.9rem; }
+            .detail-banner .actions { gap: 0.5rem; }
+            .detail-banner a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.9rem; border: 1px solid var(--border); border-radius: 8px; white-space: nowrap; }
+            .gallery-item img { height: auto; max-height: 75vh; }
+        }
+        @media (max-width: 600px) {
+            .container { padding-left: 1rem; padding-right: 1rem; }
+            nav { padding: 0.6rem 1rem; }
+            .section { padding: 3rem 0; }
+            .deep-dive-project { padding: 1.75rem 1.25rem; margin-bottom: 2rem; }
+            .psi-card { padding: 1.25rem 1rem; margin: 1.5rem 0; }
+            .psi-header { gap: 0.75rem; margin-bottom: 1rem; }
+            .psi-icon { width: 36px; height: 36px; }
+            .timeline { margin-left: 0; padding-left: 1.5rem; }
+            .timeline::before { left: 5px; }
+            .timeline-item { padding-left: 0.5rem; }
+            .tech-content ul, .tech-content ol, .psi-content ul { margin-left: 1.25rem !important; }
+            .tech-content ul ul { margin-left: 1rem !important; }
+            .tech-content div[style*="padding: 1.5rem"] { padding: 1rem !important; }
+            .hero-text h1 { font-size: 2.25rem; }
+            .hero-text .tagline { font-size: 1.1rem; }
+            .section-title { font-size: 1.75rem; }
+            .project-title-section h3 { font-size: 1.4rem; line-height: 1.3; }
+            .project-company { font-size: 1.05rem; }
+            .technical-section h4 { font-size: 1.1rem; }
+            .psi-title, .timeline-title { font-size: 1rem; }
+            .pcb-grid { grid-template-columns: 1fr !important; }
+        }
+        @media (max-height: 500px) and (orientation: landscape) {
+            nav { padding-top: 0.35rem; padding-bottom: 0.35rem; }
+            .hero { padding-top: 1.5rem; }
+        }
+
+        /* [DN-07] Metric row -> stat tiles (values no longer run together; tiles wrap, never clip) */
+        .project-metrics { flex-wrap: wrap; gap: 1rem; }
+        .metric {
+            flex: 1 1 12rem;
+            text-align: left;
+            padding: 1rem 1.25rem;
+            background: rgba(0, 217, 255, 0.04);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+        .metric-value { font-size: 1.75rem; line-height: 1.2; }
+        .metric-label { margin-top: 0.35rem; font-size: 0.85rem; }
+        @media (max-width: 768px) {
+            .project-metrics { flex-direction: row; gap: 0.75rem; }   /* overrides the old column stack (line 844) */
+            .metric { flex-basis: 8rem; padding: 0.75rem 1rem; }
+            .metric-value { font-size: 1.4rem; }
+        }
+
+        /* [DN-08] Typography polish */
+        h1, h2, h3, h4, .psi-title, .card-title { text-wrap: balance; }
+        .tech-content code, .timeline-content code, .psi-content code {
+            font-size: 0.88em;
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            background: rgba(0, 217, 255, 0.08);
+            border: 1px solid rgba(0, 217, 255, 0.15);
+            color: var(--text-code);
+        }
+
+        /* [DN-09a] Keyboard focus: visible, on-brand, never hidden behind the auto-hiding nav */
+        nav.nav-hidden:has(:focus-visible) { transform: none; }   /* keyboard focus only: a tapped or clicked menu button must not pin the bar */
+        a:focus-visible, button:focus-visible, img[tabindex]:focus-visible, iframe:focus-visible, video:focus-visible {
+            outline: 3px solid var(--accent-secondary);
+            outline-offset: 3px;
+        }
+        [tabindex="-1"]:focus { outline: none; }
+        /* gallery images sit in an overflow:hidden frame that clips their ring: ring the whole frame instead */
+        .gallery-item > img:focus-visible { outline-offset: -3px; }
+        @supports selector(:has(*)) {
+            .gallery-item > img:focus-visible { outline: none; }
+            .gallery-item:has(> img:focus-visible) { outline: 3px solid var(--accent-secondary); outline-offset: 3px; }
+        }
+        .btn-primary:focus-visible { background: transparent; color: var(--accent-primary); }
+        .btn-secondary:focus-visible { border-color: var(--accent-secondary); color: var(--accent-secondary); }
+        .project-link:focus-visible { border-color: var(--accent-primary); color: var(--accent-primary); }
+        a.card-badge:focus-visible { border-color: #fff; background: rgba(255, 255, 255, 0.14); }
+
+        /* [DN-10] Landmarks and headings */
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px; height: 1px;
+            padding: 0; margin: -1px;
+            overflow: hidden; clip: rect(0 0 0 0);
+            white-space: nowrap; border: 0;
+        }
+        .skip-link {
+            position: fixed;
+            top: 0.75rem; left: 0.75rem;
+            z-index: 1100;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            background: var(--accent-primary);
+            color: var(--bg-dark);
+            font-weight: 700;
+            text-decoration: none;
+            transform: translateY(-200%);
+        }
+        .skip-link:focus { transform: none; }
+        .detail-banner h1 { font-size: 1rem; line-height: 1.6; }
+        .projects-grid-wrapper .section-header { margin-bottom: 2rem; }
+        #skills .deep-dive-project h3 { font-size: 1rem; }
+        @media (max-width: 600px) {
+            .contact-heading { font-size: 1.9rem !important; }
+        }
+
+        /* [DN-11] Contact: real mailto link + buttons without inline JS hover */
+        .contact-email {
+            background: none;
+            border: 0;
+            padding: 0;
+            font: inherit;
+            cursor: pointer;
+            color: var(--accent-primary);
+            font-family: 'JetBrains Mono', monospace;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(0, 217, 255, 0.5);
+        }
+        .contact-email:hover { border-bottom-style: solid; }
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font: inherit;
+            cursor: pointer;
+            background: transparent;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            transition: border-color 0.3s ease, color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+        }
+        .contact-link:hover, .contact-link:focus-visible {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+        .contact-link.primary {
+            background: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: var(--bg-dark);
+            font-weight: 600;
+        }
+        .contact-link.primary:hover, .contact-link.primary:focus-visible { background: transparent; color: var(--accent-primary); }
+        .copy-status {
+            min-height: 1.6em;   /* space reserved so the confirmation does not push the footer down */
+            margin-top: 1.25rem;
+            color: var(--accent-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* [DN-12] Project cards: image first, footer in its own grid row, whole card = the "See project" link */
+        .project-card {
+            display: grid;
+            grid-template-columns: auto auto;              /* both footer items can shrink/wrap: no overlap even with WCAG text-spacing at 320px */
+            grid-template-rows: repeat(5, auto) 1fr;
+            gap: 0.6rem 0.75rem;
+            padding-bottom: 1rem;
+        }
+        .project-card > * { grid-column: 1 / -1; }
+        .project-card > .card-link { grid-column: 1; grid-row: -2 / -1; position: static; align-self: end; justify-self: start; }
+        .project-card > .card-badges { grid-column: 2; grid-row: -2 / -1; position: relative; right: auto; bottom: auto; z-index: 1; align-self: end; pointer-events: none; }
+        .project-card > .card-badges a.card-badge { pointer-events: auto; }   /* only the repo links sit above the card link */
+        .card-image { order: -1; }
+        #card-shell .card-image img, #card-quacker .card-image img { object-position: left top; }   /* terminal screenshots: keep the start of each line */
+        .card-link::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
+        .card-link svg { transform: rotate(-90deg); transition: transform 0.2s ease; }
+        .project-card:hover .card-link svg { transform: rotate(-90deg) translateY(3px); }
+        .card-link:focus-visible { outline: none; }
+        .card-link:focus-visible::after { outline: 3px solid var(--accent-secondary); outline-offset: 3px; }
+        .project-card:focus-within { border-color: var(--accent-primary); }
+        @media (pointer: coarse) {
+            a.card-badge { position: relative; }
+            a.card-badge::before { content: ""; position: absolute; inset: -6px -4px; }
+            .logo { display: inline-flex; align-items: center; min-height: 44px; }
+            /* touch screens wider than 768px (iPads, landscape phones) get the same 44px banner buttons as phones */
+            .detail-banner a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.9rem; border: 1px solid var(--border); border-radius: 8px; white-space: nowrap; }
+            .detail-banner .left { display: block; }                           /* long titles wrap as text instead of splitting "Viewing:" off */
+            .detail-banner .actions { flex-wrap: nowrap; flex-shrink: 0; }     /* the two buttons stay side by side */
+        }
+        @media (hover: none) {
+            .project-card:hover, .gallery-item:hover, .profile-picture:hover { transform: none; }
+        }
+
+        /* [DN-13] Navigation: menu button <= 1100px, one-row compact nav 1101-1365px, aligned with content >= 1401px */
+        .nav-toggle { display: none; }
+        .nav-links a[aria-current="page"] { color: var(--accent-secondary); }
+        .nav-links a[aria-current="page"]::after { width: 100%; }
+        @media (min-width: 1101px) and (max-width: 1365px) {
+            .nav-links { gap: 0.5rem 0.8rem; }
+            .nav-links a { font-size: 0.85rem; }
+        }
+        @media (min-width: 1401px) {
+            nav { padding-left: max(2rem, calc((100% - 1400px) / 2 + 2rem)); padding-right: max(2rem, calc((100% - 1400px) / 2 + 2rem)); }
+        }
+        @media (max-width: 1100px) {
+            .nav-toggle {
+                display: inline-flex; flex-direction: column; justify-content: center; gap: 5px;
+                width: 44px; height: 44px; padding: 0 11px;
+                background: transparent; border: 1px solid var(--border); border-radius: 8px; cursor: pointer;
+            }
+            .nav-toggle span { display: block; height: 2px; background: var(--accent-primary); border-radius: 2px; transition: transform 0.2s ease, opacity 0.2s ease; }
+            .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+            .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+            .nav-links {
+                display: none; position: absolute; top: 100%; left: 0; right: 0;
+                flex-direction: column; flex-wrap: nowrap; justify-content: flex-start; gap: 0; overscroll-behavior: contain;
+                padding: 0.25rem 2rem 1rem; background: var(--bg-dark);
+                border-bottom: 1px solid var(--border);
+                max-height: calc(100vh - 4.5rem); max-height: calc(100dvh - 4.5rem); overflow-y: auto;
+            }
+            nav.nav-open .nav-links { display: flex; }
+            .nav-links a { display: flex; align-items: center; min-height: 44px; font-size: 1rem; border-bottom: 1px solid rgba(42, 49, 66, 0.6); }
+            .nav-links a::after { display: none; }
+            .nav-links a[aria-current="page"] { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 6px; }   /* not colour alone */
+        }
+        @media (max-width: 600px) {
+            .nav-links { padding: 0.25rem 1rem 1rem; }
+        }
+        @media (forced-colors: active) {
+            .nav-toggle span { forced-color-adjust: none; background: ButtonText; }   /* the bars are backgrounds, which forced colours erase */
+        }
+
+        /* [DN-14] Galleries: one-image galleries at natural size; project images open in a lightbox */
+        .project-section img { cursor: zoom-in; }
+        html:has(#lightbox[open]) { overflow: hidden; scrollbar-gutter: stable; }   /* the page does not scroll behind the open viewer */
+        .image-gallery:has(> .gallery-item:only-child) { grid-template-columns: minmax(0, 880px); justify-content: center; }
+        .gallery-item:not(:only-child) img { width: 100%; }
+        /* no CSS width on one-image galleries: the width attribute sizes the box, so it is reserved before the lazy image loads */
+        .image-gallery:has(> .gallery-item:only-child) .gallery-item img { height: auto; max-height: 600px; }
+        #lightbox {
+            margin: auto; padding: 0;
+            border: 1px solid var(--border); border-radius: 12px;
+            background: var(--bg-code); color: var(--text-secondary);
+            max-width: min(96vw, 1600px); max-height: 96vh; overflow: hidden;
+        }
+        #lightbox::backdrop { background: rgba(5, 8, 12, 0.88); }
+        #lightbox img[src$=".svg"] { width: min(96vw, 1600px); }   /* vector art: fill the viewer instead of its small intrinsic size */
+        #lightbox img {
+            display: block; width: auto; height: auto;
+            max-width: min(96vw, 1600px); max-height: calc(92vh - 4rem);
+            margin: 0 auto; cursor: default;
+        }
+        #lightbox .lightbox-caption {
+            display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; align-items: baseline; justify-content: space-between;
+            padding: 0.75rem 1rem; font-size: 0.9rem;
+        }
+        #lightbox .lightbox-caption a { color: var(--accent-primary); font-weight: 600; text-decoration: none; white-space: nowrap; }
+        /* the image gives up height so the caption and "Open original" always fit (short and landscape screens) */
+        #lightbox { max-height: 96dvh; }
+        #lightbox[open] { display: flex; flex-direction: column; }
+        #lightbox img { flex: 0 1 auto; min-height: 0; max-width: 100%; object-fit: contain; }
+        #lightbox .lightbox-caption { flex: none; }
+        #lightbox .lightbox-close {
+            position: absolute; top: 0.5rem; right: 0.5rem;
+            width: 2.75rem; height: 2.75rem;
+            border-radius: 8px; border: 1px solid var(--border);
+            background: rgba(10, 14, 20, 0.85); color: var(--text-primary);
+            font-size: 1.5rem; line-height: 1; cursor: pointer;
+        }
+
+        /* [DN-16] Detail pages start right under the banner (no auto-scroll, no empty 80px band) */
+        .detail-mode .project-section { padding-top: 0; }
+
+        /* [DN-17] Native in-page anchors: land clear of the fixed nav; smooth only when motion is welcome */
+        html { scroll-padding-top: 5rem; }
+        @media (prefers-reduced-motion: no-preference) {
+            html.smooth-scroll { scroll-behavior: smooth; }   /* class set after load: arriving at a #fragment URL jumps, it does not animate from the top */
+        }
+
+        /* [DN-18] Previous / All Projects / Next pager at the end of each project page */
+        .project-pager { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1rem; margin-top: 1rem; }
+        .pager-link {
+            display: flex; flex-direction: column; justify-content: center; gap: 0.25rem;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--border); border-radius: 12px;
+            background: var(--bg-card); color: var(--text-primary);
+            text-decoration: none; font-weight: 600;
+            transition: border-color 0.2s ease, transform 0.2s ease;
+        }
+        .pager-link:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+        .pager-link small { color: var(--accent-primary); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; }
+        .pager-next { text-align: right; }
+        .pager-prev, .pager-next { justify-content: flex-start; }   /* labels line up when the two names wrap differently */
+        .pager-all { align-items: center; color: var(--accent-secondary); font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+        @media (max-width: 600px) {
+            .project-pager { grid-template-columns: 1fr 1fr; }
+            .pager-all { grid-column: 1 / -1; order: 3; }
+        }
+
+        /* [DN-09b] Respect "reduce motion" (ring animation, hover lifts, smooth scrolling). Keep this block LAST. */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            .project-card:hover, .gallery-item:hover, .btn-primary:hover, .btn-secondary:hover,
+            .project-link:hover, .profile-picture:hover, .contact-link:hover, .contact-link:focus-visible,
+            .pager-link:hover { transform: none; }
+        }
 </style>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="renderer" content="webkit">
 </head>
 <body>
-    <div class="bg-grid"></div>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <div class="bg-grid" aria-hidden="true"></div>
     
     <div class="container">
         <!-- Navigation -->
-        <nav>
-            <a href="#home" class="logo" style="text-decoration: none;">&lt;YM /&gt;</a>
-            <ul class="nav-links">
+        <nav aria-label="Main">
+            <a href="#home" class="logo" style="text-decoration: none;" aria-label="YM, Yousef Moussa: home">&lt;YM /&gt;</a>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu"><span></span><span></span><span></span></button>
+            <ul class="nav-links" id="nav-links">
                 <li><a href="?project=tenstorrent">Tenstorrent</a></li>
                 <li><a href="?project=digital-design">RISC-V</a></li>
                 <li><a href="?project=prng">PRNG</a></li>
@@ -937,8 +1329,9 @@
             </ul>
         </nav>
 
+        <main id="main" tabindex="-1">
         <div id="detail-banner" class="detail-banner">
-            <div class="left">Viewing: <span id="detail-title">Project</span></div>
+            <h1 class="left">Viewing: <span id="detail-title">Project</span></h1>
             <div class="actions">
                 <a id="back-to-projects" href="./#projects-grid">← All Projects</a>
                 <a href="#contact">Contact</a>
@@ -952,27 +1345,31 @@
                     <h1>Yousef Moussa</h1>
                     <p class="tagline">Computer Engineering Student · Graduating May 2027</p>
                     <p class="focus">Embedded Systems • AI Accelerators • ASIC Design • Autonomous Robotics</p>
-                    <p>I am a final-year Computer Engineering student at the University of Alberta (3.9 GPA), currently I am on co-op on Tenstorrent's Metal Runtime team building bare-metal C++ runtime software for RISC-V-based AI accelerators. I Specialize in real-time embedded systems, digital design, and robotics, and have a proven track record of results: 20x faster atomic semaphores in an AI accelerator runtime, a 25x network latency improvement for UAV payloads, single-cycle and multi-cycle RISC-V CPUs, real-time ROS2 software competing at the international RoboSub competition, a medical sensor built for Health Canada approval, and mission-critical UAV firmware.</p>
+                    <p>I am a final-year Computer Engineering student at the University of Alberta (3.9 GPA), currently I am on co-op on Tenstorrent's Metal Runtime team building bare-metal C++ runtime software for RISC-V-based AI accelerators. I specialize in real-time embedded systems, digital design, and robotics, and have a proven track record of results: 20x faster atomic semaphores in an AI accelerator runtime, a 25x network latency improvement for UAV payloads, single-cycle and multi-cycle RISC-V CPUs, real-time ROS2 software competing at the international RoboSub competition, a medical sensor built for Health Canada approval, and mission-critical UAV firmware.</p>
                     <div class="cta-buttons">
                         <a href="#contact" class="btn btn-primary">Get in Touch</a>
-                        <a href="https://github.com/YousefMoussa" target="_blank" class="btn btn-secondary">View GitHub</a>
+                        <a href="https://github.com/YousefMoussa" target="_blank" rel="noopener" class="btn btn-secondary">View GitHub</a>
                     </div>
                 </div>
                 <div class="profile-container">
-                    <img src="images/Yousef%20Moussa.jpg" alt="Yousef Moussa" class="profile-picture" >
+                    <img width="960" height="960" fetchpriority="high" src="images/yousef-moussa.webp" alt="Yousef Moussa" class="profile-picture" >
                 </div>
             </div>
         </section>
 
         <!-- Projects Grid -->
-        <section id="projects-grid" class="projects-grid-wrapper">
+        <section id="projects-grid" class="projects-grid-wrapper" aria-labelledby="projects-heading">
+            <div class="section-header">
+                <h2 class="section-title" id="projects-heading">Projects</h2>
+                <div class="section-line"></div>
+            </div>
             <div class="projects-grid">
-                <article class="project-card">
+                <article class="project-card" id="card-tenstorrent">
                     <h3 class="card-title">Tenstorrent AI Accelerator Runtime</h3>
                     <p class="card-meta">Bare Metal Runtime | May 2026 – Present</p>
-                    <p class="card-summary">Low-level C++ runtime work for AI accelerators: block-based buffer transfers, topology-aware atomic semaphores (20x faster), and address-translation support for fast kernal dispatch.</p>
+                    <p class="card-summary">Low-level C++ runtime work for AI accelerators: block-based buffer transfers, topology-aware atomic semaphores (20x faster), and address-translation support for fast kernel dispatch.</p>
                     <div class="card-image">
-                        <img src="images/tenstorrent_noc.svg" alt="Diagram of a block of buffer entries moving across a network-on-chip from a producer core to a consumer core">
+                        <img width="480" height="200" loading="lazy" decoding="async" src="images/tenstorrent_noc.svg" alt="Diagram of a block of buffer entries moving across a network-on-chip from a producer core to a consumer core">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">C++</span>
@@ -982,28 +1379,28 @@
                         <span class="card-tag concept">Dataflow Buffers</span>
                         <span class="card-tag concept">Atomics & Synchronization</span>
                         <span class="card-tag concept">Address Translation</span>
-                        <span class="card-tag concept">Kernal Dispatch</span>
+                        <span class="card-tag concept">Kernel Dispatch</span>
                         <span class="card-tag tool">Emulation</span>
                         <span class="card-tag tool">RTL Simulation</span>
                     </div>
+                    <a class="card-link" href="?project=tenstorrent">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/tenstorrent/tt-metal" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             TT-Metal
                         </a>
                     </div>
-                    <a class="card-link" href="?project=tenstorrent">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-digital-design">
                     <h3 class="card-title">32-bit RISC-V CPU</h3>
                     <p class="card-meta">CPU Architecture & Digital Design | Fall 2025 and Winter 2026</p>
                     <p class="card-summary">Designed and implemented two complete 32-bit RISC-V multi-cycle CPUs with FSM control and full RV32I coverage.</p>
                     <div class="card-image">
-                        <img src="images/Screenshot_from_2026-02-06_10-27-20.png" alt="RISC-V CPU datapath and controller diagram">
+                        <img width="1364" height="576" loading="lazy" decoding="async" src="images/Screenshot_from_2026-02-06_10-27-20.png" alt="RISC-V CPU datapath and controller diagram">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">VHDL</span>
@@ -1015,24 +1412,24 @@
                         <span class="card-tag hardware">FPGA</span>
                         <span class="card-tag hardware">Xilinx Zybo Z7</span>
                     </div>
+                    <a class="card-link" href="?project=digital-design">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/multi_cycle_riscv_cpu_vhdl" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             GitHub
                         </a>
                     </div>
-                    <a class="card-link" href="?project=digital-design">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-prng">
                     <h3 class="card-title">Tausworthe PRNG</h3>
                     <p class="card-meta">Digital Design | Fall 2025</p>
                     <p class="card-summary">32-bit Taus88 PRNG with three parallel LFSRs, XOR combination, and 125 MHz FPGA validation.</p>
                     <div class="card-image">
-                        <img src="images/1770401118112_image.png" alt="Tausworthe PRNG architecture diagram">
+                        <img width="1366" height="651" loading="lazy" decoding="async" src="images/1770401118112_image.png" alt="Tausworthe PRNG simulation waveform">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">VHDL</span>
@@ -1043,24 +1440,24 @@
                         <span class="card-tag concept">RTL Design</span>
                         <span class="card-tag security">Cryptography</span>
                     </div>
+                    <a class="card-link" href="?project=prng">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/tausworthe-pseudo-random-number-generator" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             GitHub
                         </a>
                     </div>
-                    <a class="card-link" href="?project=prng">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-secure-fsm">
                     <h3 class="card-title">Secure Element FSM</h3>
                     <p class="card-meta">Hardware Security & Digital Design | Fall 2025</p>
                     <p class="card-summary">Hardware security controller with instant attack override and Moore FSM for synchronized status outputs.</p>
                     <div class="card-image">
-                        <img src="images/1770401054199_image.png" alt="Secure element FSM architecture diagram">
+                        <img width="1364" height="493" loading="lazy" decoding="async" src="images/1770401054199_image.png" alt="Secure element FSM architecture diagram">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">VHDL</span>
@@ -1072,24 +1469,24 @@
                         <span class="card-tag security">Attack Detection</span>
                         <span class="card-tag security">Cryptographic Control</span>
                     </div>
+                    <a class="card-link" href="?project=secure-fsm">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/secure-element-fsm" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             GitHub
                         </a>
                     </div>
-                    <a class="card-link" href="?project=secure-fsm">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-vlsi-comparator">
                     <h3 class="card-title">2-Bit Comparator IC</h3>
                     <p class="card-meta">Full-Custom VLSI Design | Winter 2026</p>
                     <p class="card-summary">Full custom 2-bit comparator through schematic-to-layout flow with clean DRC/LVS and post-layout validation.</p>
                     <div class="card-image">
-                        <img src="images/image.png" alt="2-bit comparator schematic in GSCLIB 45nm">
+                        <img width="1454" height="547" loading="lazy" decoding="async" src="images/image.png" alt="2-bit comparator layout in GSCLIB 45nm">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag tool">Cadence Virtuoso</span>
@@ -1101,9 +1498,13 @@
                         <span class="card-tag concept">Parasitic Extraction</span>
                         <span class="card-tag hardware">Standard Cell Library</span>
                     </div>
+                    <a class="card-link" href="?project=vlsi-comparator">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <span class="card-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
                                 <rect x="5" y="11" width="14" height="10" rx="2"></rect>
                                 <path d="M12 16v2"></path>
@@ -1111,18 +1512,14 @@
                             Closed Source
                         </span>
                     </div>
-                    <a class="card-link" href="?project=vlsi-comparator">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-arvp">
                     <h3 class="card-title">ARVP AUV Systems</h3>
                     <p class="card-meta">Autonomous Robotics & Embedded Systems | Sept 2023 – Present</p>
                     <p class="card-summary">ROS2 autonomy, localization, and embedded control across three AUV platforms with Teensy hardware.</p>
                     <div class="card-image">
-                        <img src="images/1770406198124_image.png" alt="ARVP AUV pool testing">
+                        <img width="1144" height="869" loading="lazy" decoding="async" src="images/1770406198124_image.webp" alt="ARVP AUV pool testing">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag tool">ROS2</span>
@@ -1138,9 +1535,13 @@
                         <span class="card-tag tool">GitLab CI/CD</span>
                         <span class="card-tag concept">Leadership</span>
                     </div>
+                    <a class="card-link" href="?project=arvp">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <span class="card-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
                                 <rect x="5" y="11" width="14" height="10" rx="2"></rect>
                                 <path d="M12 16v2"></path>
@@ -1148,18 +1549,14 @@
                             Closed Source
                         </span>
                     </div>
-                    <a class="card-link" href="?project=arvp">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-uvad">
                     <h3 class="card-title">UVAD Control Surface Firmware and More</h3>
                     <p class="card-meta">UAV Firmware & Networking | Jan–Aug 2025</p>
                     <p class="card-summary">Safety-critical 4ms control loop for CAN servos with UART DMA ingest and hardware timer safeguards. TCP ground station to UAV quality improvement. Angle of attack and sideswipe firmware. Route upload improvements.</p>
                     <div class="card-image">
-                        <img src="images/1770358283859_image.png" alt="UVAD servo control board Rev B front view">
+                        <img width="800" height="452" loading="lazy" decoding="async" src="images/1770358283859_image.webp" alt="Alpine Swift Long-Endurance UAV">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">C/C++</span>
@@ -1173,9 +1570,13 @@
                         <span class="card-tag proto">TCP/IP</span>
                         <span class="card-tag proto">MQTT</span>
                     </div>
+                    <a class="card-link" href="?project=uvad">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <span class="card-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
                                 <rect x="5" y="11" width="14" height="10" rx="2"></rect>
                                 <path d="M12 16v2"></path>
@@ -1183,18 +1584,14 @@
                             Closed Source
                         </span>
                     </div>
-                    <a class="card-link" href="?project=uvad">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-rrl">
                     <h3 class="card-title">Shoulder Rehab Sensor</h3>
                     <p class="card-meta">Medical Device Embedded Systems | May 2023 – Dec 2024</p>
                     <p class="card-summary">ESP32-based tele-rehab sensor streaming IMU and force data, moving from prototype to Health Canada pathway.</p>
                     <div class="card-image">
-                        <img src="images/image(1).png" alt="Assembled shoulder rehab sensor PCB">
+                        <img width="1106" height="789" loading="lazy" decoding="async" src="images/image(1).png" alt="Assembled shoulder rehab sensor PCB">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag hardware">ESP32</span>
@@ -1209,9 +1606,13 @@
                         <span class="card-tag tool">EasyEDA</span>
                         <span class="card-tag lang">C/C++</span>
                     </div>
+                    <a class="card-link" href="?project=rrl">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <span class="card-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
                                 <rect x="5" y="11" width="14" height="10" rx="2"></rect>
                                 <path d="M12 16v2"></path>
@@ -1219,18 +1620,14 @@
                             Closed Source
                         </span>
                     </div>
-                    <a class="card-link" href="?project=rrl">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-smart-cushion">
                     <h3 class="card-title">ML-Based Smart Cushion</h3>
                     <p class="card-meta">Machine Learning & Sensing | Sept 2023 – April 2024</p>
                     <p class="card-summary">Pressure-sensing wheelchair cushion with 5-layer neural net achieving 0.99 AUC for seating position classification.</p>
                     <div class="card-image">
-                        <img src="images/3d_visualization.png" alt="3D pressure visualization for smart cushion">
+                        <img width="802" height="770" loading="lazy" decoding="async" src="images/3d_visualization.png" alt="3D pressure visualization for smart cushion">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">Python</span>
@@ -1242,9 +1639,13 @@
                         <span class="card-tag ml">Neural Networks</span>
                         <span class="card-tag web">Visualization</span>
                     </div>
+                    <a class="card-link" href="?project=smart-cushion">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <span class="card-badge">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M7 11V8a5 5 0 0 1 10 0v3"></path>
                                 <rect x="5" y="11" width="14" height="10" rx="2"></rect>
                                 <path d="M12 16v2"></path>
@@ -1252,18 +1653,14 @@
                             Closed Source
                         </span>
                     </div>
-                    <a class="card-link" href="?project=smart-cushion">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-shell">
                     <h3 class="card-title">Unix Shell</h3>
                     <p class="card-meta">Systems Programming | Fall 2025</p>
                     <p class="card-summary">Custom Unix shell with pipelines, redirection, job control, and robust parsing.</p>
                     <div class="card-image">
-                        <img src="images/shell.png" alt="Custom Unix shell terminal view">
+                        <img width="1039" height="449" loading="lazy" decoding="async" src="images/shell.png" alt="Custom Unix shell terminal view">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">C</span>
@@ -1273,24 +1670,24 @@
                         <span class="card-tag concept">File I/O</span>
                         <span class="card-tag concept">String Parsing</span>
                     </div>
+                    <a class="card-link" href="?project=shell">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/CustomShell-C" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             GitHub
                         </a>
                     </div>
-                    <a class="card-link" href="?project=shell">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-filesystem">
                     <h3 class="card-title">Simulated Filesystem</h3>
                     <p class="card-meta">File Systems & Storage | Fall 2025</p>
                     <p class="card-summary">Unix-like filesystem simulator with block allocation, inode metadata, and multi-level directories.</p>
                     <div class="card-image">
-                        <img src="images/filesystem.png" alt="Filesystem architecture visualization">
+                        <img width="708" height="309" loading="lazy" decoding="async" src="images/filesystem.png" alt="Filesystem architecture visualization">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">C</span>
@@ -1300,24 +1697,24 @@
                         <span class="card-tag concept">Memory Management</span>
                         <span class="card-tag concept">Data Structures</span>
                     </div>
+                    <a class="card-link" href="?project=filesystem">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/Simulated-Filesystem" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             GitHub
                         </a>
                     </div>
-                    <a class="card-link" href="?project=filesystem">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-mapreduce">
                     <h3 class="card-title">MapReduce Framework</h3>
                     <p class="card-meta">Distributed Systems | Fall 2025</p>
                     <p class="card-summary">Coordinator/worker MapReduce implementation with IPC, multithreading and more.</p>
                     <div class="card-image">
-                        <img src="images/mapreduce.png" alt="MapReduce workflow diagram">
+                        <img width="787" height="436" loading="lazy" decoding="async" src="images/mapreduce.png" alt="MapReduce workflow diagram">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">C</span>
@@ -1327,24 +1724,24 @@
                         <span class="card-tag concept">Process Management</span>
                         <span class="card-tag concept">Fault Tolerance</span>
                     </div>
+                    <a class="card-link" href="?project=mapreduce">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/MapReduce" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             GitHub
                         </a>
                     </div>
-                    <a class="card-link" href="?project=mapreduce">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card" id="card-quacker">
                     <h3 class="card-title">Quacker Platform</h3>
                     <p class="card-meta">Database & User Management | Fall 2024</p>
                     <p class="card-summary">Command-line, Twitter-style social platform in C++ on SQLite: sign-up and login, paginated feeds, tweet and user search, hashtags, replies, retweets, and follows.</p>
                     <div class="card-image">
-                        <img src="images/1770402899967_image.png" alt="Quacker terminal welcome screen">
+                        <img width="640" height="323" loading="lazy" decoding="async" src="images/1770402899967_image.png" alt="Quacker terminal welcome screen">
                     </div>
                     <div class="card-tags">
                         <span class="card-tag lang">C++</span>
@@ -1353,16 +1750,16 @@
                         <span class="card-tag lang">Python</span>
                         <span class="card-tag concept">Terminal UI</span>
                     </div>
+                    <a class="card-link" href="?project=quacker">
+                        <span>See project</span>
+                        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                    </a>
                     <div class="card-badges">
                         <a class="card-badge" href="https://github.com/YousefMoussa/Quacker" target="_blank" rel="noopener">
-                            <svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                             GitHub
                         </a>
                     </div>
-                    <a class="card-link" href="?project=quacker">
-                        <span>See project</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </a>
                 </article>
             </div>
         </section>
@@ -1381,6 +1778,14 @@
                         <h3>Block-Based Data Movement for AI Accelerator Kernels</h3>
                         <p class="project-company">Tenstorrent</p>
                         <p class="project-role">Computer Engineer Co-op, Metal Runtime | May 2026 – Present</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/tenstorrent/tt-metal" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            TT-Metal on GitHub
+                        </a>
                     </div>
                 </div>
 
@@ -1421,7 +1826,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon problem-icon"></div>
-                        <div class="psi-title">PROBLEM: Per-Entry Transfer Overhead</div>
+                        <h4 class="psi-title">PROBLEM: Per-Entry Transfer Overhead</h4>
                     </div>
                     <div class="psi-content">
                         The existing data-movement path was designed mainly for per-entry transfers. Workloads that naturally consume contiguous groups of data paid transaction overhead on every entry, even when the whole group could have moved at once.
@@ -1429,7 +1834,7 @@
                 </div>
 
                 <div style="margin-top: 1.5rem; text-align: center;">
-                    <img src="images/tenstorrent_noc.svg" alt="Diagram of a block of buffer entries moving across a network-on-chip from a producer core to a consumer core" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border);">
+                    <img width="480" height="200" loading="lazy" decoding="async" src="images/tenstorrent_noc.svg" alt="Diagram of a block of buffer entries moving across a network-on-chip from a producer core to a consumer core" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border);">
                     <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Block-based transfer: a contiguous group of Dataflow Buffer entries moves from a producer core to a consumer core in a single NoC transaction</p>
                 </div>
 
@@ -1468,17 +1873,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">IMPACT: Fewer NoC Transactions</div>
+                        <h4 class="psi-title">IMPACT: Fewer NoC Transactions</h4>
                     </div>
                     <div class="psi-content">
                         Reduces the number of network transactions required for contiguous data regions. Validated in emulation with more than 100 end-to-end tests covering producer/consumer layouts and synchronization behavior.
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
 
             <!-- Atomic Semaphores Project -->
@@ -1488,6 +1889,14 @@
                         <h3>Topology-Aware Atomic Semaphores</h3>
                         <p class="project-company">Tenstorrent</p>
                         <p class="project-role">Computer Engineer Co-op, Metal Runtime | May 2026 – Present</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/tenstorrent/tt-metal" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            TT-Metal on GitHub
+                        </a>
                     </div>
                 </div>
 
@@ -1528,7 +1937,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon problem-icon"></div>
-                        <div class="psi-title">PROBLEM: Atomicity Depends on Who Is Accessing</div>
+                        <h4 class="psi-title">PROBLEM: Atomicity Depends on Who Is Accessing</h4>
                     </div>
                     <div class="psi-content">
                         A shared semaphore may be accessed by multiple threads on the same accelerator or by remote devices over the network. A mechanism that is safe and efficient for local access may not remain atomic once remote access is possible, and leaving that choice to the user invites subtle synchronization bugs.
@@ -1566,17 +1975,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">IMPACT: Correct by Default, 20x Faster</div>
+                        <h4 class="psi-title">IMPACT: Correct by Default, 20x Faster</h4>
                     </div>
                     <div class="psi-content">
                         Semaphore users no longer choose an implementation manually. The runtime selects an appropriate mechanism for each semaphore's access topology while preserving atomicity across the supported access patterns, and selecting between cached and NoC-based updates increased speed by a factor of 20. The change was validated with 44 emulator tests.
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
 
             <!-- Fast Dispatch Project -->
@@ -1586,6 +1991,14 @@
                         <h3>Fast Dispatch with Address Translation</h3>
                         <p class="project-company">Tenstorrent</p>
                         <p class="project-role">Computer Engineer Co-op, Metal Runtime | May 2026 – Present</p>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/tenstorrent/tt-metal" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            TT-Metal on GitHub
+                        </a>
                     </div>
                 </div>
 
@@ -1653,17 +2066,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">RESULTS</div>
+                        <h4 class="psi-title">RESULTS</h4>
                     </div>
                     <div class="psi-content">
                         Fast dispatch was validated with address translation enabled in emulation. Testing covered 55 cases across basic programs, events, buffers, prefetching, and dispatch behavior, while the existing slow-dispatch and non-translated paths remained covered.
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
 
             <!-- Other Tenstorrent Work -->
@@ -1671,6 +2080,14 @@
                 <div class="project-header">
                     <div class="project-title-section">
                         <h3>Additional Tenstorrent Work</h3>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/tenstorrent/tt-metal" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                            TT-Metal on GitHub
+                        </a>
                     </div>
                 </div>
 
@@ -1716,14 +2133,14 @@
                         <p class="project-company">CPU Architecture & Digital Design | Fall and Winter 2025</p>
                     </div>
                     <div class="project-links" style="display: flex; gap: 1rem;">
-                        <a href="https://github.com/YousefMoussa/multi_cycle_riscv_cpu_vhdl" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/YousefMoussa/multi_cycle_riscv_cpu_vhdl" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             VHDL
                         </a>
-                        <a href="https://github.com/oamkotb/riscv-cpu" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/oamkotb/riscv-cpu" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             Verilog
@@ -1803,7 +2220,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon problem-icon"></div>
-                        <div class="psi-title">CHALLENGE: FSM Timing and Data Hazards</div>
+                        <h4 class="psi-title">CHALLENGE: FSM Timing and Data Hazards</h4>
                     </div>
                     <div class="psi-content">
                         <p><strong>Register Value Timing Issues:</strong> Initial JALR implementation failed due to incorrect PC value capture - newer PC values were being used instead of the current instruction value needed for return address calculation (PC+4).</p>
@@ -1818,7 +2235,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon solution-icon"></div>
-                        <div class="psi-title">SOLUTION: Datapath Signal Analysis</div>
+                        <h4 class="psi-title">SOLUTION: Datapath Signal Analysis</h4>
                     </div>
                     <div class="psi-content">
                         <p><strong>Systematic Debugging Methodology:</strong> Carefully analyzed which register values (before vs after flip-flops) should be used at each multiplexer and datapath junction.</p>
@@ -1834,7 +2251,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">IMPACT: Complete RV32I Multi-Cycle CPU</div>
+                        <h4 class="psi-title">IMPACT: Complete RV32I Multi-Cycle CPU</h4>
                     </div>
                     <div class="psi-content">
                         Successfully designed and verified two multi-cycle CPUs demonstrating ISA scalability, from core 10-instruction VHDL implementation to full 25+ instruction RV32I in Verilog. Architecture demonstrates industry-relevant skills: FSM-based control, hardware resource sharing, register staging, and comprehensive testbench verification. Bit-counter subroutine validates JALR function call/return.
@@ -1880,30 +2297,26 @@
 
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <img src="images/Screenshot_from_2026-02-06_10-27-20.png" alt="Multi-Cycle CPU Architecture">
+                        <img width="1364" height="576" loading="lazy" decoding="async" src="images/Screenshot_from_2026-02-06_10-27-20.png" alt="Multi-Cycle CPU Architecture">
                         <div class="gallery-caption">Multi-Cycle CPU Architecture - Controller and Datapath block diagram</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/Screenshot_from_2026-02-06_10-23-10.png" alt="FSM State Diagram">
+                        <img width="781" height="335" loading="lazy" decoding="async" src="images/Screenshot_from_2026-02-06_10-23-10.png" alt="FSM State Diagram">
                         <div class="gallery-caption">FSM Controller State Diagram - 10-state machine orchestrating instruction fetch, decode, execution, memory access, and writeback</div>
                     </div>
                 </div>
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/Screenshot_from_2026-02-06_10-26-05.png" alt="Simulation Waveform 1">
+                        <img width="1372" height="675" loading="lazy" decoding="async" src="images/Screenshot_from_2026-02-06_10-26-05.png" alt="Simulation Waveform 1">
                         <div class="gallery-caption">Bit-Count Testing Simulation - Waveform validating JALR subroutine execution: register updates track bit-counting algorithm (extract LSB, accumulate, shift), FSM state progression through function call/return sequence, and control signal timing for PC+4 return address storage</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/Screenshot_from_2026-02-06_10-26-15.png" alt="Simulation Waveform 2">
+                        <img width="1372" height="675" loading="lazy" decoding="async" src="images/Screenshot_from_2026-02-06_10-26-15.png" alt="Simulation Waveform 2">
                         <div class="gallery-caption">Bit-Count Subroutine Verification - JALR execution detail showing bit-counter algorithm validation: PC+4 stored to x12 (return address register), jump back from subroutine at rs1+offset, confirming proper function call/return mechanism</div>
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="prng" class="section project-section">
@@ -1920,8 +2333,8 @@
                         <p class="project-company">Digital Design | Fall 2025</p>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/YousefMoussa/tausworthe-pseudo-random-number-generator" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/YousefMoussa/tausworthe-pseudo-random-number-generator" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             View on GitHub
@@ -1979,22 +2392,22 @@
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/1770400779626_image.png" alt="Tausworthe Architecture">
+                        <img width="1008" height="819" loading="lazy" decoding="async" src="images/1770400779626_image.png" alt="Tausworthe Architecture">
                         <div class="gallery-caption">Tausworthe PRNG Architecture - Three parallel LFSR generators (U1, U2, U3) with unique shift parameters, combined through XOR tree to produce final 32-bit random output</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1770400813109_image.png" alt="RTL Schematic">
+                        <img width="1359" height="468" loading="lazy" decoding="async" src="images/1770400813109_image.png" alt="RTL Schematic">
                         <div class="gallery-caption">RTL Schematic - Top-level integration showing three parameterized Taus88 components with seed loading, synchronous generation, and XOR output combination</div>
                     </div>
                 </div>
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/1770401118112_image.png" alt="Simulation Waveform">
+                        <img width="1366" height="651" loading="lazy" decoding="async" src="images/1770401118112_image.png" alt="Simulation Waveform">
                         <div class="gallery-caption">Vivado Simulation - Waveform showing deterministic random sequence generation with seed values (seed1=0x12345678, seed2=0x9ABCDE0, seed3=0xfedcba98) producing repeatable 32-bit output stream</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1770401002458_image.png" alt="FPGA Setup">
+                        <img width="1232" height="993" loading="lazy" decoding="async" src="images/1770401002458_image.webp" alt="FPGA Setup">
                         <div class="gallery-caption">Zybo Z7-10 FPGA Implementation - Physical hardware validation with load/start/reset buttons, 7-segment display showing output bytes, and 4-bit switch input for seed configuration</div>
                     </div>
                 </div>
@@ -2002,17 +2415,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon solution-icon"></div>
-                        <div class="psi-title">Hardware Validation</div>
+                        <h4 class="psi-title">Hardware Validation</h4>
                     </div>
                     <div class="psi-content">
                         <p>Deployed on Zybo Z7-10 FPGA with 7-segment display and LED indicators. Used 1Hz clock divider to observe sequential bytes of 32-bit output. Verified deterministic behavior by comparing hardware-generated sequences against simulation logs - confirmed exact match across multiple runs with same seed values.</p>
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="secure-fsm" class="section project-section">
@@ -2029,8 +2438,8 @@
                         <p class="project-company">Hardware Security & Digital Design | Fall 2025</p>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/YousefMoussa/secure-element-fsm" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/YousefMoussa/secure-element-fsm" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             View on GitHub
@@ -2095,18 +2504,18 @@
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/1770401054199_image.png" alt="FSM Architecture">
+                        <img width="1364" height="493" loading="lazy" decoding="async" src="images/1770401054199_image.png" alt="FSM Architecture">
                         <div class="gallery-caption">Complete System Architecture - Main secure element FSM (bottom left) with 6 operational states, LED flasher FSM (top left) for alarm visualization, and integrated countdown timer (right) for automatic wake from sleep mode</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1770401096470_image.png" alt="Attack Response Waveform">
+                        <img width="1369" height="607" loading="lazy" decoding="async" src="images/1770401096470_image.png" alt="Attack Response Waveform">
                         <div class="gallery-caption">Vivado Simulation - Waveform demonstrating critical attack response: attack_detected assertion (180ns) triggers instantaneous STATE_ALARM transition with rgb_led=100 (Red) on next clock edge, validating single-cycle security response</div>
                     </div>
                 </div>
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/1770401018685_image.png" alt="Hardware Test Setup">
+                        <img width="1360" height="747" loading="lazy" decoding="async" src="images/1770401018685_image.webp" alt="Hardware Test Setup">
                         <div class="gallery-caption">FPGA Test Configuration - Zybo Z7-20 board with Analog Discovery 2 providing test vectors through GPIO pins via JC Pmod adapter. LED indicators show real-time FSM state, 7-segment display outputs status codes</div>
                     </div>
                 </div>
@@ -2114,7 +2523,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">Verified Security Properties</div>
+                        <h4 class="psi-title">Verified Security Properties</h4>
                     </div>
                     <div class="psi-content">
                         <ul style="margin-left: 1rem;">
@@ -2127,10 +2536,6 @@
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="vlsi-comparator" class="section project-section">
@@ -2212,7 +2617,7 @@
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/comparetor%20schematic.png" alt="Comparator Schemat0.8i brightness(0.8)c">
+                        <img width="1326" height="819" loading="lazy" decoding="async" src="images/comparetor%20schematic.png" alt="2-bit comparator schematic using GSCLIB 45nm standard cells">
                         <div class="gallery-caption">Schematic Design - 2-bit comparator using GSCLIB 45nm standard cells: 6 DFFQX1 flip-flops for input/output registration, 2 XOR2XL gates for bit comparison, 1 OR2X1 gate combining match results. All cells instantiated from gsclib045 library.</div>
                     </div>
                 </div>
@@ -2234,11 +2639,11 @@
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/tutorial_DRC_pass.png" alt="Layout with LVS Clean">
+                        <img width="2560" height="1440" loading="lazy" decoding="async" src="images/vlsi_lvs_clean.png" alt="Layout with LVS Clean">
                         <div class="gallery-caption">Physical Layout with LVS Verification - Layout view showing standard cell placement and metal routing. Pegasus LVS results confirm clean match: ISL Clean, SCD No conflicts, ERC Empty, Extraction Clean, Comparison Match.</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/tutorial_drc_pass.png" alt="DRC Clean">
+                        <img width="2560" height="1440" loading="lazy" decoding="async" src="images/vlsi_drc_clean.png" alt="DRC Clean">
                         <div class="gallery-caption">DRC Verification - Pegasus Design Rule Checker showing 0 results in 0 of 552 checks, confirming zero violations and manufacturability compliance for the 45nm GSCLIB process.</div>
                     </div>
                 </div>
@@ -2261,11 +2666,11 @@
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/layout_simulation.png" alt="Post-Layout Simulation">
+                        <img width="2560" height="1440" loading="lazy" decoding="async" src="images/layout_simulation.png" alt="Post-Layout Simulation">
                         <div class="gallery-caption">Post-Layout Simulation - Transient response using extracted layout parasitics. Waveforms show Match output (red), Clock (green), and input signals A[1:0], B[1:0]. Includes realistic RC delays from physical routing.</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/non_layout_simulation.png" alt="Pre-Layout Simulation">
+                        <img width="2560" height="1440" loading="lazy" decoding="async" src="images/non_layout_simulation.png" alt="Pre-Layout Simulation">
                         <div class="gallery-caption">Pre-Layout Simulation - Ideal schematic simulation without parasitic effects. Comparison with post-layout results validates that extracted parasitics don't violate timing requirements.</div>
                     </div>
                 </div>
@@ -2273,7 +2678,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">VLSI Skills Demonstrated</div>
+                        <h4 class="psi-title">VLSI Skills Demonstrated</h4>
                     </div>
                     <div class="psi-content">
                         <ul style="margin-left: 1rem;">
@@ -2286,10 +2691,6 @@
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="arvp" class="section project-section">
@@ -2337,7 +2738,7 @@
                     <span class="tech-tag">C++/Python</span>
                     <span class="tech-tag">Teensy 4.0</span>
                     <span class="tech-tag">Device Drivers</span>
-                    <span class="tech-tag">FREERTOS</span>
+                    <span class="tech-tag">FreeRTOS</span>
                     <span class="tech-tag">DVL Navigation</span>
                     <span class="tech-tag">IMU/AHRS</span>
                     <span class="tech-tag">CAN Bus</span>
@@ -2357,37 +2758,37 @@
                     <div class="tech-content">
                         <p><strong>Role:</strong> Designed and validated embedded control systems for servo actuation, internal environment management, sensor and system integration on autonomous underwater vehicles.</p>
 
-                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); margin: 1.5rem 0;">
-                            <h5 style="margin-top: 0; color: var(--accent);">Control Board Development: Design → Test → Iterate</h5>
+                        <div style="background: var(--bg-code); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-primary); margin: 1.5rem 0;">
+                            <h5 style="margin-top: 0; color: var(--accent-primary);">Control Board Development: Design → Test → Iterate</h5>
                             
                             <p><strong>Challenge:</strong></p>
-                            <p>Needed reliable, real-time servo control for actuatiors and auxiliary systems with CAN bus communication to Hitec smart servos, while maintaining system health monitoring and fault detection capabilities.</p>
+                            <p>Needed reliable, real-time servo control for actuators and auxiliary systems with CAN bus communication to Hitec smart servos, while maintaining system health monitoring and fault detection capabilities.</p>
 
                             <p style="margin-top: 1rem;"><strong>Design Process:</strong></p>
                             <ul style="margin-left: 2rem;">
                                 <li><strong>Requirements Analysis:</strong> Collaborated with electrical and mechanical teams to define interface requirements (6 auxiliary servos, CAN bus for smart servos, current monitoring and claw grab detection, environmental monitoring)</li>
                                 <li><strong>Component Selection (REV B) :</strong> Selected Teensy 4.0 (600 MHz ARM Cortex-M7) for high-speed real-time control, MCP2515 CAN controller with TJA1050 transceiver for robust CAN communication, INA219 for current monitoring, MS561101BA03-50 for pressure and temperature sensing</li>
-                                <li><strong>PCB Design:</strong> Initial layout with focus on getting all required functionality working while minimoizing route length and ensuring signal integrity using a 4 layer board with power and ground planes</li>
+                                <li><strong>PCB Design:</strong> Initial layout with focus on getting all required functionality working while minimizing route length and ensuring signal integrity using a 4 layer board with power and ground planes</li>
                                 <li><strong>Firmware Development:</strong> Implemented drivers for all peripherals like the INA219, and FreeRTOS tasks to schedule all required operations; managed communication between tasks and peripherals</li>
                             </ul>
 
                             <div style="margin-top: 1.5rem;">
                                 <p><strong>PCB Design Evolution:</strong></p>
-                                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem;">
+                                <div class="pcb-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem;">
                                     <div>
-                                        <img src="images/ControlBoard_revA_front.png" alt="Control Board Rev A Front" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <img width="1157" height="797" loading="lazy" decoding="async" src="images/ControlBoard_revA_front.webp" alt="Control Board Rev A Front" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
                                         <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev A - Front</p>
                                     </div>
                                     <div>
-                                        <img src="images/ControlBoard_revA_back.png" alt="Control Board Rev A Back" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <img width="1157" height="797" loading="lazy" decoding="async" src="images/ControlBoard_revA_back.webp" alt="Control Board Rev A Back" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
                                         <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev A - Back</p>
                                     </div>
                                     <div>
-                                        <img src="images/ControlBoard_revB_front.png" alt="Control Board Rev B Front" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <img width="1157" height="797" loading="lazy" decoding="async" src="images/ControlBoard_revB_front.webp" alt="Control Board Rev B Front" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
                                         <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev B - Front</p>
                                     </div>
                                     <div>
-                                        <img src="images/ControlBoard_revB_back.png" alt="Control Board Rev B Back" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
+                                        <img width="1157" height="797" loading="lazy" decoding="async" src="images/ControlBoard_revB_back.webp" alt="Control Board Rev B Back" style="width: 100%; border-radius: 8px; border: 1px solid var(--border);">
                                         <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">Control Board Rev B - Back</p>
                                     </div>
                                 </div>
@@ -2425,13 +2826,13 @@
                         <p><strong>Role:</strong> Transitioned to ROS2 software development focused on autonomous navigation in GPS-denied underwater environments. Promoted to Software Co-Lead role, coordinating development across ~15 team members and driving technical decisions on software architecture and sensor selection.</p>
 
                         <div style="margin-top: 1.5rem; text-align: center;">
-                            <img src="images/1770406458708_image.png" alt="ROS2 Software Architecture" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border);">
+                            <img width="1156" height="1036" loading="lazy" decoding="async" src="images/1770406458708_image.png" alt="ROS2 Software Architecture" style="width: 100%; max-width: 800px; border-radius: 8px; border: 1px solid var(--border);">
                             <p style="margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.9rem;">ROS2 Software Architecture used on Kenai, Koda, and Arctos AUVs</p>
                         </div>
 
                         <!-- Motion Planning & Autonomy -->
-                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); margin: 1.5rem 0;">
-                            <h5 style="margin-top: 0; color: var(--accent);">Motion Planning & Autonomous Behaviors</h5>
+                        <div style="background: var(--bg-code); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-primary); margin: 1.5rem 0;">
+                            <h5 style="margin-top: 0; color: var(--accent-primary);">Motion Planning & Autonomous Behaviors</h5>
                             
                             <p><strong>Development Approach:</strong></p>
                             <ul style="margin-left: 2rem;">
@@ -2456,25 +2857,25 @@
                                 <li>Motion planning system enabled complex maneuvers including barrel roll execution for bonus points</li>
                             </ul>
 
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; justify-items: center;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; margin-top: 1.5rem; justify-items: center;">
                                 <div style="width: 100%; max-width: 400px;">
-                                    <img src="images/1770406160222_image.png" alt="Team Testing Kenai" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                                    <img width="650" height="868" loading="lazy" decoding="async" src="images/1770406160222_image.webp" alt="Team Testing Kenai" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
                                     <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">Pool Testing: Kenai AUV</p>
                                 </div>
                                 <div style="width: 100%; max-width: 400px;">
-                                    <img src="images/1770406198124_image.png" alt="Team Testing Arctos" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                                    <img width="1144" height="869" loading="lazy" decoding="async" src="images/1770406198124_image.webp" alt="Team Testing Arctos" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
                                     <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">Pool Testing: Arctos AUV</p>
                                 </div>
                                 <div style="width: 100%; max-width: 400px;">
-                                    <img src="images/1770406191678_image.png" alt="RoboSub 2024 Competition" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
+                                    <img width="1298" height="869" loading="lazy" decoding="async" src="images/1770406191678_image.webp" alt="RoboSub 2024 Competition" style="width: 100%; height: 280px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border);">
                                     <p style="text-align: center; margin-top: 0.5rem; color: var(--text-secondary); font-size: 0.85rem;">RoboSub 2024 Competition</p>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Software Co-Lead Responsibilities -->
-                        <div style="background: var(--card-bg); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent); margin: 1.5rem 0;">
-                            <h5 style="margin-top: 0; color: var(--accent);">Software Co-Lead: Technical Leadership</h5>
+                        <div style="background: var(--bg-code); padding: 1.5rem; border-radius: 8px; border-left: 4px solid var(--accent-primary); margin: 1.5rem 0;">
+                            <h5 style="margin-top: 0; color: var(--accent-primary);">Software Co-Lead: Technical Leadership</h5>
                             
                             <p><strong>Key Responsibilities:</strong></p>
                             <ul style="margin-left: 2rem;">
@@ -2512,23 +2913,17 @@
 
                         <div style="margin-top: 1.5rem;">
                             <p><strong>Kenai AUV Introduction Video:</strong></p>
-                            <div style="margin-top: 1rem; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; border: 1px solid var(--border);">
-                                <iframe src="https://drive.google.com/file/d/1mJXHMRmj5gdmaCDj9WGhtaa07T7xuj34/preview" 
-                                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                        frameborder="0" 
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                        allowfullscreen>
-                                </iframe>
-                            </div>
+                            <video controls playsinline preload="none" poster="images/kenai-poster.webp" width="1920" height="1080"
+                                   aria-label="Kenai AUV introduction video"
+                                   style="margin-top: 1rem; display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border); background: #000;">
+                                <source src="videos/kenai-auv.mp4" type="video/mp4">
+                                <a href="videos/kenai-auv.mp4">Download the Kenai AUV introduction video (MP4)</a>
+                            </video>
                         </div>
                     </div>
                 </div>
 
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="uvad" class="section project-section">
@@ -2647,7 +3042,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon problem-icon"></div>
-                        <div class="psi-title">PROBLEM: False Timeout Events</div>
+                        <h4 class="psi-title">PROBLEM: False Timeout Events</h4>
                     </div>
                     <div class="psi-content">
                         While developing the safety-critical 5ms timeout mechanism, intermittent false timeout events occurred even though all servos were connected and the measured execution time was consistently ~4ms, well within budget. The FreeRTOS software timer exhibited approximately ±1ms jitter under load, causing unreliable timeout detection in a system where timing precision was paramount for flight safety.
@@ -2657,7 +3052,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon solution-icon"></div>
-                        <div class="psi-title">SOLUTION: Hardware Timer Migration</div>
+                        <h4 class="psi-title">SOLUTION: Hardware Timer Migration</h4>
                     </div>
                     <div class="psi-content">
                         <p><strong>Root Cause Analysis:</strong></p>
@@ -2674,7 +3069,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">IMPACT: Reliable Safety-Critical System</div>
+                        <h4 class="psi-title">IMPACT: Reliable Safety-Critical System</h4>
                     </div>
                     <div class="psi-content">
                         Eliminated all false timeouts and restored reliable communication under full operational conditions. The system now operates deterministically with predictable timing behavior essential for flight safety. This demonstrates proficiency in real-time systems debugging, oscilloscope-based timing analysis, and understanding the critical distinction between software and hardware timing in safety-critical applications.
@@ -2690,19 +3085,15 @@
 
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <img src="images/1770358279047_image.png" alt="FALCON Target Drone UAV">
+                        <img width="1600" height="817" loading="lazy" decoding="async" src="images/1770358279047_image.webp" alt="FALCON Target Drone UAV">
                         <div class="gallery-caption">FALCON - High-speed target drone </div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1770358283859_image.png" alt="Alpine Swift Long-Endurance UAV">
+                        <img width="800" height="452" loading="lazy" decoding="async" src="images/1770358283859_image.webp" alt="Alpine Swift Long-Endurance UAV">
                         <div class="gallery-caption">Alpine Swift - Long-endurance platform featuring integrated payload TCP network and MQTT messaging architecture</div>
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
 
             <!-- TCP Network Debugging Project -->
@@ -2787,17 +3178,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">RESULTS</div>
+                        <h4 class="psi-title">RESULTS</h4>
                     </div>
                     <div class="psi-content">
                         Reduced round-trip latency from >5 seconds to ~200ms, meeting customer specifications and enabling real-time payload operations. Demonstrated expertise in distributed systems debugging, network protocol analysis, and systematic root cause analysis across complex multi-computer architectures. The MQTT message broker architecture with Mosquitto enabled robust communication between multiple applications across the UAV and ground station systems.
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
 
             <!-- Other UVAD Projects -->
@@ -2851,7 +3238,7 @@
                 </div>
 
                 <div class="cert-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
                         <polyline points="22 4 12 14.01 9 11.01"/>
                     </svg>
@@ -2947,15 +3334,15 @@
 
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <img src="images/1770361515707_image.png" alt="Force Meter Prototype Assembly">
+                        <img width="665" height="1310" loading="lazy" decoding="async" src="images/1770361515707_image.webp" alt="Force Meter Prototype Assembly">
                         <div class="gallery-caption">Force Meter Prototype - Internal electronics assembly (top) showing multi-board integration, and final prototype in portable enclosure (bottom)</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1770361680394_image.png" alt="Lab Work and Testing">
+                        <img width="474" height="632" loading="lazy" decoding="async" src="images/1770361680394_image.webp" alt="Lab Work and Testing">
                         <div class="gallery-caption">Lab Development - PCB assembly, soldering, and testing at Rehabilitation Robotics Lab workbench</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1770362665469_image.png" alt="Force Data Visualization">
+                        <img width="1600" height="900" loading="lazy" decoding="async" src="images/1770362665469_image.webp" alt="Force Data Visualization">
                         <div class="gallery-caption">Data Collection - Force vs time graph showing repeated shoulder exercise measurements (~20N peak force over 3500ms test duration)</div>
                     </div>
                 </div>
@@ -3045,11 +3432,11 @@
 
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <img src="images/1770358767211_image.png" alt="Shoulder Sensor PCB Schematic">
+                        <img width="554" height="772" loading="lazy" decoding="async" src="images/1770358767211_image.png" alt="Shoulder Sensor PCB Schematic">
                         <div class="gallery-caption">Custom PCB Design - EasyEDA schematic showing ESP32, BNO055, HX711, and power management integration</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/1770358784625_image.png" alt="Assembled Shoulder Sensor PCB">
+                        <img width="1067" height="1600" loading="lazy" decoding="async" src="images/1770358784625_image.webp" alt="Assembled Shoulder Sensor PCB">
                         <div class="gallery-caption">Production PCB Assembly - Fully assembled and tested device ready for Health Canada approval pathway</div>
                     </div>
                 </div>
@@ -3057,7 +3444,7 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">IMPACT & DOCUMENTATION</div>
+                        <h4 class="psi-title">IMPACT & DOCUMENTATION</h4>
                     </div>
                     <div class="psi-content">
                         <ul style="margin-left: 2rem;">
@@ -3069,10 +3456,6 @@
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
 
         </section>
@@ -3146,7 +3529,7 @@
 
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <img src="images/velostat_sensor.png" alt="Velostat Sensor Operating Principle">
+                        <img width="593" height="404" loading="lazy" decoding="async" src="images/velostat_sensor.png" alt="Velostat Sensor Operating Principle">
                         <div class="gallery-caption">Velostat Pressure Sensing Mechanism - Low current at rest, high current under pressure as carbon particles compress and create conductive pathways</div>
                     </div>
                 </div>
@@ -3164,11 +3547,11 @@
 
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <img src="images/cushion_testing.png" alt="Smart Cushion Testing Setup">
+                        <img width="1121" height="886" loading="lazy" decoding="async" src="images/cushion_testing.webp" alt="Smart Cushion Testing Setup">
                         <div class="gallery-caption">Testing Configuration - User seated on cushion with Arduino/multiplexer visible, collecting pressure distribution data for training dataset</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/3d_visualization.png" alt="3D Pressure Visualization">
+                        <img width="802" height="770" loading="lazy" decoding="async" src="images/3d_visualization.png" alt="3D Pressure Visualization">
                         <div class="gallery-caption">Real-Time 3D Force Visualization - Java Processing interface displaying pressure distribution as height-mapped surface with color gradient</div>
                     </div>
                 </div>
@@ -3186,11 +3569,11 @@
 
                 <div class="image-gallery">
                     <div class="gallery-item">
-                        <img src="images/training_loss.png" alt="Neural Network Training Loss">
+                        <img width="1102" height="885" loading="lazy" decoding="async" src="images/training_loss.png" alt="Neural Network Training Loss">
                         <div class="gallery-caption">Training Progress - Convergence of training and validation loss over 12 epochs, demonstrating effective learning without overfitting</div>
                     </div>
                     <div class="gallery-item">
-                        <img src="images/roc_curve.png" alt="ROC Curve Classification Performance">
+                        <img width="800" height="800" loading="lazy" decoding="async" src="images/roc_curve.png" alt="ROC Curve Classification Performance">
                         <div class="gallery-caption">Classification Performance - ROC curves showing excellent discrimination: Class 0 (AUC=0.99), Class 1 (AUC=1.00), Class 2 (AUC=1.00), Class 3 (AUC=0.67)</div>
                     </div>
                 </div>
@@ -3198,10 +3581,10 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon impact-icon"></div>
-                        <div class="psi-title">RESULTS & CLINICAL IMPACT</div>
+                        <h4 class="psi-title">RESULTS & CLINICAL IMPACT</h4>
                     </div>
                     <div class="psi-content">
-                        <p><strong>Classification Performance:</strong> Achieved near-perfect classification for three seating positions (AUC 0.99-1.00), demonstrating system viability for clinical deployment. Class 3 (sitting on something) showed lower but acceptable performance (AUC 0.67), this is because Class 3 was tested on data it had not seen to see how it would preform. Showing that the model needed more training data for this class to improve generalization.</p>
+                        <p><strong>Classification Performance:</strong> Achieved near-perfect classification for three seating positions (AUC 0.99-1.00), demonstrating system viability for clinical deployment. Class 3 (sitting on something) showed lower but acceptable performance (AUC 0.67), this is because Class 3 was tested on data it had not seen to see how it would perform. Showing that the model needed more training data for this class to improve generalization.</p>
 
                         <p style="margin-top: 1rem;"><strong>3D Visualization System:</strong> Developed real-time pressure visualization in Java using Processing IDE. Interface displays pressure distribution as 3D height-mapped surface with color-coded intensity (red indicates high pressure regions). Visualization enables clinicians to quickly assess seating patterns and identify problematic pressure concentrations that could lead to tissue damage.</p>
 
@@ -3209,10 +3592,6 @@
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="shell" class="section project-section">
@@ -3229,8 +3608,8 @@
                         <p class="project-company">Systems Programming | Fall 2025</p>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/YousefMoussa/CustomShell-C" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/YousefMoussa/CustomShell-C" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             View on GitHub
@@ -3278,7 +3657,7 @@
                         <ul style="margin-left: 2rem;">
                             <li>Command parsing with argument tokenization and quote handling</li>
                             <li>Process creation and management using fork()/exec()/wait() system calls</li>
-                            <li>I/O redirection (>, <, >>) with file descriptor manipulation</li>
+                            <li>I/O redirection (&gt;, &lt;, &gt;&gt;) with file descriptor manipulation</li>
                             <li>Pipeline implementation (|) supporting multiple command chaining</li>
                             <li>Built-in commands: cd, pwd, exit, history</li>
                             <li>Background process execution with & operator</li>
@@ -3290,7 +3669,7 @@
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/1770402653210_image.png" alt="Custom Shell Terminal">
+                        <img width="1345" height="1312" loading="lazy" decoding="async" src="images/1770402653210_image.png" alt="Custom Shell Terminal">
                         <div class="gallery-caption">Custom Shell in Action - Terminal session demonstrating command execution (ls, ps aux, git), directory navigation, custom prompt display, and Unix command integration. Shows built-in command support alongside external program execution with proper I/O handling and process management.</div>
                     </div>
                 </div>
@@ -3298,17 +3677,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon solution-icon"></div>
-                        <div class="psi-title">Implementation Details</div>
+                        <h4 class="psi-title">Implementation Details</h4>
                     </div>
                     <div class="psi-content">
                         <p>Implemented robust command parser handling quotes, escapes, and special characters. Managed file descriptor lifecycle for complex pipelines with proper cleanup. Handled zombie processes through SIGCHLD signals and proper wait() usage. Developed command history mechanism with efficient storage and retrieval.</p>
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="filesystem" class="section project-section">
@@ -3325,8 +3700,8 @@
                         <p class="project-company">File Systems & Storage | Fall 2025</p>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/YousefMoussa/Simulated-Filesystem" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/YousefMoussa/Simulated-Filesystem" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             View on GitHub
@@ -3369,7 +3744,7 @@
                 <div class="collapse-content">
                 <div class="image-gallery" style="margin-top: 1.5rem;">
                     <div class="gallery-item">
-                        <img src="images/filesystem.png" alt="Simulated filesystem visualization">
+                        <img width="708" height="309" loading="lazy" decoding="async" src="images/filesystem.png" alt="Simulated filesystem visualization">
                         <div class="gallery-caption">Filesystem Architecture - visualization of block allocation, inodes, and directory hierarchy.</div>
                     </div>
                 </div>
@@ -3392,17 +3767,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon solution-icon"></div>
-                        <div class="psi-title">Technical Challenges</div>
+                        <h4 class="psi-title">Technical Challenges</h4>
                     </div>
                     <div class="psi-content">
                         <p>Implemented efficient block allocation strategies to minimize fragmentation, developed robust path parsing to handle edge cases (., .., /), and designed data structures for optimal memory usage. Ensured filesystem consistency across operations with proper error handling and validation.</p>
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="mapreduce" class="section project-section">
@@ -3419,8 +3790,8 @@
                         <p class="project-company">Distributed Systems | Fall 2025</p>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/YousefMoussa/MapReduce" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/YousefMoussa/MapReduce" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             View on GitHub
@@ -3463,7 +3834,7 @@
                 <div class="collapse-content">
                 <div class="image-gallery" style="margin-top: 1.5rem;">
                     <div class="gallery-item">
-                        <img src="images/mapreduce.png" alt="MapReduce framework diagram">
+                        <img width="787" height="436" loading="lazy" decoding="async" src="images/mapreduce.png" alt="MapReduce framework diagram">
                         <div class="gallery-caption">MapReduce Workflow - coordinator, workers, and shuffle phases for distributed jobs.</div>
                     </div>
                 </div>
@@ -3486,17 +3857,13 @@
                 <div class="psi-card">
                     <div class="psi-header">
                         <div class="psi-icon solution-icon"></div>
-                        <div class="psi-title">Implementation Challenges</div>
+                        <h4 class="psi-title">Implementation Challenges</h4>
                     </div>
                     <div class="psi-content">
                         <p>Implemented efficient data partitioning strategy to balance workload across workers, developed heartbeat mechanism for failure detection, and designed intermediate file format for map-to-reduce data transfer. Handled race conditions in shared state access and ensured exactly-once task execution semantics.</p>
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="quacker" class="section project-section">
@@ -3513,8 +3880,8 @@
                         <p class="project-company">Database & User Management | Fall 2024</p>
                     </div>
                     <div class="project-links">
-                        <a href="https://github.com/YousefMoussa/Quacker" target="_blank" class="project-link">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <a href="https://github.com/YousefMoussa/Quacker" target="_blank" rel="noopener" class="project-link">
+                            <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                             </svg>
                             View on GitHub
@@ -3579,15 +3946,11 @@
 
                 <div class="image-gallery" style="margin-top: 2rem;">
                     <div class="gallery-item">
-                        <img src="images/1770402899967_image.png" alt="Quacker terminal welcome screen">
+                        <img width="640" height="323" loading="lazy" decoding="async" src="images/1770402899967_image.png" alt="Quacker terminal welcome screen">
                         <div class="gallery-caption">Quacker Welcome Screen - Terminal-based interface with ASCII art logo and main menu featuring authentication options: user login for existing accounts, sign-up for new user registration, and exit. Built in C++ on the SQLite3 C API with database-backed user management.</div>
                     </div>
                 </div>
                 </div>
-                <button class="expand-btn" onclick="toggleCollapse(this)">
-                    <span>View Full Details</span>
-                    <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                </button>
             </div>
         </section>
         <section id="skills" class="section">
@@ -3596,9 +3959,9 @@
                 <div class="section-line"></div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr)); gap: 2rem;">
                 <div class="deep-dive-project" style="margin-bottom: 0; grid-column: 1 / -1;">
-                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Low Level Systems Programming</h4>
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">Low Level Systems Programming</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">Bare-Metal C++</span>
                         <span class="tech-tag">RISC-V</span>
@@ -3616,7 +3979,7 @@
                 </div>
 
                 <div class="deep-dive-project" style="margin-bottom: 0;">
-                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Embedded Systems & Real-Time</h4>
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">Embedded Systems & Real-Time</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">STM32</span>
                         <span class="tech-tag">ESP32</span>
@@ -3630,7 +3993,7 @@
                 </div>
 
                 <div class="deep-dive-project" style="margin-bottom: 0;">
-                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Communication Protocols</h4>
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">Communication Protocols</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">CAN Bus</span>
                         <span class="tech-tag">SPI</span>
@@ -3644,7 +4007,7 @@
                 </div>
 
                 <div class="deep-dive-project" style="margin-bottom: 0;">
-                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Programming Languages</h4>
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">Programming Languages</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">C</span>
                         <span class="tech-tag">C++</span>
@@ -3658,7 +4021,7 @@
                 </div>
 
                 <div class="deep-dive-project" style="margin-bottom: 0;">
-                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Hardware Design & Tools</h4>
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">Hardware Design & Tools</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">Altium</span>
                         <span class="tech-tag">EasyEDA</span>
@@ -3671,7 +4034,7 @@
                 </div>
 
                 <div class="deep-dive-project" style="margin-bottom: 0;">
-                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Robotics & Autonomy</h4>
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">Robotics & Autonomy</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">ROS2</span>
                         <span class="tech-tag">IMU/AHRS</span>
@@ -3682,7 +4045,7 @@
                 </div>
 
                 <div class="deep-dive-project" style="margin-bottom: 0;">
-                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">Machine Learning & Data</h4>
+                    <h3 style="color: var(--accent-secondary); margin-bottom: 1rem;">Machine Learning & Data</h3>
                     <div class="tech-stack">
                         <span class="tech-tag">PyTorch</span>
                         <span class="tech-tag">CUDA</span>
@@ -3699,33 +4062,42 @@
                 <div class="section-line"></div>
             </div>
 
-            <div style="text-align: center; max-width: 700px; margin: 0 auto;">
-                <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            <div style="text-align: center; max-width: 760px; margin: 0 auto;">
+                <p class="contact-heading" style="font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; font-weight: 700; line-height: 1.2; margin-bottom: 1rem; background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
                     Let's Build Something Together
-                </h2>
+                </p>
                 <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 2rem;">
                     Graduating in May 2027 and seeking full-time roles starting Spring/Summer 2027 in embedded systems, low level systems programming, ASIC design and verification, autonomous systems and robotics.<br><br>
-                    <span style="color: var(--accent-primary); font-family: 'JetBrains Mono', monospace;">ymoussa@ualberta.ca</span>
+                    <button type="button" class="contact-email copy-email" data-email="ymoussa@ualberta.ca" title="Copy email address">ymoussa@ualberta.ca</button>
                 </p>
 
                 <div style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 2rem; flex-wrap: wrap;">
-                    <a href="https://linkedin.com/in/yousefmoussa" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; padding: 0.8rem 1.5rem; border: 2px solid var(--border); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-primary)'; this.style.transform='translateY(0)'">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button type="button" class="contact-link primary copy-email" data-email="ymoussa@ualberta.ca">
+                        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="m22 6-10 7L2 6"/>
+                        </svg>
+                        <span class="copy-label">Copy Email</span>
+                    </button>
+                    <a href="https://linkedin.com/in/yousefmoussa" target="_blank" rel="noopener" class="contact-link">
+                        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
                             <rect x="2" y="9" width="4" height="12"/>
                             <circle cx="4" cy="4" r="2"/>
                         </svg>
                         LinkedIn
                     </a>
-                    <a href="https://github.com/YousefMoussa" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; color: var(--text-primary); text-decoration: none; padding: 0.8rem 1.5rem; border: 2px solid var(--border); border-radius: 8px; transition: all 0.3s ease;" onmouseover="this.style.borderColor='var(--accent-primary)'; this.style.color='var(--accent-primary)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--border)'; this.style.color='var(--text-primary)'; this.style.transform='translateY(0)'">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <a href="https://github.com/YousefMoussa" target="_blank" rel="noopener" class="contact-link">
+                        <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
                         </svg>
                         GitHub
                     </a>
                 </div>
+                <p id="copy-status" class="copy-status" role="status" aria-live="polite"></p>
             </div>
         </section>
+        </main>
 
         <!-- Footer -->
         <footer style="padding: 3rem 0; text-align: center; border-top: 1px solid var(--border); color: var(--text-secondary); font-size: 0.9rem;">
@@ -3734,115 +4106,224 @@
         </footer>
     </div>
 
+    <dialog id="lightbox" aria-label="Enlarged image">
+        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+        <img alt="">
+        <p class="lightbox-caption"><span></span> <a target="_blank" rel="noopener">Open original ↗</a></p>
+    </dialog>
+
     <script>
-        // Overview vs detail routing
+        // [DN-16] Overview vs detail routing
         (function() {
             const params = new URLSearchParams(window.location.search);
-            const projectId = params.get('project');
+            const projectId = (params.get('project') || '').trim().toLowerCase();
             const overview = document.getElementById('projects-grid');
             const detailSections = document.querySelectorAll('.project-section');
             const banner = document.getElementById('detail-banner');
             const bannerTitle = document.getElementById('detail-title');
+            const SITE_URL = 'https://yousefmoussa.github.io/Portfolio/';
             let found = false;
 
             if (projectId) {
-                document.body.classList.add('detail-mode');
-                if (overview) overview.style.display = 'none';
                 detailSections.forEach(section => {
                     const match = section.id === projectId;
                     section.classList.toggle('hidden', !match);
                     if (match) found = true;
                 });
-                if (found) {
-                    if (banner) banner.classList.add('show');
-                    const active = document.getElementById(projectId);
-                    if (active) {
-                        const title = active.querySelector('.project-title-section h3')?.textContent?.trim();
-                        if (bannerTitle && title) bannerTitle.textContent = title;
-                        toggleAllSections(true);
-                        setTimeout(() => active.scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
-                    }
-                } else {
-                    document.body.classList.remove('detail-mode');
-                    if (overview) overview.style.display = 'block';
-                    detailSections.forEach(section => section.classList.add('hidden'));
-                    if (banner) banner.classList.remove('show');
+            }
+
+            if (found) {
+                document.body.classList.add('detail-mode');
+                if (overview) overview.style.display = 'none';
+                if (banner) banner.classList.add('show');
+                const active = document.getElementById(projectId);
+                const card = document.getElementById('card-' + projectId);
+                // The name the visitor clicked (card title); fall back to the section's own heading
+                const name = (card && card.querySelector('.card-title').textContent.trim())
+                    || active.querySelector('.section-title').textContent.trim();
+                if (bannerTitle) { bannerTitle.textContent = name; bannerTitle.style.visibility = 'visible'; }
+                document.title = name + ' | Yousef Moussa';
+                const summary = card && card.querySelector('.card-summary');
+                const description = document.querySelector('meta[name="description"]');
+                if (summary && description) description.setAttribute('content', summary.textContent.trim());
+                document.querySelectorAll('.nav-links a[href="?project=' + projectId + '"]')
+                    .forEach(a => a.setAttribute('aria-current', 'page'));
+
+                // Real hrefs, so Ctrl/Cmd/middle-click open a new tab
+                const backLink = document.getElementById('back-to-projects');
+                if (backLink) {
+                    backLink.href = window.location.pathname + '#card-' + projectId;
+                    backLink.addEventListener('click', function(e) {
+                        if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                        let ref = null;
+                        try { ref = new URL(document.referrer); } catch (err) { ref = null; }
+                        // Came straight from the overview: go back, which restores the exact scroll position.
+                        // Not after an in-page jump (banner Contact, skip link): back would only undo the #fragment.
+                        if (ref && ref.origin === location.origin && ref.pathname === location.pathname
+                                && !ref.searchParams.get('project') && history.length > 1 && !location.hash) {
+                            e.preventDefault();
+                            history.back();
+                        }
+                    });
                 }
+                const logoLink = document.querySelector('.logo');
+                if (logoLink) logoLink.href = window.location.pathname;
             } else {
                 document.body.classList.remove('detail-mode');
+                // [DN-04] undo the first-paint route style when ?project= did not match a section
+                const routeStyle = document.getElementById('route-style');
+                if (routeStyle) routeStyle.textContent = 'section.project-section { display: none !important; }';
                 if (overview) overview.style.display = 'block';
                 detailSections.forEach(section => section.classList.add('hidden'));
                 if (banner) banner.classList.remove('show');
             }
 
-            const backLink = document.getElementById('back-to-projects');
-            if (backLink) {
-                backLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const dest = window.location.pathname + '#projects-grid';
-                    window.location.href = dest;
-                });
-            }
-
-            const logoLink = document.querySelector('.logo');
-            if (logoLink) {
-                logoLink.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const dest = window.location.pathname + '#home';
-                    window.location.href = dest;
-                });
-            }
+            // [DN-03] one canonical per route (no static canonical/og:url in <head>, see audit notes)
+            const canonical = document.createElement('link');
+            canonical.rel = 'canonical';
+            canonical.href = SITE_URL + (found ? '?project=' + encodeURIComponent(projectId) : '');
+            document.head.appendChild(canonical);
         })();
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+        // [DN-12] Distinct accessible names for the 13 "See project" links and the repo badges
+        document.querySelectorAll('.project-card').forEach(card => {
+            const title = card.querySelector('.card-title')?.textContent.trim();
+            if (!title) return;
+            card.querySelector('.card-link')?.setAttribute('aria-label', 'See project: ' + title);
+            card.querySelectorAll('a.card-badge').forEach(badge => {
+                badge.setAttribute('aria-label', badge.textContent.trim() + ' repository: ' + title + ' (opens in new tab)');
             });
         });
 
-        // Collapsible sections
-        function toggleCollapse(btn) {
-            const content = btn.previousElementSibling;
-            const isExpanded = content.classList.contains('expanded');
-            
-            if (isExpanded) {
-                content.classList.remove('expanded');
-                btn.classList.remove('expanded');
-                btn.innerHTML = `<span>View Full Details</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
-            } else {
-                content.classList.add('expanded');
-                btn.classList.add('expanded');
-                btn.innerHTML = `<span>Show Less</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+        // [DN-18] Previous / All Projects / Next pager, in grid order, using the card titles
+        (function() {
+            const active = document.querySelector('.project-section:not(.hidden)');
+            if (!document.body.classList.contains('detail-mode') || !active) return;
+            const cards = [...document.querySelectorAll('.project-card[id^="card-"]')];
+            const ids = cards.map(c => c.id.slice(5));
+            const i = ids.indexOf(active.id);
+            if (i < 0) return;
+            function pagerLink(j, rel, label) {
+                const card = cards[(j + cards.length) % cards.length];
+                const a = document.createElement('a');
+                a.className = 'pager-link pager-' + rel;
+                a.href = '?project=' + card.id.slice(5);
+                a.rel = rel;
+                const small = document.createElement('small');
+                small.textContent = label;
+                const name = document.createElement('span');
+                name.textContent = card.querySelector('.card-title').textContent.trim();
+                a.append(small, name);
+                return a;
             }
-        }
+            const all = document.createElement('a');
+            all.className = 'pager-link pager-all';
+            all.href = window.location.pathname + '#card-' + active.id;
+            all.textContent = 'All Projects';
+            const pager = document.createElement('div');
+            pager.className = 'project-pager';
+            pager.setAttribute('role', 'navigation');
+            pager.setAttribute('aria-label', 'More projects');
+            pager.append(pagerLink(i - 1, 'prev', '← Previous'), all, pagerLink(i + 1, 'next', 'Next →'));
+            active.appendChild(pager);
+        })();
 
-        // Expand All / Collapse All
-        function toggleAllSections(expand) {
-            document.querySelectorAll('.collapse-content').forEach(content => {
-                if (expand) {
-                    content.classList.add('expanded');
-                } else {
-                    content.classList.remove('expanded');
-                }
+        // [DN-14] Lightbox for project images (native <dialog>, no dependency)
+        (function() {
+            const dialog = document.getElementById('lightbox');
+            if (!dialog || typeof dialog.showModal !== 'function') return;
+            const big = dialog.querySelector('img');
+            const caption = dialog.querySelector('.lightbox-caption span');
+            const original = dialog.querySelector('.lightbox-caption a');
+            document.querySelectorAll('.project-section img').forEach(img => {
+                img.tabIndex = 0;
+                img.setAttribute('role', 'button');
+                img.setAttribute('aria-haspopup', 'dialog');
+                const open = () => {
+                    const src = img.currentSrc || img.src;
+                    big.src = src;
+                    big.alt = img.alt;
+                    original.href = src;
+                    caption.textContent = img.closest('.gallery-item')?.querySelector('.gallery-caption')?.textContent.trim()
+                        || img.parentElement.querySelector('p')?.textContent.trim()
+                        || img.alt;
+                    dialog.showModal();
+                };
+                img.addEventListener('click', open);
+                img.addEventListener('keydown', e => {
+                    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+                });
             });
-            document.querySelectorAll('.expand-btn').forEach(btn => {
-                if (expand) {
-                    btn.classList.add('expanded');
-                    btn.innerHTML = `<span>Show Less</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
-                } else {
-                    btn.classList.remove('expanded');
-                    btn.innerHTML = `<span>View Full Details</span><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
-                }
+            dialog.addEventListener('click', e => {
+                if (e.target === dialog || e.target.closest('.lightbox-close')) dialog.close();
             });
-        }
+        })();
+
+        // [DN-13] Menu button for the nav (visible <= 1100px)
+        (function() {
+            const nav = document.querySelector('nav');
+            const btn = nav && nav.querySelector('.nav-toggle');
+            const list = document.getElementById('nav-links');
+            if (!btn || !list) return;
+            function setOpen(open) {
+                nav.classList.toggle('nav-open', open);
+                btn.setAttribute('aria-expanded', String(open));
+                btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+                if (open) nav.classList.remove('nav-hidden');
+            }
+            btn.addEventListener('click', () => setOpen(!nav.classList.contains('nav-open')));
+            nav.addEventListener('click', e => { if (e.target.closest('a')) setOpen(false); });   // menu links and the logo
+            document.addEventListener('click', e => { if (!nav.contains(e.target)) setOpen(false); });
+            // Close it when the window grows past the menu breakpoint (e.g. a tablet rotated to landscape)
+            const wide = window.matchMedia('(max-width: 1100px)');
+            if (wide.addEventListener) wide.addEventListener('change', e => { if (!e.matches) setOpen(false); });
+            document.addEventListener('keydown', e => {
+                if (e.key === 'Escape' && nav.classList.contains('nav-open')) { setOpen(false); btn.focus(); }
+            });
+            // Close the menu when keyboard focus leaves the nav, so the newly focused element is not hidden under it
+            nav.addEventListener('focusout', e => {
+                if (nav.classList.contains('nav-open') && e.relatedTarget && !nav.contains(e.relatedTarget)) setOpen(false);
+            });
+        })();
+
+        // [DN-17] smooth in-page scrolling only once the page has loaded (see html.smooth-scroll)
+        window.addEventListener('load', () => setTimeout(() => document.documentElement.classList.add('smooth-scroll'), 0));
+
+        // Email buttons copy the address to the clipboard instead of opening a mail app
+        (function() {
+            const status = document.getElementById('copy-status');
+            let timer;
+            function legacyCopy(text) {
+                const active = document.activeElement;
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                let ok = false;
+                try { ok = document.execCommand('copy'); } catch (err) { ok = false; }
+                ta.remove();
+                if (active) active.focus();
+                return ok;
+            }
+            document.querySelectorAll('.copy-email').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const email = btn.dataset.email;
+                    let ok = false;
+                    try { await navigator.clipboard.writeText(email); ok = true; } catch (err) { ok = legacyCopy(email); }
+                    clearTimeout(timer);
+                    if (status) status.textContent = ok ? 'Copied ' + email + ' to your clipboard ✓' : 'Couldn’t copy automatically. The address is ' + email;
+                    const label = btn.querySelector('.copy-label');
+                    if (label && ok) label.textContent = 'Copied!';
+                    timer = setTimeout(() => {
+                        if (status) status.textContent = '';
+                        document.querySelectorAll('.copy-email .copy-label').forEach(l => { l.textContent = 'Copy Email'; });
+                    }, 3000);
+                });
+            });
+        })();
 
         // Hide nav on scroll down, show on scroll up
         (function() {
@@ -3852,7 +4333,9 @@
 
             function updateNav() {
                 const currentScrollY = window.scrollY;
-                
+                // [DN-13] keep the bar in place while its menu is open
+                if (nav.classList.contains('nav-open')) { lastScrollY = currentScrollY; ticking = false; return; }
+
                 if (currentScrollY < 100) {
                     // Always show nav near top of page
                     nav.classList.remove('nav-hidden');
@@ -3863,7 +4346,7 @@
                     // Scrolling up - show nav
                     nav.classList.remove('nav-hidden');
                 }
-                
+
                 lastScrollY = currentScrollY;
                 ticking = false;
             }
